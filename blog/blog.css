@@ -38,3 +38,13 @@ html[lang="en"] .blog-hero h1{font-family:'Playfair Display',serif;font-weight:5
 .blog-card h3{margin:0 28px 12px}
 .blog-card p{margin:0 28px 24px}
 .blog-card-link{margin:auto 28px 26px}
+
+/* Blog identity: personal portrait replaces generic stationery illustration.
+   Fallback remains visible until the static image has been deployed. */
+.blog-hero-photo{position:relative;overflow:hidden;margin:0;width:100%;min-height:360px;aspect-ratio:4/5;border-radius:30px;border:1px solid rgba(157,139,116,.16);background:linear-gradient(145deg,#ede0cc,#e2e8df);box-shadow:0 24px 65px rgba(34,48,44,.13)}
+.blog-photo-fallback{position:absolute;inset:0;display:grid;place-items:center;background:radial-gradient(circle at 72% 20%,#dcebf7 0%,transparent 50%),linear-gradient(135deg,#f3e7d6,#e5eee6)}
+.blog-photo-fallback span{font:600 clamp(75px,13vw,150px)/1 'Playfair Display',serif;color:#30413d;letter-spacing:-.07em;opacity:.55}
+.blog-hero-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 36%;display:block}
+.blog-hero-photo img[hidden]{display:none}
+@media(max-width:950px){.blog-hero-photo{max-width:600px;min-height:0;max-height:610px;aspect-ratio:4/5}}
+@media(max-width:700px){.blog-hero-photo{width:100%;max-width:100%;max-height:530px;aspect-ratio:4/5;border-radius:24px}.blog-hero-photo img{object-position:center 28%}}
