@@ -13,4 +13,19 @@
  *
  * Keep this list empty until you have an actual published article.
  */
-window.DK_BLOG_POSTS = [];
+window.DK_BLOG_POSTS = [
+  {
+    url: 'posts/rsp-naya-netritwa.html',
+    date: '2026-11-19',
+    image: 'assets/rsp-naya-netritwa-cover.webp',
+    category: { ne: 'विचार · नेतृत्व', en: 'Opinion · Leadership' },
+    title: {
+      ne: 'राष्ट्रिय स्वतन्त्र पार्टी (RSP) ले नयाँ नेतृत्व खोज्नुपर्छ, पुरानै अनुहार होइन',
+      en: 'राष्ट्रिय स्वतन्त्र पार्टी (RSP) ले नयाँ नेतृत्व खोज्नुपर्छ, पुरानै अनुहार होइन'
+    },
+    excerpt: {
+      ne: 'स्थानीय तहको उम्मेदवार छनोटमा पुरानै राजनीतिक समीकरणभन्दा नयाँ सोच, क्षमता, इमानदारी र जिम्मेवारीलाई प्राथमिकता दिनुपर्छ।',
+      en: 'स्थानीय तहको उम्मेदवार छनोटमा पुरानै राजनीतिक समीकरणभन्दा नयाँ सोच, क्षमता, इमानदारी र जिम्मेवारीलाई प्राथमिकता दिनुपर्छ।'
+    }
+  }
+];
