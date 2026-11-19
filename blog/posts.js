@@ -17,7 +17,7 @@ window.DK_BLOG_POSTS = [
   {
     url: 'posts/rsp-naya-netritwa.html',
     date: '2026-11-19',
-    image: 'assets/rsp-naya-netritwa-cover.webp',
+    image: 'assets/rsp-naya-netritwa-cover.webp?v=20261119-hq',
     category: { ne: 'विचार · नेतृत्व', en: 'Opinion · Leadership' },
     title: {
       ne: 'राष्ट्रिय स्वतन्त्र पार्टी (RSP) ले नयाँ नेतृत्व खोज्नुपर्छ, पुरानै अनुहार होइन',
