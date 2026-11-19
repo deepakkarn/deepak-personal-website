@@ -56,8 +56,8 @@ function setLanguage(lang) {
   renderPosts(lang);
   try { localStorage.setItem('dk-language',lang); } catch (_) {}
 }
-let initial = 'ne';
-try { if (localStorage.getItem('dk-language') === 'en') initial = 'en'; } catch (_) {}
+let initial = 'en';
+try { if (localStorage.getItem('dk-language') === 'ne') initial = 'ne'; } catch (_) {}
 setLanguage(initial);
 toggle.addEventListener('click',()=>setLanguage(document.documentElement.lang === 'ne' ? 'en' : 'ne'));
 menu.addEventListener('click',()=>{
