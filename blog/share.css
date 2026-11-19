@@ -11,6 +11,7 @@
 .share-menu{position:absolute;right:0;top:calc(100% + 12px);width:min(310px,calc(100vw - 48px));z-index:30;background:#fff;border:1px solid var(--line);border-radius:18px;box-shadow:0 22px 60px rgba(34,48,44,.17);padding:9px}
 .share-menu[hidden],.share-status:empty{display:none}
 .share-menu a,.share-menu button{display:flex;align-items:center;gap:13px;width:100%;padding:12px 13px;color:var(--ink);font:700 14px/1.4 'DM Sans','Noto Sans Devanagari',sans-serif;text-align:left;background:transparent;border:0;border-radius:12px;cursor:pointer;text-decoration:none}
+.share-menu [hidden]{display:none}
 .share-menu a:hover,.share-menu button:hover{background:#f6f0e7;color:var(--accent)}
 .share-menu .bi{font-size:19px;width:23px;text-align:center}
 .share-menu [data-share="facebook"] .bi{color:#1877f2}
