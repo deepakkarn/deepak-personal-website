@@ -149,14 +149,15 @@ mobile.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
   menu.setAttribute('aria-label', 'Open menu');
 }));
 
-// Make the DK wordmark and footer name reliably return to the top of the homepage.
-// Keep href="#top" as a working fallback when JavaScript is unavailable.
-document.querySelectorAll('a.wordmark[href="#top"], a.footer-name[href="#top"]').forEach(link => {
+// The anchor is outside the sticky header, so native hash navigation
+// also returns to the actual page top when JavaScript is disabled or cached.
+const pageTop = document.getElementById('page-top');
+document.querySelectorAll('a.wordmark[href="#page-top"], a.footer-name[href="#page-top"]').forEach(link => {
   link.addEventListener('click', event => {
+    if (!pageTop) return; // Native anchor fallback
     event.preventDefault();
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    window.scrollTo({ top: 0, left: 0, behavior: reduceMotion ? 'instant' : 'smooth' });
-    if (window.location.hash) history.replaceState(null, '', window.location.pathname + window.location.search);
+    pageTop.scrollIntoView({ block: 'start', behavior: reduceMotion ? 'auto' : 'smooth' });
   });
 });
 
