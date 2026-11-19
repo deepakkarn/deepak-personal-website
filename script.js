@@ -149,6 +149,17 @@ mobile.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
   menu.setAttribute('aria-label', 'Open menu');
 }));
 
+// Make the DK wordmark and footer name reliably return to the top of the homepage.
+// Keep href="#top" as a working fallback when JavaScript is unavailable.
+document.querySelectorAll('a.wordmark[href="#top"], a.footer-name[href="#top"]').forEach(link => {
+  link.addEventListener('click', event => {
+    event.preventDefault();
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    window.scrollTo({ top: 0, left: 0, behavior: reduceMotion ? 'instant' : 'smooth' });
+    if (window.location.hash) history.replaceState(null, '', window.location.pathname + window.location.search);
+  });
+});
+
 document.getElementById('year').textContent = new Date().getFullYear();
 
 
