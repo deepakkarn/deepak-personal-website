@@ -1,7 +1,7 @@
 const content = {
   ne: {
     skip: 'मुख्य सामग्रीमा जानुहोस्',
-    navAbout: 'मेरो बारेमा', navFocus: 'मुख्य सोच', navJourney: 'यात्रा', navConnect: 'सम्पर्क',
+    navAbout: 'मेरो बारेमा', navFocus: 'मुख्य सोच', navJourney: 'यात्रा', navBlog: 'ब्लग', navConnect: 'सम्पर्क',
     eyebrow: 'भंगहाबाट, जिम्मेवार यात्रातर्फ',
     greeting: 'नमस्कार, म',
     heroSubtitle: 'इन्जिनियर · लेखक · जिम्मेवारी र अर्थपूर्ण काममा विश्वास गर्ने व्यक्ति',
@@ -49,7 +49,7 @@ const content = {
   },
   en: {
     skip: 'Skip to content',
-    navAbout: 'About', navFocus: 'Focus', navJourney: 'Journey', navConnect: 'Connect',
+    navAbout: 'About', navFocus: 'Focus', navJourney: 'Journey', navBlog: 'Blog', navConnect: 'Connect',
     eyebrow: 'ROOTED IN BHANGAHA, MOVING WITH RESPONSIBILITY',
     greeting: 'Hello, I am',
     heroSubtitle: 'Engineer · Writer · Guided by responsibility and meaningful work',
