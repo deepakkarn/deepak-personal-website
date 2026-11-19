@@ -30,3 +30,11 @@ html[lang="en"] .blog-hero h1{font-family:'Playfair Display',serif;font-weight:5
 @media(max-width:950px){.blog-hero{grid-template-columns:1fr;gap:34px;padding-block:65px}.blog-hero-visual{min-height:290px;max-width:650px;width:100%}.blog-paper{height:230px}.blog-note{grid-template-columns:1fr}}
 @media(max-width:700px){.blog-hero{padding-block:55px 70px}.blog-hero h1{font-size:clamp(52px,13vw,80px)}.blog-hero-visual{min-height:245px}.blog-paper{height:195px;top:36px}.paper-one{top:60px}.paper-two{top:48px}.paper-main{padding:24px 18px}.blog-section{padding:65px 0 78px}.blog-section-top{display:block}.blog-section-top p{margin-top:18px}.blog-list{grid-template-columns:1fr}.blog-empty{padding:35px 24px}.blog-note{padding-block:72px 85px}}
 @media(prefers-reduced-motion:reduce){.blog-card{transition:none}.blog-card:hover{transform:none}}
+
+/* Post cover art, shown before category and title */
+.blog-card{overflow:hidden;padding:0;gap:0}
+.blog-card-cover{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;background:#eae3d7;flex-shrink:0}
+.blog-card-meta{margin:26px 28px 12px}
+.blog-card h3{margin:0 28px 12px}
+.blog-card p{margin:0 28px 24px}
+.blog-card-link{margin:auto 28px 26px}
