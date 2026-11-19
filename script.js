@@ -132,8 +132,8 @@ function syncName() {
     : 'Deepak Kumar<br><em>Karn.</em><span class="name-en">दीपक कुमार कर्ण</span>';
 }
 
-let starting = 'ne';
-try { if (localStorage.getItem('dk-language') === 'en') starting = 'en'; } catch (e) {}
+let starting = 'en';
+try { if (localStorage.getItem('dk-language') === 'ne') starting = 'ne'; } catch (e) {}
 setLanguage(starting);
 
 toggle.addEventListener('click', () => setLanguage(document.documentElement.lang === 'ne' ? 'en' : 'ne'));
