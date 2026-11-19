@@ -1,0 +1,21 @@
+/* Reusable static article sharing controls */
+.article-share{max-width:770px;margin:0 auto 44px;padding:30px 28px 24px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:20px;align-items:center;flex-wrap:wrap}
+.article-share-copy{max-width:420px}
+.article-share-copy h2{font:700 18px/1.6 'Noto Sans Devanagari','DM Sans',sans-serif;margin:0 0 4px}
+.article-share-copy p{font:400 13px/1.75 'Noto Sans Devanagari','DM Sans',sans-serif;color:var(--muted);margin:0}
+.share-widget{position:relative;flex:0 0 auto}
+.share-toggle{border:1px solid rgba(155,103,71,.35);border-radius:99px;background:var(--dark);color:#fff;display:flex;gap:10px;align-items:center;justify-content:center;padding:13px 18px;font-size:14px;font-weight:700;cursor:pointer;transition:background .2s ease,transform .2s ease}
+.share-toggle:hover{background:#385048;transform:translateY(-1px)}
+.share-toggle:focus-visible,.share-menu a:focus-visible,.share-menu button:focus-visible{outline:3px solid #9b6747;outline-offset:3px}
+.share-toggle .bi{font-size:17px}
+.share-menu{position:absolute;right:0;top:calc(100% + 12px);width:min(310px,calc(100vw - 48px));z-index:30;background:#fff;border:1px solid var(--line);border-radius:18px;box-shadow:0 22px 60px rgba(34,48,44,.17);padding:9px}
+.share-menu[hidden],.share-status:empty{display:none}
+.share-menu a,.share-menu button{display:flex;align-items:center;gap:13px;width:100%;padding:12px 13px;color:var(--ink);font:700 14px/1.4 'DM Sans','Noto Sans Devanagari',sans-serif;text-align:left;background:transparent;border:0;border-radius:12px;cursor:pointer;text-decoration:none}
+.share-menu a:hover,.share-menu button:hover{background:#f6f0e7;color:var(--accent)}
+.share-menu .bi{font-size:19px;width:23px;text-align:center}
+.share-menu [data-share="facebook"] .bi{color:#1877f2}
+.share-menu [data-share="whatsapp"] .bi{color:#209a59}
+.share-menu [data-share="linkedin"] .bi{color:#0a66c2}
+.share-status{position:absolute;top:calc(100% + 8px);right:0;min-width:170px;font:600 12px/1.6 'Noto Sans Devanagari','DM Sans',sans-serif;color:#376d4e;margin:0;text-align:right}
+@media(max-width:700px){.article-share{margin:0 23px 36px;padding:24px 0;gap:16px}.share-widget{width:100%}.share-toggle{width:100%}.share-menu{right:0;left:0;width:100%;max-width:none}}
+@media(prefers-reduced-motion:reduce){.share-toggle{transition:none}.share-toggle:hover{transform:none}}
