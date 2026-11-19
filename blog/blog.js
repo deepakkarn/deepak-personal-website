@@ -41,7 +41,7 @@ function renderPosts(lang) {
     const title = document.createElement('h3'); title.textContent = post.title?.[lang] || post.title?.en || '';
     const excerpt = document.createElement('p'); excerpt.textContent = post.excerpt?.[lang] || post.excerpt?.en || '';
     const read = document.createElement('span'); read.className = 'blog-card-link'; read.textContent = translations[lang].read;
-    if (post.image && /^assets\/[a-z0-9_-]+\.(webp|jpg|jpeg|png)$/.test(post.image)) {
+    if (post.image && /^assets\/[a-z0-9_-]+\.(webp|jpg|jpeg|png)(\?v=[a-z0-9_-]+)?$/.test(post.image)) {
       const cover = document.createElement('img');
       cover.className = 'blog-card-cover';
       cover.src = post.image;
