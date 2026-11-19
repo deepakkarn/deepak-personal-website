@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#fbf7f0">
+  <meta name="description" content="दीपक कुमार कर्णका लेख, विचार, परियोजना र अनुभवहरू।">
+  <meta property="og:title" content="Blog | Deepak Kumar Karn">
+  <meta property="og:description" content="Ideas, observations, projects and reflections by Deepak Kumar Karn.">
+  <title>Blog | Deepak Kumar Karn</title>
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Noto+Sans+Devanagari:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="blog.css">
+  <script defer src="posts.js"></script>
+  <script defer src="blog.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main" data-i18n="skip">मुख्य सामग्रीमा जानुहोस्</a>
+  <header class="site-header" id="top">
+    <a class="wordmark" href="/" aria-label="Deepak Kumar Karn — home">DK<span class="dot">.</span></a>
+    <nav class="desktop-nav" aria-label="Primary navigation">
+      <a href="/#about" data-i18n="navAbout">मेरो बारेमा</a>
+      <a href="/#focus" data-i18n="navFocus">मुख्य सोच</a>
+      <a href="/#journey" data-i18n="navJourney">यात्रा</a>
+      <a href="/blog/" aria-current="page" data-i18n="navBlog">ब्लग</a>
+      <a href="/#connect" data-i18n="navConnect">सम्पर्क</a>
+    </nav>
+    <div class="header-actions">
+      <button id="language-toggle" class="language-toggle" type="button" aria-label="Switch language" aria-pressed="false"><span id="language-label">EN</span><span aria-hidden="true"> ↗</span></button>
+      <button id="menu-toggle" class="menu-toggle" type="button" aria-controls="mobile-nav" aria-expanded="false" aria-label="Open menu"><span></span><span></span></button>
+    </div>
+  </header>
+  <nav id="mobile-nav" class="mobile-nav" hidden aria-label="Mobile navigation">
+    <a href="/#about" data-i18n="navAbout">मेरो बारेमा</a>
+    <a href="/#focus" data-i18n="navFocus">मुख्य सोच</a>
+    <a href="/#journey" data-i18n="navJourney">यात्रा</a>
+    <a href="/blog/" aria-current="page" data-i18n="navBlog">ब्लग</a>
+    <a href="/#connect" data-i18n="navConnect">सम्पर्क</a>
+  </nav>
+  <main id="main">
+    <section class="blog-hero wrap" aria-labelledby="blog-title">
+      <div class="blog-hero-copy">
+        <span class="eyebrow"><span class="eyebrow-line"></span><span data-i18n="eyebrow">विचार · अनुभव · लेखन</span></span>
+        <h1 id="blog-title" data-i18n="title">लेखहरू<span class="blog-accent">.</span></h1>
+        <p class="blog-lead" data-i18n="intro">जिज्ञासाबाट सुरु भएका विचार, अनुभवबाट सिकेका कुरा र समयसँगै विकसित हुँदै गरेका दृष्टिकोण। यहाँ मेरा लेख, परियोजनाका अनुभव र व्यक्तिगत नोटहरू रहनेछन्।</p>
+        <a class="blog-back" href="/" data-i18n="back">← मुख्य पृष्ठमा फर्कनुहोस्</a>
+      </div>
+      <div class="blog-hero-visual" aria-hidden="true">
+        <div class="blog-paper paper-one"></div><div class="blog-paper paper-two"></div>
+        <div class="blog-paper paper-main"><span>DK<span class="dot">.</span></span><div></div><div></div><div class="short-line"></div></div>
+      </div>
+    </section>
+    <section class="blog-section section-border">
+      <div class="wrap">
+        <div class="blog-section-top">
+          <div>
+            <span class="section-num">01 / <span data-i18n="sectionLabel">लेखन</span></span>
+            <h2 data-i18n="sectionTitle">नयाँ लेख र नोटहरू</h2>
+          </div>
+          <p data-i18n="sectionHint">समयसँगै थपिँदै जाने विचार र अनुभवहरू।</p>
+        </div>
+        <div class="blog-list" id="blog-list" aria-live="polite"></div>
+        <div class="blog-empty" id="blog-empty">
+          <span class="blog-empty-symbol" aria-hidden="true">✳</span>
+          <h3 data-i18n="emptyTitle">यहाँ लेखहरू आउँदैछन्।</h3>
+          <p data-i18n="emptyText">अहिले यो नयाँ ठाउँ तयार गरेको छु। चाँडै आफ्ना लेख, परियोजनाका अनुभव र विचारहरू यहीँ साझा गर्नेछु।</p>
+        </div>
+      </div>
+    </section>
+    <section class="blog-note wrap">
+      <span class="section-num">02 / <span data-i18n="noteLabel">अरू लेखन</span></span>
+      <div>
+        <h2 data-i18n="noteTitle">सफ्टवेयर परीक्षणबारे मेरा लेखहरू</h2>
+        <p data-i18n="noteText">Testing, engineering र सोच्ने तरिकाबारे मैले LifeOfQA मा पनि लेख्दै आएको छु।</p>
+        <a class="primary-link" href="https://www.lifeofqa.com/" target="_blank" rel="noopener noreferrer"><span data-i18n="lifeofqa">LifeOfQA हेर्नुहोस्</span><span aria-hidden="true">↗</span></a>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <a class="footer-name" href="/">Deepak Kumar Karn<span class="dot">.</span></a>
+      <p data-i18n="footerNote">सुन्ने। बुझ्ने। काम गर्ने।</p>
+      <a href="/#connect" class="blog-footer-contact" data-i18n="navConnect">सम्पर्क</a>
+      <span class="copyright">© <span id="year">2026</span> Deepak Kumar Karn</span>
+    </div>
+  </footer>
+</body>
+</html>
