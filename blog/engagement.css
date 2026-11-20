@@ -1,0 +1,43 @@
+/* Reusable article interaction block, independent of each article's page layout. */
+.blog-engagement{width:min(760px,calc(100% - 54px));max-width:760px;margin:55px auto 45px;padding:32px clamp(21px,3.4vw,35px);border:1px solid #e3d7c9;border-radius:23px;background:#fffdfa;box-shadow:0 8px 34px rgba(30,45,38,.035);color:#25312f;font-family:'Noto Sans Devanagari','DM Sans',sans-serif;box-sizing:border-box}
+.blog-engagement *{box-sizing:border-box}
+.engagement-header{display:flex;justify-content:space-between;align-items:center;gap:20px;padding-bottom:30px;border-bottom:1px solid #e9dfd4}
+.engagement-eyebrow{font:700 10px/1.6 'DM Sans',sans-serif;letter-spacing:.15em;color:#9b6747}
+.engagement-header h2{font-size:clamp(22px,3vw,27px);line-height:1.5;margin:6px 0 8px}
+.engagement-header p{font-size:14px;line-height:1.8;margin:0;color:#61706a}
+.engagement-likes{display:flex;flex-direction:column;align-items:center;gap:7px;flex-shrink:0}
+.engagement-like{border:1px solid #bd9e85;background:#fff;color:#774d3d;border-radius:99px;padding:10px 21px;min-height:44px;min-width:105px;font:700 14px/1.4 'DM Sans','Noto Sans Devanagari',sans-serif;cursor:pointer;transition:background .15s ease,color .15s ease}
+.engagement-like.is-liked{background:#ad6252;color:#fff;border-color:#ad6252}
+.engagement-like:disabled{opacity:.6;cursor:wait}
+.engagement-like-count{font-size:12px;color:#64716b}
+.engagement-discussion{padding:25px 0 24px;border-bottom:1px solid #e9dfd4}
+.engagement-discussion h3,.engagement-form h3{font-size:19px;line-height:1.5;margin:0 0 13px}
+.engagement-discussion h3 span{font-size:15px;color:#7a8982}
+.engagement-load-status,.engagement-empty{font-size:14px;line-height:1.9;color:#6b756f;margin:10px 0}
+.engagement-load-status[hidden]{display:none}
+.engagement-comment{padding:16px 0;border-bottom:1px solid #eee7dc}
+.engagement-comment:last-child{border-bottom:0}
+.engagement-comment-meta{display:flex;gap:15px;justify-content:space-between;align-items:baseline}
+.engagement-comment-meta strong{font-size:14px}
+.engagement-comment-meta time{font-size:12px;color:#79847d}
+.engagement-comment p{font-size:15px;line-height:1.85;margin:8px 0 0;overflow-wrap:anywhere;white-space:pre-wrap}
+.engagement-form{padding-top:28px}
+.engagement-form>p{font-size:14px;line-height:1.7;color:#64716b;margin:0 0 18px}
+.engagement-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.engagement-fields label{font-size:13px;font-weight:700;display:flex;flex-direction:column;gap:8px;color:#2a3731;min-width:0}
+.engagement-fields label span{color:#b15d4a}
+.engagement-fields input,.engagement-fields textarea{width:100%;padding:12px 14px;background:#fff;border:1px solid #d6d5cc;border-radius:12px;font:400 15px/1.65 'Noto Sans Devanagari','DM Sans',sans-serif;color:#25312f;outline:0;transition:border-color .15s ease}
+.engagement-fields input:focus,.engagement-fields textarea:focus{border-color:#9b6747;box-shadow:0 0 0 3px rgba(155,103,71,.13)}
+.engagement-fields textarea{resize:vertical;min-height:130px}
+.engagement-comment-field{grid-column:1/-1}
+.engagement-form .engagement-privacy{font-size:12px;color:#687770;line-height:1.85;margin:15px 0 20px}
+.engagement-turnstile{min-height:70px;max-width:100%;overflow:hidden;margin:0 0 14px}
+.engagement-submit{border:0;background:#263a34;border-radius:999px;padding:14px 24px;min-height:46px;color:#fff;font:700 14px/1.4 'DM Sans','Noto Sans Devanagari',sans-serif;cursor:pointer}
+.engagement-submit:hover:not(:disabled){background:#38594d}
+.engagement-submit:disabled{opacity:.48;cursor:not-allowed}
+.engagement-submit-status{font-size:13px;line-height:1.85;margin:13px 0 0;color:#a44739;min-height:20px}
+.engagement-submit-status.is-success{color:#31734e}
+.engagement-submit:focus-visible,.engagement-like:focus-visible{outline:3px solid #a77d58;outline-offset:3px}
+@media(max-width:650px){.blog-engagement{width:calc(100% - 48px);margin:42px auto 34px;padding:23px 19px;border-radius:18px}.engagement-header{align-items:flex-start;gap:12px}.engagement-header h2{font-size:22px}.engagement-header p{font-size:13px}.engagement-like{padding:10px 14px;min-width:86px}.engagement-fields{grid-template-columns:1fr;gap:14px}}
+@media(max-width:365px){.blog-engagement{width:calc(100% - 40px);padding:19px 14px}.engagement-header{flex-direction:column}.engagement-likes{flex-direction:row}}
+@media(prefers-reduced-motion:reduce){.engagement-fields input,.engagement-fields textarea,.engagement-like{transition:none}}
