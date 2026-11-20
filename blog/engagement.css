@@ -24,9 +24,9 @@
 .engagement-form{padding-top:28px}
 .engagement-form>p{font-size:14px;line-height:1.7;color:#64716b;margin:0 0 18px}
 .engagement-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
-.engagement-fields label{font-size:13px;font-weight:700;display:flex;flex-direction:column;gap:8px;color:#2a3731;min-width:0}
+.engagement-fields label{font-size:13px;font-weight:700;display:block;line-height:1.55;color:#2a3731;min-width:0}
 .engagement-fields label span{color:#b15d4a}
-.engagement-fields input,.engagement-fields textarea{width:100%;padding:12px 14px;background:#fff;border:1px solid #d6d5cc;border-radius:12px;font:400 15px/1.65 'Noto Sans Devanagari','DM Sans',sans-serif;color:#25312f;outline:0;transition:border-color .15s ease}
+.engagement-fields input,.engagement-fields textarea{display:block;margin-top:8px;width:100%;padding:12px 14px;background:#fff;border:1px solid #d6d5cc;border-radius:12px;font:400 15px/1.65 'Noto Sans Devanagari','DM Sans',sans-serif;color:#25312f;outline:0;transition:border-color .15s ease}
 .engagement-fields input:focus,.engagement-fields textarea:focus{border-color:#9b6747;box-shadow:0 0 0 3px rgba(155,103,71,.13)}
 .engagement-fields textarea{resize:vertical;min-height:130px}
 .engagement-comment-field{grid-column:1/-1}
