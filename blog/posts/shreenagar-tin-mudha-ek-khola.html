@@ -73,6 +73,11 @@ body{background:var(--story-paper);color:var(--story-ink)}
 }
 @media(max-width:460px){.story-top h1{font-size:34px;line-height:1.38}.story-top{padding:33px 22px 0}.story-subtitle{font-size:17px}.story-intro p,.story-section>p,.story-split-copy p{font-size:17px;line-height:1.92}.story-section h2{font-size:27px}.story-cover{padding:0 12px}.story-figure img{max-height:525px}}
 @media(prefers-reduced-motion:reduce){.story-split *{transition:none}}
+/* The paragraph spacing rule above sets margin: 0 0 25px, which resets
+   margin-inline:auto and left-aligns narrower paragraphs against the viewport.
+   Explicitly restore centering for the full-width reading column. */
+.story-section > p { margin-left:auto; margin-right:auto; }
+
 /* Reading margins: a consistent safe gutter for prose, headings and photo/text pairs. */
 :root{--story-reading-gutter:clamp(34px,5vw,64px)}
 .story-top{padding-inline:var(--story-reading-gutter)}
