@@ -162,7 +162,7 @@ function parseId(value) {
 async function sessionFromRequest(request, env) {
   const raw = readPortalToken(request);
   if (!raw) return null;
-  const tokenHash = await sha256(raw);
+  const tokenHash = await sha256(raw + ':' + env.PORTAL_PASSWORD);
   const entry = await env.BLOG_DB.prepare('SELECT expires_at FROM portal_sessions WHERE token_hash = ?')
     .bind(tokenHash).first();
   return entry && Number(entry.expires_at) > Math.floor(Date.now() / 1000) ? { tokenHash } : null;
@@ -198,7 +198,7 @@ async function portalLogin(request, env) {
   ]);
   const token = newToken();
   await env.BLOG_DB.prepare('INSERT INTO portal_sessions (token_hash, created_at, expires_at) VALUES (?, ?, ?)')
-    .bind(await sha256(token), now, now + PORTAL_MAX_AGE).run();
+    .bind(await sha256(token + ':' + env.PORTAL_PASSWORD), now, now + PORTAL_MAX_AGE).run();
   return json({ ok: true, loggedIn: true }, 200, { 'Set-Cookie': portalCookie(token, PORTAL_MAX_AGE) });
 }
 async function portalSession(request, env) {
@@ -210,7 +210,7 @@ async function portalLogout(request, env) {
   if (!allowMutation(request)) return json({ error: 'Invalid request origin' }, 403);
   const token = readPortalToken(request);
   if (token) await env.BLOG_DB.prepare('DELETE FROM portal_sessions WHERE token_hash = ?')
-    .bind(await sha256(token)).run();
+    .bind(await sha256(token + ':' + env.PORTAL_PASSWORD)).run();
   return json({ ok: true }, 200, { 'Set-Cookie': portalCookie('', 0) });
 }
 async function portalList(env) {
