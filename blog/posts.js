@@ -15,6 +15,20 @@
  */
 window.DK_BLOG_POSTS = [
   {
+    url: 'posts/shreenagar-tin-mudha-ek-khola.html',
+    date: '2026-11-20',
+    image: 'assets/shreenagar/bridge-article-cover.avif',
+    category: { ne: 'स्थानीय अनुभव · नागरिक प्रश्न', en: 'Community · Field Notes' },
+    title: {
+      ne: 'तीनवटा मुढा, एउटा खोला र श्रीनगरका प्रश्नहरू',
+      en: 'तीनवटा मुढा, एउटा खोला र श्रीनगरका प्रश्नहरू'
+    },
+    excerpt: {
+      ne: 'भंगाहा–६ को एउटा सानो बस्तीमा बालबालिकाको विद्यालय जाने बाटो, तीनवटा मुढा र सामूहिक पहलले उठाएका प्रश्नहरू।',
+      en: 'A firsthand Nepali story from Shreenagar, Bhangaha-6: a difficult school route, three logs across a stream, and a community-led temporary crossing.'
+    }
+  },
+  {
     url: 'posts/rsp-naya-netritwa.html',
     date: '2026-11-19',
     image: 'assets/rsp-naya-netritwa-cover.webp?v=20261119-hq',
