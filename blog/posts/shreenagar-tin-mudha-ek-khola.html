@@ -73,6 +73,26 @@ body{background:var(--story-paper);color:var(--story-ink)}
 }
 @media(max-width:460px){.story-top h1{font-size:34px;line-height:1.38}.story-top{padding:33px 22px 0}.story-subtitle{font-size:17px}.story-intro p,.story-section>p,.story-split-copy p{font-size:17px;line-height:1.92}.story-section h2{font-size:27px}.story-cover{padding:0 12px}.story-figure img{max-height:525px}}
 @media(prefers-reduced-motion:reduce){.story-split *{transition:none}}
+/* Reading margins: a consistent safe gutter for prose, headings and photo/text pairs. */
+:root{--story-reading-gutter:clamp(34px,5vw,64px)}
+.story-top{padding-inline:var(--story-reading-gutter)}
+.story-intro,.story-section-heading,.story-section>p,.story-foot{
+  width:min(760px,calc(100% - 2 * var(--story-reading-gutter)));
+}
+.story-split{
+  width:min(1150px,calc(100% - 2 * var(--story-reading-gutter)));
+}
+.story-wide{
+  width:min(1060px,calc(100% - 2 * var(--story-reading-gutter)));
+}
+.story-split-copy{min-width:0;overflow-wrap:break-word}
+@media(max-width:800px){
+  :root{--story-reading-gutter:clamp(32px,6vw,46px)}
+  .story-split .story-split-copy{width:100%;margin-inline:0}
+}
+@media(max-width:460px){
+  :root{--story-reading-gutter:clamp(27px,8.5vw,36px)}
+}
 </style>
 </head>
 <body>
