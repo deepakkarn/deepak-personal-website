@@ -1,0 +1,17 @@
+# Keep backend/configuration files out of the publicly served static assets.
+/.git/
+/.github/
+/.wrangler/
+/worker/
+/migrations/
+/node_modules/
+/wrangler.jsonc
+/wrangler.json
+/wrangler.toml
+/.assetsignore
+/.dev.vars
+/.env
+/.env.*
+/README.md
+/package.json
+/package-lock.json
