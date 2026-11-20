@@ -98,7 +98,11 @@ body{background:var(--story-paper);color:var(--story-ink)}
 @media(max-width:460px){
   :root{--story-reading-gutter:clamp(27px,8.5vw,36px)}
 }
+.story-layout > .article-share{width:min(760px,calc(100% - var(--story-reading-gutter) - var(--story-reading-gutter)));max-width:none;margin:24px auto 44px}
 </style>
+<link rel="stylesheet" href="../share.css?v=20261119-1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+<script defer src="../share.js?v=20261119-1"></script>
 </head>
 <body>
 <a class="skip-link" href="#main">मुख्य सामग्रीमा जानुहोस्</a>
@@ -245,6 +249,27 @@ body{background:var(--story-paper);color:var(--story-ink)}
 <p>र त्यससँगै एउटा प्रश्न पनि।</p>
 <p class="story-emphasis"><strong>हाम्रा विकासका प्राथमिकतामा श्रीनगरजस्ता साना बस्ती र त्यहाँका नागरिकहरू कहाँ पर्छन्?</strong></p>
 </section></article>
+    <section class="article-share" aria-label="लेख साझा गर्नुहोस्">
+      <div class="article-share-copy">
+        <h2>यो लेख अरूसँग साझा गर्नुहोस्</h2>
+        <p>Facebook, WhatsApp, LinkedIn वा सीधै लिंक पठाउन सक्नुहुन्छ।</p>
+      </div>
+      <div class="share-widget" data-article-share>
+        <button class="share-toggle" type="button" aria-controls="share-options" aria-expanded="false">
+          <i class="bi bi-share" aria-hidden="true"></i>
+          <span>Share this article</span>
+          <i class="bi bi-chevron-down" aria-hidden="true"></i>
+        </button>
+        <div class="share-menu" id="share-options" hidden aria-label="Share options">
+          <a data-share="facebook" href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer"><i class="bi bi-facebook" aria-hidden="true"></i>Facebook</a>
+          <a data-share="whatsapp" href="https://wa.me/" target="_blank" rel="noopener noreferrer"><i class="bi bi-whatsapp" aria-hidden="true"></i>WhatsApp</a>
+          <a data-share="linkedin" href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer"><i class="bi bi-linkedin" aria-hidden="true"></i>LinkedIn</a>
+          <button type="button" data-share="copy"><i class="bi bi-link-45deg" aria-hidden="true"></i>Copy link</button>
+          <button type="button" data-share="native" hidden><i class="bi bi-phone" aria-hidden="true"></i>More sharing options</button>
+        </div>
+        <p class="share-status" role="status" aria-live="polite"></p>
+      </div>
+    </section>
 <nav class="story-foot" aria-label="Blog navigation"><a href="/blog/">← सबै लेखहरूमा फर्कनुहोस्</a><a href="/">मुख्य पृष्ठ</a></nav>
 </main>
 <footer class="story-footer"><div class="wrap"><a class="footer-name" href="/">Deepak Kumar Karn<span class="dot">.</span></a><a href="/blog/">Blog</a><span class="copyright">© 2026 Deepak Kumar Karn</span></div></footer>
