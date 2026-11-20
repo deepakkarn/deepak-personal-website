@@ -15,6 +15,21 @@
  */
 window.DK_BLOG_POSTS = [
   {
+    url: 'posts/eutai-palika-dui-nirwachan-kshetra.html',
+    date: '2026-11-20',
+    image: 'assets/dui-nirwachan-kshetra-cover.webp',
+    category: { ne: 'विश्लेषण · स्थानीय शासन', en: 'Analysis · Local Governance' },
+    title: {
+      ne: 'एउटै पालिका, दुई निर्वाचन क्षेत्र: विकासको जिम्मेवारी कसको?',
+      en: 'एउटै पालिका, दुई निर्वाचन क्षेत्र: विकासको जिम्मेवारी कसको?'
+    },
+    excerpt: {
+      ne: 'संघीय सांसद, प्रदेश सांसद र स्थानीय सरकारका भूमिका, अधिकार र जवाफदेहितालाई भंगाहा नगरपालिकाको सन्दर्भमा बुझ्ने प्रयास।',
+      en: 'संघीय सांसद, प्रदेश सांसद र स्थानीय सरकारका भूमिका, अधिकार र जवाफदेहितालाई भंगाहा नगरपालिकाको सन्दर्भमा बुझ्ने प्रयास।'
+    }
+  },
+
+  {
     url: 'posts/shreenagar-tin-mudha-ek-khola.html',
     date: '2026-11-20',
     image: 'assets/shreenagar/bridge-article-cover.avif',
