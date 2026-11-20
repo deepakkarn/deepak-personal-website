@@ -45,3 +45,6 @@
 @media(max-width:365px){
   .blog-interaction-divider{width:calc(100% - 40px)}
 }
+
+/* Match the divider before Share to the one between Share and feedback. */
+.longform > .article-share.share-before-feedback{margin-top:0}
