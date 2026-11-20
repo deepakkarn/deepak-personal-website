@@ -20,3 +20,28 @@
 .share-status{position:absolute;top:calc(100% + 8px);right:0;min-width:170px;font:600 12px/1.6 'Noto Sans Devanagari','DM Sans',sans-serif;color:#376d4e;margin:0;text-align:right}
 @media(max-width:700px){.article-share{margin:0 23px 36px;padding:24px 0;gap:16px}.share-widget{width:100%}.share-toggle{width:100%}.share-menu{right:0;left:0;width:100%;max-width:none}}
 @media(prefers-reduced-motion:reduce){.share-toggle{transition:none}.share-toggle:hover{transform:none}}
+
+/* Sharing first, separated from the compact feedback block below. */
+.article-share.share-before-feedback{
+  border-top:0;
+  border-bottom:0;
+  margin-bottom:0;
+  padding-bottom:20px;
+}
+.longform > .article-share.share-before-feedback{margin-bottom:0}
+.blog-interaction-divider{
+  display:block;
+  height:0;
+  width:min(760px,calc(100% - 54px));
+  border:0;
+  border-top:1px solid #ded4c8;
+  margin:0 auto;
+}
+.blog-interaction-divider + .blog-engagement{margin-top:26px}
+@media(max-width:650px){
+  .blog-interaction-divider{width:calc(100% - 48px)}
+  .blog-interaction-divider + .blog-engagement{margin-top:21px}
+}
+@media(max-width:365px){
+  .blog-interaction-divider{width:calc(100% - 40px)}
+}
