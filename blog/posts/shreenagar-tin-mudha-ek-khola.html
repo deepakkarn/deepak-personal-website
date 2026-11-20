@@ -77,13 +77,13 @@ body{background:var(--story-paper);color:var(--story-ink)}
 :root{--story-reading-gutter:clamp(34px,5vw,64px)}
 .story-top{padding-inline:var(--story-reading-gutter)}
 .story-intro,.story-section-heading,.story-section>p,.story-foot{
-  width:min(760px,calc(100% - 2 * var(--story-reading-gutter)));
+  width:min(760px,calc(100% - var(--story-reading-gutter) - var(--story-reading-gutter)));
 }
 .story-split{
-  width:min(1150px,calc(100% - 2 * var(--story-reading-gutter)));
+  width:min(1150px,calc(100% - var(--story-reading-gutter) - var(--story-reading-gutter)));
 }
 .story-wide{
-  width:min(1060px,calc(100% - 2 * var(--story-reading-gutter)));
+  width:min(1060px,calc(100% - var(--story-reading-gutter) - var(--story-reading-gutter)));
 }
 .story-split-copy{min-width:0;overflow-wrap:break-word}
 @media(max-width:800px){
