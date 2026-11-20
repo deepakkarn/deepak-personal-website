@@ -69,3 +69,14 @@
  .engagement-comment-toggle{margin-left:0}
 }
 @media(max-width:400px){.engagement-actions{align-items:flex-start}.engagement-likes{width:100%}.engagement-comment-toggle{flex:1}.engagement-view-comments{flex:1}}
+
+/* Author replies displayed under approved public comments. */
+.engagement-replies{margin:15px 0 2px 18px;display:grid;gap:11px}
+.engagement-reply{border-left:3px solid #b8815f;border-radius:0 12px 12px 0;background:#f9f2ea;padding:13px 16px}
+.engagement-reply-meta{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+.engagement-reply-meta strong{font-size:13px}
+.engagement-reply-meta time{font-size:11px;color:#7a8982;margin-left:auto}
+.engagement-author-label{font-size:10px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#9f6b4f;background:#efe0d3;padding:2px 7px;border-radius:99px}
+.engagement-reply p{font-size:14px;line-height:1.85;white-space:pre-wrap;overflow-wrap:anywhere;margin:8px 0 0}
+.engagement-reply-edited{font-size:11px;color:#73827b}
+@media(max-width:650px){.engagement-replies{margin-left:6px}.engagement-reply{padding:12px}}

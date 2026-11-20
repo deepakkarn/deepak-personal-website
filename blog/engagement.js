@@ -1,4 +1,4 @@
-/* Reusable blog Like and moderated Comment UI. Only uses same-origin /api routes. */
+/* Reusable blog Like and Comment UI. Only uses same-origin /api routes. */
 (() => {
   const root = document.querySelector('[data-blog-engagement]');
   if (!root) return;
@@ -28,7 +28,7 @@
         <label>Email <span aria-hidden="true">*</span><input name="email" type="email" maxlength="254" required autocomplete="email" placeholder="you@example.com"></label>
         <label class="engagement-comment-field">Comment <span aria-hidden="true">*</span><textarea name="comment" minlength="3" maxlength="3000" rows="5" required placeholder="तपाईंको विचार लेख्नुहोस्…"></textarea></label>
       </div>
-      <p class="engagement-privacy">तपाईंको Email सार्वजनिक हुँदैन। Comment समीक्षा र स्वीकृतिपछि मात्र देखिन्छ।</p>
+      <p class="engagement-privacy">तपाईंको Email सार्वजनिक हुँदैन। Submit गरेपछि Comment तुरुन्त प्रकाशित हुन्छ।</p>
       <div class="engagement-turnstile" aria-label="Spam verification"></div>
       <button class="engagement-submit" type="submit" disabled>Submit Comment</button>
       <p class="engagement-submit-status" role="status" aria-live="polite"></p>
@@ -88,6 +88,37 @@
       const message = document.createElement('p');
       message.textContent = String(item.message || ''); // Never interpret reader content as HTML.
       box.append(header, message);
+      if (Array.isArray(item.replies) && item.replies.length) {
+        const replies = document.createElement('div');
+        replies.className = 'engagement-replies';
+        for (const reply of item.replies) {
+          const replyBox = document.createElement('div');
+          replyBox.className = 'engagement-reply';
+          const replyHeader = document.createElement('div');
+          replyHeader.className = 'engagement-reply-meta';
+          const author = document.createElement('strong');
+          author.textContent = String(reply.author_name || 'Deepak Kumar Karn');
+          const label = document.createElement('span');
+          label.textContent = 'Author';
+          label.className = 'engagement-author-label';
+          const replyDate = document.createElement('time');
+          const replyValue = new Date(String(reply.created_at || '').replace(' ', 'T') + 'Z');
+          replyDate.textContent = Number.isNaN(replyValue.valueOf()) ? '' :
+            replyValue.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+          replyHeader.append(author, label, replyDate);
+          const replyText = document.createElement('p');
+          replyText.textContent = String(reply.message || '');
+          replyBox.append(replyHeader, replyText);
+          if (reply.updated_at) {
+            const edited = document.createElement('small');
+            edited.className = 'engagement-reply-edited';
+            edited.textContent = 'Edited';
+            replyBox.append(edited);
+          }
+          replies.append(replyBox);
+        }
+        box.append(replies);
+      }
       commentList.append(box);
     }
   }
@@ -174,8 +205,11 @@
         comment: form.elements.comment.value.trim(), turnstileToken: token
       });
       form.reset();
-      submitStatus.textContent = 'धन्यवाद! तपाईंको comment प्राप्त भयो। स्वीकृतिपछि सार्वजनिक हुनेछ।';
+      submitStatus.textContent = 'धन्यवाद! तपाईंको comment प्रकाशित भयो।';
       submitStatus.classList.add('is-success');
+      await loadComments();
+      discussion.hidden = false;
+      viewCommentsButton.setAttribute('aria-expanded', 'true');
     } catch (error) {
       submitStatus.textContent = error.message || 'Comment पठाउन सकिएन।';
       submitStatus.classList.remove('is-success');
