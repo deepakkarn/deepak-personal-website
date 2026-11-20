@@ -8,16 +8,19 @@
 
   root.innerHTML = `
     <div class="engagement-header">
-      <div><span class="engagement-eyebrow">YOUR VOICE MATTERS</span><h2>तपाईंको प्रतिक्रिया</h2>
-      <p>लेख मन पर्‍यो? आफ्नो विचार पनि राख्नुहोस्।</p></div>
-      <div class="engagement-likes"><button type="button" class="engagement-like" disabled aria-pressed="false">♡ <span>Like</span></button><span class="engagement-like-count" aria-live="polite">— likes</span></div>
+      <div><h2>तपाईंको प्रतिक्रिया</h2>
+      <p>लेख मन पर्‍यो? Like गर्नुहोस् वा आफ्नो विचार राख्नुहोस्।</p></div>
     </div>
-    <div class="engagement-discussion">
-      <h3>Comments <span class="engagement-comment-count"></span></h3>
-      <p class="engagement-load-status" role="status" aria-live="polite">Comments लोड हुँदैछन्…</p>
+    <div class="engagement-actions">
+      <div class="engagement-likes"><button type="button" class="engagement-like" disabled aria-pressed="false">♡ <span>Like</span></button><span class="engagement-like-count" aria-live="polite">— likes</span></div>
+      <button type="button" class="engagement-view-comments" aria-controls="engagement-discussion-panel" aria-expanded="false" disabled>▤ Comments <span class="engagement-comment-count">(0)</span></button>
+      <button type="button" class="engagement-comment-toggle" aria-controls="engagement-compose-panel" aria-expanded="false" disabled>✎ Comment लेख्नुहोस्</button>
+    </div>
+    <p class="engagement-load-status" role="status" aria-live="polite">Comments लोड हुँदैछन्…</p>
+    <div class="engagement-discussion" id="engagement-discussion-panel" hidden>
       <div class="engagement-comment-list"></div>
     </div>
-    <form class="engagement-form" novalidate>
+    <form class="engagement-form" id="engagement-compose-panel" novalidate hidden>
       <h3>Leave a Comment</h3>
       <p>Login आवश्यक छैन। सबै विवरण अनिवार्य छन्।</p>
       <div class="engagement-fields">
@@ -36,6 +39,9 @@
   const commentList = root.querySelector('.engagement-comment-list');
   const commentCount = root.querySelector('.engagement-comment-count');
   const loadStatus = root.querySelector('.engagement-load-status');
+  const discussion = root.querySelector('.engagement-discussion');
+  const viewCommentsButton = root.querySelector('.engagement-view-comments');
+  const commentToggleButton = root.querySelector('.engagement-comment-toggle');
   const form = root.querySelector('.engagement-form');
   const submitButton = root.querySelector('.engagement-submit');
   const submitStatus = root.querySelector('.engagement-submit-status');
@@ -44,7 +50,9 @@
   let token = '';
   let widgetId = null;
   let busy = false;
-  form.hidden = true; // Do not expose an unusable form before the secret is configured.
+  let turnstileScriptAdded = false;
+  let commentsEnabled = false;
+  // Form and public comments stay collapsed until a reader asks to open them.
 
   function setLikes(count, active) {
     liked = Boolean(active);
@@ -112,10 +120,10 @@
       setLikes(payload.likes, payload.liked);
       showComments(Array.isArray(payload.comments) ? payload.comments : []);
       loadStatus.hidden = true;
-      if (payload.commentsEnabled) {
-        form.hidden = false;
-        document.head.appendChild(script);
-      } else {
+      viewCommentsButton.disabled = false;
+      commentsEnabled = Boolean(payload.commentsEnabled);
+      commentToggleButton.disabled = !commentsEnabled;
+      if (!commentsEnabled) {
         loadStatus.hidden = false;
         loadStatus.textContent = 'Comment form को सुरक्षा सेटअप पूरा हुँदैछ।';
       }
@@ -125,6 +133,27 @@
       commentCount.textContent = '';
     }
   }
+  viewCommentsButton.addEventListener('click', () => {
+    discussion.hidden = !discussion.hidden;
+    viewCommentsButton.setAttribute('aria-expanded', String(!discussion.hidden));
+    if (!discussion.hidden) discussion.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  });
+  commentToggleButton.addEventListener('click', () => {
+    if (!commentsEnabled) return;
+    form.hidden = !form.hidden;
+    commentToggleButton.setAttribute('aria-expanded', String(!form.hidden));
+    commentToggleButton.textContent = form.hidden ? '✎ Comment लेख्नुहोस्' : '✕ Form बन्द गर्नुहोस्';
+    if (!form.hidden) {
+      if (!turnstileScriptAdded) {
+        turnstileScriptAdded = true;
+        document.head.appendChild(script);
+      } else if (window.turnstile && widgetId === null) {
+        setupTurnstile();
+      }
+      form.elements.name.focus({ preventScroll: true });
+    }
+  });
+
   function updateSubmit() {
     const fields = form.elements;
     const valid = fields.name.value.trim().length >= 2 && fields.name.validity.valid &&
@@ -158,6 +187,7 @@
     }
   });
   function setupTurnstile() {
+    if (widgetId !== null || form.hidden) return;
     if (!window.turnstile) {
       submitStatus.textContent = 'Verification लोड हुन सकेन। पेज refresh गर्नुहोस्।';
       return;
