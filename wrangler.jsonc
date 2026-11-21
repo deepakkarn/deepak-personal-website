@@ -16,5 +16,6 @@
       "database_name": "deepakkarn-blog",
       "database_id": "88cb1855-2b0b-4d56-8308-2d630c13b9cd"
     }
-  ]
+  ],
+  "keep_vars": true
 }
