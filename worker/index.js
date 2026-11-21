@@ -189,6 +189,9 @@ async function recordPageView(request, env) {
   const body = await bodyJson(request);
   const page = normalizedTrackPath(body?.path);
   if (!page) return json({ error: 'Invalid page' }, 400);
+  // Article views are counted on GET requests by the Worker, not here.
+  // Older cached analytics.js versions may still POST an article path.
+  if (validPost(page)) return json({ ok: true, counted: false, source: 'server' });
   let visitor = analyticsCookieId(request);
   let cookie = {};
   if (!visitor) {
@@ -202,6 +205,56 @@ async function recordPageView(request, env) {
   ).bind(page, idHash).run();
   return json({ ok: true }, 200, cookie);
 }
+
+// Count article HTML navigation at the edge, even when JavaScript is disabled or cached.
+function isArticleNavigation(request, url) {
+  if (request.method !== 'GET' || !validPost(url.pathname)) return false;
+  if (!(request.headers.get('Accept') || '').includes('text/html')) return false;
+  const dest = request.headers.get('Sec-Fetch-Dest');
+  if (dest && dest !== 'document') return false;
+  const mode = request.headers.get('Sec-Fetch-Mode');
+  if (mode && mode !== 'navigate') return false;
+  const purpose = (request.headers.get('Purpose') || '') + ' ' +
+    (request.headers.get('Sec-Purpose') || '');
+  if (/prefetch|prerender/i.test(purpose)) return false;
+  return true;
+}
+async function serveTrackedArticle(request, env, url, ctx) {
+  // Strip validators so a refresh still passes through a complete HTML response.
+  const assetRequest = new Request(request);
+  assetRequest.headers.delete('If-None-Match');
+  assetRequest.headers.delete('If-Modified-Since');
+  const assetResponse = await env.ASSETS.fetch(assetRequest);
+  if (assetResponse.status !== 200 ||
+      !(assetResponse.headers.get('Content-Type') || '').toLowerCase().includes('text/html') ||
+      !env.BLOG_DB) return assetResponse;
+
+  const previousId = analyticsCookieId(request);
+  const visitorId = previousId || crypto.randomUUID();
+  const visitorHash = await sha256(visitorId);
+  const save = env.BLOG_DB.prepare(
+    'INSERT INTO site_page_views (page_path, visitor_id, view_count) VALUES (?, ?, 1) ' +
+    'ON CONFLICT(page_path, visitor_id) DO UPDATE SET view_count = view_count + 1, last_seen_at = CURRENT_TIMESTAMP'
+  ).bind(url.pathname, visitorHash).run();
+  if (ctx?.waitUntil) {
+    ctx.waitUntil(save.catch(error => console.error('Article analytics write failed:', error)));
+  } else {
+    await save.catch(error => console.error('Article analytics write failed:', error));
+  }
+
+  const headers = new Headers(assetResponse.headers);
+  headers.set('Cache-Control', 'private, no-store');
+  if (!previousId) {
+    headers.append('Set-Cookie', 'dk_site_visitor=' + visitorId +
+      '; Path=/; Secure; HttpOnly; SameSite=Lax; Max-Age=31536000');
+  }
+  return new Response(assetResponse.body, {
+    status: assetResponse.status,
+    statusText: assetResponse.statusText,
+    headers
+  });
+}
+
 async function portalTrafficStats(env) {
   const [all, articles] = await Promise.all([
     env.BLOG_DB.prepare(
@@ -418,6 +471,9 @@ export default {
     }
     if (url.pathname === '/portal') {
       return new Response(null, { status: 302, headers: { 'Location': '/portal/', 'Cache-Control': 'no-store' } });
+    }
+    if (isArticleNavigation(request, url)) {
+      return serveTrackedArticle(request, env, url, ctx);
     }
     return env.ASSETS.fetch(request);
   }

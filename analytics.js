@@ -5,7 +5,9 @@
   const isArticle = /^\/blog\/posts\/[a-z0-9][a-z0-9-]{0,90}\.html$/.test(path);
   const canonicalPath = path === '/index.html' ? '/' :
     (path === '/blog' || path === '/blog/index.html' ? '/blog/' : path);
-  if (canonicalPath !== '/' && canonicalPath !== '/blog/' && !isArticle) return;
+  // Article pages are tracked reliably by Worker GET navigation.
+  // Leave client tracking for homepage and blog index only.
+  if (canonicalPath !== '/' && canonicalPath !== '/blog/') return;
 
   let sent = false;
   function track() {
