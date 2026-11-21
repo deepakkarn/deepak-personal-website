@@ -23,6 +23,7 @@
   const articleNames = {
     'rsp-naya-netritwa': 'RSP ले नयाँ नेतृत्व खोज्नुपर्छ',
     'shreenagar-tin-mudha-ek-khola': 'तीनवटा मुढा, एउटा खोला र श्रीनगरका प्रश्नहरू',
+    'vidyalaya-chha-tara-sikne-batawaran-kasto-chha': 'विद्यालय छ, तर सिक्ने वातावरण कस्तो छ?',
     'eutai-palika-dui-nirwachan-kshetra': 'एउटै पालिका, दुई निर्वाचन क्षेत्र'
   };
   let comments = [];
@@ -230,6 +231,7 @@
     const known = [
       '/blog/posts/rsp-naya-netritwa.html',
       '/blog/posts/shreenagar-tin-mudha-ek-khola.html',
+      '/blog/posts/vidyalaya-chha-tara-sikne-batawaran-kasto-chha.html',
       '/blog/posts/eutai-palika-dui-nirwachan-kshetra.html'
     ];
     const found = new Map((Array.isArray(info.articles) ? info.articles : [])

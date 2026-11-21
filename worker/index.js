@@ -111,6 +111,7 @@ async function verifyTurnstile(env, token, request) {
 const COMMENT_EMAIL_SUBJECTS = {
   '/blog/posts/rsp-naya-netritwa.html': 'RSP ले नयाँ नेतृत्व खोज्नुपर्छ',
   '/blog/posts/shreenagar-tin-mudha-ek-khola.html': 'तीनवटा मुढा, एउटा खोला र श्रीनगरका प्रश्नहरू',
+  '/blog/posts/vidyalaya-chha-tara-sikne-batawaran-kasto-chha.html': 'विद्यालय छ, तर सिक्ने वातावरण कस्तो छ?',
   '/blog/posts/eutai-palika-dui-nirwachan-kshetra.html': 'एउटै पालिका, दुई निर्वाचन क्षेत्र: विकासको जिम्मेवारी कसको?'
 };
 async function sendCommentNotification(env, post, name, comment) {

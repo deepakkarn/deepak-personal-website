@@ -15,6 +15,18 @@
  */
 window.DK_BLOG_POSTS = [
   {
+    url: 'posts/vidyalaya-chha-tara-sikne-batawaran-kasto-chha.html',
+    date: '2026-11-21',
+    image: 'assets/vidyalaya-sikai-cover.avif',
+    category: { ne: 'शिक्षा · सार्वजनिक प्रश्न', en: 'Education · Public Questions' },
+    title: { ne: 'विद्यालय छ, तर सिक्ने वातावरण कस्तो छ?', en: 'विद्यालय छ, तर सिक्ने वातावरण कस्तो छ?' },
+    excerpt: {
+      ne: 'मधेशका सामुदायिक विद्यालय, आधारभूत सुविधाको अभाव, सिकाइको गुणस्तर र बालबालिकाको भविष्यबारे केही प्रश्न।',
+      en: 'Questions about learning, school facilities, educational inequality and children\'s futures in Madhesh.'
+    }
+  },
+
+  {
     url: 'posts/eutai-palika-dui-nirwachan-kshetra.html',
     date: '2026-11-20',
     image: 'assets/dui-nirwachan-kshetra-cover.webp',
