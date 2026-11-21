@@ -10,6 +10,13 @@
   const trafficStatus = document.querySelector('#traffic-status');
   const trafficMetrics = document.querySelector('#traffic-metrics');
   const trafficArticles = document.querySelector('#traffic-articles');
+  const commentTab = document.querySelector('#tab-comments');
+  const analyticsTab = document.querySelector('#tab-analytics');
+  const commentPanel = document.querySelector('#panel-comments');
+  const analyticsPanel = document.querySelector('#panel-analytics');
+  const analyticsRefresh = document.querySelector('#refresh-analytics-button');
+  const tablist = document.querySelector('.portal-tabs');
+  let trafficLoaded = false;
   const search = document.querySelector('#comment-search');
   const filter = document.querySelector('#comment-filter');
   const loginButton = document.querySelector('#login-button');
@@ -33,6 +40,18 @@
   function setSignedIn(signedIn) {
     loginPanel.hidden = signedIn;
     dashboard.hidden = !signedIn;
+  }
+  function showTab(section) {
+    const analytics = section === 'analytics';
+    commentTab.classList.toggle('is-active', !analytics);
+    analyticsTab.classList.toggle('is-active', analytics);
+    commentTab.setAttribute('aria-selected', String(!analytics));
+    analyticsTab.setAttribute('aria-selected', String(analytics));
+    commentTab.tabIndex = analytics ? -1 : 0;
+    analyticsTab.tabIndex = analytics ? 0 : -1;
+    commentPanel.hidden = analytics;
+    analyticsPanel.hidden = !analytics;
+    if (analytics && !trafficLoaded) void loadTraffic();
   }
   async function api(path, method, data) {
     const options = { method: method || 'GET', credentials: 'same-origin', cache: 'no-store' };
@@ -241,6 +260,7 @@
     try {
       const info = await api('/api/portal/traffic');
       renderTraffic(info);
+      trafficLoaded = true;
     } catch (error) {
       trafficStatus.textContent = 'Statistics not ready. Run the D1 analytics table migration, then refresh.';
       trafficMetrics.replaceChildren();
@@ -252,7 +272,6 @@
     comments = Array.isArray(response.comments) ? response.comments : [];
     paintSummary();
     render();
-    await loadTraffic();
   }
   loginForm.addEventListener('submit', async event => {
     event.preventDefault();
@@ -265,6 +284,7 @@
       });
       loginForm.reset();
       setSignedIn(true);
+      showTab('comments');
       await load();
       note(loginMessage, '');
     } catch (error) {
@@ -278,12 +298,36 @@
     try { await api('/api/portal/logout', 'POST', {}); } catch {}
     comments = [];
     commentRows.replaceChildren();
+    trafficLoaded = false;
+    trafficMetrics.replaceChildren();
+    trafficArticles.replaceChildren();
+    showTab('comments');
     setSignedIn(false);
     note(portalMessage, '');
   });
   document.querySelector('#refresh-button').addEventListener('click', async () => {
     try { await load(); note(portalMessage, 'Updated.', true); }
     catch (error) { note(portalMessage, error.message); }
+  });
+  commentTab.addEventListener('click', () => showTab('comments'));
+  analyticsTab.addEventListener('click', () => showTab('analytics'));
+  analyticsRefresh.addEventListener('click', () => {
+    trafficLoaded = false;
+    trafficStatus.textContent = 'Refreshing website statistics…';
+    void loadTraffic();
+  });
+  tablist.addEventListener('keydown', event => {
+    const current = document.activeElement === analyticsTab ? 1 : 0;
+    let next;
+    if (event.key === 'ArrowRight') next = (current + 1) % 2;
+    else if (event.key === 'ArrowLeft') next = (current + 1) % 2;
+    else if (event.key === 'Home') next = 0;
+    else if (event.key === 'End') next = 1;
+    else return;
+    event.preventDefault();
+    const target = next ? analyticsTab : commentTab;
+    target.focus();
+    showTab(next ? 'analytics' : 'comments');
   });
   search.addEventListener('input', render);
   filter.addEventListener('change', render);
@@ -295,6 +339,7 @@
       }
       if (state.loggedIn) {
         setSignedIn(true);
+        showTab('comments');
         await load();
       } else setSignedIn(false);
     } catch (error) {

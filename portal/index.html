@@ -7,8 +7,8 @@
   <meta name="referrer" content="no-referrer">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; base-uri 'none'; form-action 'self'">
   <title>Private Portal | Deepak Kumar Karn</title>
-  <link rel="stylesheet" href="/portal/portal.css?v=20261121-analytics1">
-  <script defer src="/portal/portal.js?v=20261121-analytics1"></script>
+  <link rel="stylesheet" href="/portal/portal.css?v=20261121-tabs1">
+  <script defer src="/portal/portal.js?v=20261121-tabs1"></script>
 </head>
 <body>
   <header class="site-top">
@@ -32,25 +32,27 @@
     </section>
     <section class="dashboard" id="dashboard" hidden aria-labelledby="dashboard-title">
       <div class="dashboard-heading">
-        <div><span class="eyebrow">COMMENT MANAGEMENT</span><h1 id="dashboard-title">Your portal<span>.</span></h1>
-          <p class="lede">Reply, edit your replies, or remove unwanted comments.</p></div>
+        <div><span class="eyebrow">PRIVATE EDITOR PORTAL</span><h1 id="dashboard-title">Your portal<span>.</span></h1>
+          <p class="lede">Manage conversations and understand your website's readership.</p></div>
         <button class="secondary-button" id="logout-button" type="button">Sign out</button>
       </div>
-      <div id="summary" class="summary" aria-live="polite"></div>
-      <section class="traffic-panel" aria-labelledby="traffic-title">
-        <div class="traffic-header">
-          <div>
-            <span class="eyebrow">WEBSITE ANALYTICS</span>
-            <h2 id="traffic-title">Visitors &amp; page views</h2>
-            <p>Private statistics, counted from the date tracking was enabled.</p>
-          </div>
+
+      <nav class="portal-tabs" role="tablist" aria-label="Portal sections">
+        <button type="button" class="portal-tab is-active" id="tab-comments" role="tab" aria-controls="panel-comments" aria-selected="true" tabindex="0">
+          <span class="portal-tab-title">Comment Management</span>
+          <span class="portal-tab-description">Comments &amp; replies</span>
+        </button>
+        <button type="button" class="portal-tab" id="tab-analytics" role="tab" aria-controls="panel-analytics" aria-selected="false" tabindex="-1">
+          <span class="portal-tab-title">Web Analytics</span>
+          <span class="portal-tab-description">Visitors &amp; article views</span>
+        </button>
+      </nav>
+      <section id="panel-comments" class="portal-tabpanel" role="tabpanel" aria-labelledby="tab-comments" tabindex="0">
+        <div class="portal-panel-intro">
+          <h2>Comment Management</h2>
+          <p>Read comments, reply to readers, and moderate discussions.</p>
         </div>
-        <p id="traffic-status" class="traffic-status" role="status" aria-live="polite">Loading website statistics…</p>
-        <div id="traffic-metrics" class="traffic-metrics"></div>
-        <h3 class="traffic-list-heading">Blog post views</h3>
-        <div id="traffic-articles" class="traffic-articles"></div>
-        <p class="traffic-disclaimer">Unique visitors are estimated by browser; clearing cookies or switching devices may count as a new visitor. Automated and blocked requests can also affect totals.</p>
-      </section>
+      <div id="summary" class="summary" aria-live="polite"></div>
       <div class="toolbar">
         <label class="search-wrap" for="comment-search">Search comments
           <input id="comment-search" type="search" placeholder="Name, article or comment…" autocomplete="off">
@@ -68,6 +70,27 @@
       <p id="portal-message" class="message" role="status" aria-live="polite"></p>
       <div id="comment-rows" class="comment-rows" aria-live="polite"></div>
       <p class="end-note">Showing up to 200 recent comments. New comments are published immediately; older pending comments can be published here.</p>
+      </section>
+      <section id="panel-analytics" class="portal-tabpanel" role="tabpanel" aria-labelledby="tab-analytics" tabindex="0" hidden>
+        <div class="portal-panel-intro portal-analytics-heading">
+          <div><h2>Web Analytics</h2><p>Traffic and readership across deepakkarn.com.</p></div>
+          <button id="refresh-analytics-button" class="secondary-button" type="button">Refresh statistics</button>
+        </div>
+      <section class="traffic-panel" aria-labelledby="traffic-title">
+        <div class="traffic-header">
+          <div>
+            <span class="eyebrow">WEBSITE ANALYTICS</span>
+            <h2 id="traffic-title">Visitors &amp; page views</h2>
+            <p>Private statistics, counted from the date tracking was enabled.</p>
+          </div>
+        </div>
+        <p id="traffic-status" class="traffic-status" role="status" aria-live="polite">Loading website statistics…</p>
+        <div id="traffic-metrics" class="traffic-metrics"></div>
+        <h3 class="traffic-list-heading">Blog post views</h3>
+        <div id="traffic-articles" class="traffic-articles"></div>
+        <p class="traffic-disclaimer">Unique visitors are estimated by browser; clearing cookies or switching devices may count as a new visitor. Automated and blocked requests can also affect totals.</p>
+      </section>
+      </section>
     </section>
   </main>
   <footer>Deepak Kumar Karn · <a href="/">deepakkarn.com</a></footer>
