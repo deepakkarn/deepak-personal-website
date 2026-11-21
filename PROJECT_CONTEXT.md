@@ -5,7 +5,7 @@
 > Last reviewed: 2026-11-21  
 > Repository: https://github.com/deepakkarn/deepak-personal-website  
 > Default branch: `main`  
-> Latest commit reviewed: `e4faa5850676ae3560419e09a3109de9a9e20f15`
+> Latest commit reviewed: `9fa09accc587f3b08d70d38e6210ab9cddda0cd7`
 
 ## 1. Project purpose
 
@@ -157,6 +157,7 @@ When returning to the project:
 | Date | Note |
 | --- | --- |
 | 2026-11-21 | Initial context file created using project preferences, repository `README.md` / `index.html`, and recent GitHub commit history. Production behavior not independently verified. |
+| 2026-11-21 | Homepage code review (desktop/mobile CSS, image placements, gallery, mobile navigation, language switch). Production website was not reachable from available network tools, so no live viewport/crop verification was possible. Added gallery animation pause on keyboard focus and focus-visible styles; Escape now closes the mobile menu; language switch gets action-specific accessible label and consistent pressed state; homepage CSS/JS URLs versioned. Source re-fetch verified changes. Commits through `9fa09ac`; visually validate mobile and desktop before further crop/spacing adjustments. |
 | 2026-11-21 | Corrected भंगाहा spelling and nonbreaking spaces in homepage/translations. Improved photo lightbox keyboard focus handling: focus moves to Close on open, Tab stays inside, Escape closes, and focus returns to the triggering photo. Changes committed to `main` through `e4faa58`; source re-read confirmed changes. Live browser inspection and Cloudflare deployment remain unverified. |
 
 ---
