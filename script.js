@@ -135,7 +135,8 @@ function setLanguage(lang) {
     if (value !== undefined) el.alt = value;
   });
   label.textContent = lang === 'ne' ? 'EN' : 'ने';
-  toggle.setAttribute('aria-pressed', String(lang === 'en'));
+  toggle.setAttribute('aria-pressed', String(lang === 'ne'));
+  toggle.setAttribute('aria-label', lang === 'ne' ? 'Switch to English' : 'नेपालीमा परिवर्तन गर्नुहोस्');
   syncName();
   document.dispatchEvent(new CustomEvent('dk:languagechange', { detail: { language: lang } }));
   try { localStorage.setItem('dk-language', lang); } catch (e) {}
@@ -163,6 +164,14 @@ mobile.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
   menu.setAttribute('aria-expanded', 'false');
   menu.setAttribute('aria-label', 'Open menu');
 }));
+// Escape closes the mobile navigation and returns focus to its opener.
+document.addEventListener('keydown', event => {
+  if (event.key !== 'Escape' || mobile.hidden) return;
+  mobile.hidden = true;
+  menu.setAttribute('aria-expanded', 'false');
+  menu.setAttribute('aria-label', 'Open menu');
+  menu.focus();
+});
 
 // The anchor is outside the sticky header, so native hash navigation
 // also returns to the actual page top when JavaScript is disabled or cached.
