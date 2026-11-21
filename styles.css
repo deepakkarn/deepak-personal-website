@@ -184,3 +184,9 @@ html[lang="en"] .name-en{font-family:'Noto Sans Devanagari',sans-serif;letter-sp
  .about-topline{grid-template-columns:minmax(0,1fr)}
  .about-thumbnail{width:150px}
 }
+
+
+/* Keyboard accessibility: pause moving photos while navigating the gallery. */
+.photo-band:focus-within .photo-track{animation-play-state:paused}
+.band-photo:focus-visible{outline:3px solid var(--accent);outline-offset:-3px}
+.menu-toggle:focus-visible,.language-toggle:focus-visible,.mobile-nav a:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
