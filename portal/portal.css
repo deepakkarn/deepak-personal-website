@@ -82,3 +82,25 @@ footer{border-top:1px solid var(--line);padding:25px;text-align:center;font-size
 }
 @media(max-width:420px){.summary-card span{font-size:11px}.toolbar .secondary-button{grid-column:1/-1}.dashboard-heading h1{font-size:34px}.dashboard-heading .secondary-button{padding:9px 13px}}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+
+/* Analytics summary, visible only inside the signed-in private portal. */
+.traffic-panel{background:var(--white);border:1px solid var(--line);border-radius:20px;padding:clamp(18px,3vw,27px);margin:0 0 30px;box-shadow:var(--shadow)}
+.traffic-header h2{font-size:clamp(19px,3vw,24px);letter-spacing:-.025em;margin:7px 0 4px}
+.traffic-header p,.traffic-disclaimer{color:var(--muted);font-size:12px;line-height:1.75;margin:0}
+.traffic-status{font-size:12px;color:var(--muted);min-height:12px;margin:14px 0 0}
+.traffic-status:empty{display:none}
+.traffic-metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:18px}
+.traffic-metric{background:#f6f1e9;border:1px solid #eee3d8;border-radius:13px;padding:16px;min-width:0}
+.traffic-metric strong{font:700 clamp(22px,3vw,31px) Georgia,serif;display:block;overflow-wrap:anywhere}
+.traffic-metric span{font-size:12px;color:var(--muted);display:block;margin-top:5px}
+.traffic-list-heading{font-size:15px;margin:25px 0 6px}
+.traffic-articles{display:grid;gap:0}
+.traffic-article{display:flex;align-items:center;justify-content:space-between;gap:15px;border-top:1px solid var(--line);padding:13px 0}
+.traffic-article-title{font-weight:650;color:#7a5039;line-height:1.55;text-decoration:none;font-size:13px;overflow-wrap:anywhere}
+.traffic-article-title:hover{text-decoration:underline}
+.traffic-article-count{display:grid;gap:3px;text-align:right;white-space:nowrap}
+.traffic-article-count strong{font-size:13px}
+.traffic-article-count span{font-size:11px;color:var(--muted)}
+.traffic-disclaimer{margin-top:13px}
+@media(max-width:650px){.traffic-metrics{gap:7px}.traffic-metric{padding:12px}.traffic-metric strong{font-size:24px}.traffic-metric span{font-size:11px}.traffic-article{align-items:flex-start}}
+@media(max-width:390px){.traffic-metrics{grid-template-columns:1fr}.traffic-metric{display:flex;align-items:center;justify-content:space-between;gap:15px}.traffic-metric span{margin-top:0}}

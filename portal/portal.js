@@ -7,6 +7,9 @@
   const portalMessage = document.querySelector('#portal-message');
   const commentRows = document.querySelector('#comment-rows');
   const summary = document.querySelector('#summary');
+  const trafficStatus = document.querySelector('#traffic-status');
+  const trafficMetrics = document.querySelector('#traffic-metrics');
+  const trafficArticles = document.querySelector('#traffic-articles');
   const search = document.querySelector('#comment-search');
   const filter = document.querySelector('#comment-filter');
   const loginButton = document.querySelector('#login-button');
@@ -188,11 +191,68 @@
       summary.append(card);
     }
   }
+  function renderTraffic(info) {
+    trafficStatus.textContent = '';
+    const tiles = [
+      ['Unique visitors', info.visitors],
+      ['Total page views', info.pageViews],
+      ['Blog post views', info.blogViews]
+    ];
+    trafficMetrics.replaceChildren();
+    for (const [label, number] of tiles) {
+      const tile = node('div', 'traffic-metric');
+      tile.append(
+        node('strong', '', Number(number || 0).toLocaleString('en-US')),
+        node('span', '', label)
+      );
+      trafficMetrics.append(tile);
+    }
+
+    const known = [
+      '/blog/posts/rsp-naya-netritwa.html',
+      '/blog/posts/shreenagar-tin-mudha-ek-khola.html',
+      '/blog/posts/eutai-palika-dui-nirwachan-kshetra.html'
+    ];
+    const found = new Map((Array.isArray(info.articles) ? info.articles : [])
+      .filter(item => /^\/blog\/posts\/[a-z0-9-]+\.html$/.test(item.path))
+      .map(item => [item.path, item]));
+    const pages = [...new Set([...known, ...found.keys()])].map(path => ({
+      path, views: Number(found.get(path)?.views || 0),
+      visitors: Number(found.get(path)?.visitors || 0)
+    })).sort((a, b) => b.views - a.views);
+
+    trafficArticles.replaceChildren();
+    for (const article of pages) {
+      const line = node('div', 'traffic-article');
+      const link = node('a', 'traffic-article-title', articleTitle(article.path));
+      link.href = article.path;
+      link.target = '_blank';
+      link.rel = 'noopener noreferrer';
+      const views = node('div', 'traffic-article-count');
+      views.append(
+        node('strong', '', article.views.toLocaleString('en-US') + ' views'),
+        node('span', '', article.visitors.toLocaleString('en-US') + ' visitors')
+      );
+      line.append(link, views);
+      trafficArticles.append(line);
+    }
+  }
+  async function loadTraffic() {
+    try {
+      const info = await api('/api/portal/traffic');
+      renderTraffic(info);
+    } catch (error) {
+      trafficStatus.textContent = 'Statistics not ready. Run the D1 analytics table migration, then refresh.';
+      trafficMetrics.replaceChildren();
+      trafficArticles.replaceChildren();
+    }
+  }
   async function load() {
     const response = await api('/api/portal/comments');
     comments = Array.isArray(response.comments) ? response.comments : [];
     paintSummary();
     render();
+    await loadTraffic();
   }
   loginForm.addEventListener('submit', async event => {
     event.preventDefault();

@@ -7,8 +7,8 @@
   <meta name="referrer" content="no-referrer">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; base-uri 'none'; form-action 'self'">
   <title>Private Portal | Deepak Kumar Karn</title>
-  <link rel="stylesheet" href="/portal/portal.css?v=20261120-1">
-  <script defer src="/portal/portal.js?v=20261120-1"></script>
+  <link rel="stylesheet" href="/portal/portal.css?v=20261121-analytics1">
+  <script defer src="/portal/portal.js?v=20261121-analytics1"></script>
 </head>
 <body>
   <header class="site-top">
@@ -37,6 +37,20 @@
         <button class="secondary-button" id="logout-button" type="button">Sign out</button>
       </div>
       <div id="summary" class="summary" aria-live="polite"></div>
+      <section class="traffic-panel" aria-labelledby="traffic-title">
+        <div class="traffic-header">
+          <div>
+            <span class="eyebrow">WEBSITE ANALYTICS</span>
+            <h2 id="traffic-title">Visitors &amp; page views</h2>
+            <p>Private statistics, counted from the date tracking was enabled.</p>
+          </div>
+        </div>
+        <p id="traffic-status" class="traffic-status" role="status" aria-live="polite">Loading website statistics…</p>
+        <div id="traffic-metrics" class="traffic-metrics"></div>
+        <h3 class="traffic-list-heading">Blog post views</h3>
+        <div id="traffic-articles" class="traffic-articles"></div>
+        <p class="traffic-disclaimer">Unique visitors are estimated by browser; clearing cookies or switching devices may count as a new visitor. Automated and blocked requests can also affect totals.</p>
+      </section>
       <div class="toolbar">
         <label class="search-wrap" for="comment-search">Search comments
           <input id="comment-search" type="search" placeholder="Name, article or comment…" autocomplete="off">
