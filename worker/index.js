@@ -99,7 +99,47 @@ async function verifyTurnstile(env, token, request) {
     return { ready: true, success: data.success === true && data.hostname === new URL(request.url).hostname };
   } catch { return { ready: true, success: false }; }
 }
-async function addComment(request, env) {
+
+// Email notifications are optional: leave disabled until Resend and Cloudflare secrets are configured.
+const COMMENT_EMAIL_SUBJECTS = {
+  '/blog/posts/rsp-naya-netritwa.html': 'RSP ले नयाँ नेतृत्व खोज्नुपर्छ',
+  '/blog/posts/shreenagar-tin-mudha-ek-khola.html': 'तीनवटा मुढा, एउटा खोला र श्रीनगरका प्रश्नहरू',
+  '/blog/posts/eutai-palika-dui-nirwachan-kshetra.html': 'एउटै पालिका, दुई निर्वाचन क्षेत्र: विकासको जिम्मेवारी कसको?'
+};
+async function sendCommentNotification(env, post, name, comment) {
+  if (!env.RESEND_API_KEY || !env.BLOG_NOTIFY_TO) return;
+  const title = COMMENT_EMAIL_SUBJECTS[post] || 'Your blog';
+  const subject = 'New comment: ' + title;
+  const articleUrl = 'https://deepakkarn.com' + post;
+  const message = [
+    'A reader left a new comment on deepakkarn.com.',
+    '',
+    'Article: ' + title,
+    'Reader: ' + name,
+    '',
+    'Comment:',
+    comment,
+    '',
+    'Read article: ' + articleUrl,
+    'Manage comment: https://deepakkarn.com/portal/'
+  ].join('\n');
+  const res = await fetch('https://api.resend.com/emails', {
+    method: 'POST',
+    headers: {
+      'Authorization': 'Bearer ' + env.RESEND_API_KEY,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      from: 'Deepak Karn Blog <comments@notify.deepakkarn.com>',
+      to: [String(env.BLOG_NOTIFY_TO).trim()],
+      subject,
+      text: message
+    })
+  });
+  if (!res.ok) throw new Error('Resend HTTP ' + res.status);
+}
+
+async function addComment(request, env, ctx) {
   if (!allowMutation(request)) return json({ error: 'Request origin not allowed' }, 403);
   if (!env.TURNSTILE_SECRET_KEY) return json({ error: 'Comment service is being configured' }, 503);
   const data = await bodyJson(request);
@@ -122,6 +162,11 @@ async function addComment(request, env) {
   if (!verified.success) return json({ error: 'Verification failed. Please try again.' }, verified.ready ? 400 : 503);
   await env.BLOG_DB.prepare("INSERT INTO blog_comments (post_slug, author_name, author_email, message, status) VALUES (?, ?, ?, ?, 'approved')")
     .bind(post, name, email, comment).run();
+  // Email failure must never block or undo an already-published comment.
+  if (env.RESEND_API_KEY && env.BLOG_NOTIFY_TO && ctx?.waitUntil) {
+    ctx.waitUntil(sendCommentNotification(env, post, name, comment)
+      .catch(error => console.error('Blog email alert failed:', error?.message || 'Unknown error')));
+  }
   return json({ ok: true, message: 'Your comment is now published.' }, 201);
 }
 
@@ -296,7 +341,7 @@ async function portalApi(request, env, url) {
 }
 
 export default {
-  async fetch(request, env) {
+  async fetch(request, env, ctx) {
     const url = new URL(request.url);
     if (url.pathname === '/api/health' && request.method === 'GET') {
       return json({ ok: true, service: 'deepakkarn-blog', databaseBound: Boolean(env.BLOG_DB) });
@@ -307,7 +352,7 @@ export default {
         if (url.pathname.startsWith('/api/portal/')) return await portalApi(request, env, url);
         if (url.pathname === '/api/engagement' && request.method === 'GET') return await publicEngagement(request, env, url);
         if (url.pathname === '/api/likes' && request.method === 'POST') return await changeLike(request, env);
-        if (url.pathname === '/api/comments' && request.method === 'POST') return await addComment(request, env);
+        if (url.pathname === '/api/comments' && request.method === 'POST') return await addComment(request, env, ctx);
         return json({ error: 'Not found' }, 404);
       } catch (error) {
         console.error('Blog engagement request failed', error);
