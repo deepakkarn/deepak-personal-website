@@ -15,6 +15,13 @@ function json(data, status = 200, extraHeaders = {}) {
   });
 }
 function validPost(post) { return typeof post === 'string' && POST_RE.test(post); }
+// Cloudflare Static Assets strips .html from canonical article URLs by default.
+// Keep .html as the database key used by comment/like and portal analytics.
+function canonicalArticlePath(path) {
+  if (typeof path !== 'string') return null;
+  const canonical = path.endsWith('.html') ? path : path + '.html';
+  return validPost(canonical) ? canonical : null;
+}
 function browserId(request) {
   const match = (request.headers.get('Cookie') || '').match(/(?:^|;\s*)dk_blog_reader=([0-9a-f-]{36})(?:;|$)/i);
   return match ? match[1].toLowerCase() : null;
@@ -177,8 +184,8 @@ function normalizedTrackPath(value) {
   if (typeof value !== 'string') return null;
   if (value === '/index.html') return '/';
   if (value === '/blog' || value === '/blog/index.html') return '/blog/';
-  if (TRACKABLE_PATHS.has(value) || validPost(value)) return value;
-  return null;
+  if (TRACKABLE_PATHS.has(value)) return value;
+  return canonicalArticlePath(value);
 }
 function analyticsCookieId(request) {
   const match = (request.headers.get('Cookie') || '').match(/(?:^|;\s*)dk_site_visitor=([0-9a-f-]{36})(?:;|$)/i);
@@ -208,7 +215,7 @@ async function recordPageView(request, env) {
 
 // Count article HTML navigation at the edge, even when JavaScript is disabled or cached.
 function isArticleNavigation(request, url) {
-  if (request.method !== 'GET' || !validPost(url.pathname)) return false;
+  if (request.method !== 'GET' || !canonicalArticlePath(url.pathname)) return false;
   if (!(request.headers.get('Accept') || '').includes('text/html')) return false;
   const dest = request.headers.get('Sec-Fetch-Dest');
   if (dest && dest !== 'document') return false;
@@ -235,7 +242,7 @@ async function serveTrackedArticle(request, env, url, ctx) {
   const save = env.BLOG_DB.prepare(
     'INSERT INTO site_page_views (page_path, visitor_id, view_count) VALUES (?, ?, 1) ' +
     'ON CONFLICT(page_path, visitor_id) DO UPDATE SET view_count = view_count + 1, last_seen_at = CURRENT_TIMESTAMP'
-  ).bind(url.pathname, visitorHash).run();
+  ).bind(canonicalArticlePath(url.pathname), visitorHash).run();
   if (ctx?.waitUntil) {
     ctx.waitUntil(save.catch(error => console.error('Article analytics write failed:', error)));
   } else {
