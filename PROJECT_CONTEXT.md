@@ -5,7 +5,7 @@
 > Last reviewed: 2026-11-21  
 > Repository: https://github.com/deepakkarn/deepak-personal-website  
 > Default branch: `main`  
-> Latest commit reviewed: `9fa09accc587f3b08d70d38e6210ab9cddda0cd7`
+> Latest commit reviewed: `442a4adce501eaedfb02712c85ac0630c77b27ba`
 
 ## 1. Project purpose
 
@@ -156,6 +156,7 @@ When returning to the project:
 
 | Date | Note |
 | --- | --- |
+| 2026-11-21 | Added Instagram `https://www.instagram.com/krndpk98/` and Threads `https://www.threads.com/@krndpk98` in Connect, using existing Bootstrap icons and descriptive accessible link labels. Adjusted desktop contact grid to four columns, preserving two-column tablet/mobile and single-column narrow-phone breakpoints. Versioned homepage CSS URL; verified changes by re-reading `index.html`/`styles.css` on `main`. Live site/deployment not independently verified. |
 | 2026-11-21 | Initial context file created using project preferences, repository `README.md` / `index.html`, and recent GitHub commit history. Production behavior not independently verified. |
 | 2026-11-21 | Homepage code review (desktop/mobile CSS, image placements, gallery, mobile navigation, language switch). Production website was not reachable from available network tools, so no live viewport/crop verification was possible. Added gallery animation pause on keyboard focus and focus-visible styles; Escape now closes the mobile menu; language switch gets action-specific accessible label and consistent pressed state; homepage CSS/JS URLs versioned. Source re-fetch verified changes. Commits through `9fa09ac`; visually validate mobile and desktop before further crop/spacing adjustments. |
 | 2026-11-21 | Corrected भंगाहा spelling and nonbreaking spaces in homepage/translations. Improved photo lightbox keyboard focus handling: focus moves to Close on open, Tab stays inside, Escape closes, and focus returns to the triggering photo. Changes committed to `main` through `e4faa58`; source re-read confirmed changes. Live browser inspection and Cloudflare deployment remain unverified. |
