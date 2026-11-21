@@ -170,6 +170,61 @@ async function addComment(request, env, ctx) {
   return json({ ok: true, message: 'Your comment is now published.' }, 201);
 }
 
+
+// Lightweight first-party traffic counts. No IP address or email is stored.
+const TRACKABLE_PATHS = new Set(['/', '/blog/']);
+function normalizedTrackPath(value) {
+  if (typeof value !== 'string') return null;
+  if (value === '/index.html') return '/';
+  if (value === '/blog' || value === '/blog/index.html') return '/blog/';
+  if (TRACKABLE_PATHS.has(value) || validPost(value)) return value;
+  return null;
+}
+function analyticsCookieId(request) {
+  const match = (request.headers.get('Cookie') || '').match(/(?:^|;\s*)dk_site_visitor=([0-9a-f-]{36})(?:;|$)/i);
+  return match ? match[1].toLowerCase() : null;
+}
+async function recordPageView(request, env) {
+  if (!allowMutation(request)) return json({ error: 'Invalid request origin' }, 403);
+  const body = await bodyJson(request);
+  const page = normalizedTrackPath(body?.path);
+  if (!page) return json({ error: 'Invalid page' }, 400);
+  let visitor = analyticsCookieId(request);
+  let cookie = {};
+  if (!visitor) {
+    visitor = crypto.randomUUID();
+    cookie = { 'Set-Cookie': 'dk_site_visitor=' + visitor + '; Path=/; Secure; HttpOnly; SameSite=Lax; Max-Age=31536000' };
+  }
+  const idHash = await sha256(visitor);
+  await env.BLOG_DB.prepare(
+    'INSERT INTO site_page_views (page_path, visitor_id, view_count) VALUES (?, ?, 1) ' +
+    'ON CONFLICT(page_path, visitor_id) DO UPDATE SET view_count = view_count + 1, last_seen_at = CURRENT_TIMESTAMP'
+  ).bind(page, idHash).run();
+  return json({ ok: true }, 200, cookie);
+}
+async function portalTrafficStats(env) {
+  const [all, articles] = await Promise.all([
+    env.BLOG_DB.prepare(
+      "SELECT COUNT(DISTINCT visitor_id) AS visitors, COALESCE(SUM(view_count), 0) AS pageViews, " +
+      "COALESCE(SUM(CASE WHEN page_path LIKE '/blog/posts/%' THEN view_count ELSE 0 END), 0) AS blogViews " +
+      'FROM site_page_views'
+    ).first(),
+    env.BLOG_DB.prepare(
+      "SELECT page_path AS path, COALESCE(SUM(view_count), 0) AS views, COUNT(*) AS visitors " +
+      "FROM site_page_views WHERE page_path LIKE '/blog/posts/%' " +
+      'GROUP BY page_path ORDER BY views DESC'
+    ).all()
+  ]);
+  return json({
+    visitors: Number(all?.visitors || 0),
+    pageViews: Number(all?.pageViews || 0),
+    blogViews: Number(all?.blogViews || 0),
+    articles: (articles.results || []).map(row => ({
+      path: row.path, views: Number(row.views || 0), visitors: Number(row.visitors || 0)
+    }))
+  });
+}
+
 // Private editor portal. Credentials are configured only as Cloudflare Worker secrets.
 const PORTAL_MAX_AGE = 8 * 60 * 60;
 const LOGIN_WINDOW = 15 * 60;
@@ -319,6 +374,7 @@ async function portalApi(request, env, url) {
   const session = await sessionFromRequest(request, env);
   if (!session) return json({ error: 'Please sign in to the portal.' }, 401);
   if (url.pathname === '/api/portal/comments' && request.method === 'GET') return portalList(env);
+  if (url.pathname === '/api/portal/traffic' && request.method === 'GET') return portalTrafficStats(env);
   if (!['POST', 'PATCH', 'DELETE'].includes(request.method) || !allowMutation(request)) {
     return json({ error: 'Invalid request' }, 403);
   }
@@ -350,6 +406,7 @@ export default {
       if (!env.BLOG_DB) return json({ error: 'Database unavailable' }, 503);
       try {
         if (url.pathname.startsWith('/api/portal/')) return await portalApi(request, env, url);
+        if (url.pathname === '/api/pageview' && request.method === 'POST') return await recordPageView(request, env);
         if (url.pathname === '/api/engagement' && request.method === 'GET') return await publicEngagement(request, env, url);
         if (url.pathname === '/api/likes' && request.method === 'POST') return await changeLike(request, env);
         if (url.pathname === '/api/comments' && request.method === 'POST') return await addComment(request, env, ctx);
