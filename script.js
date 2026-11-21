@@ -8,13 +8,13 @@ const content = {
     latestAll: 'सबै लेखहरू पढ्नुहोस्',
     latestLoading: 'नयाँ लेखहरू पढ्न ब्लगमा जानुहोस्.',
 
-    eyebrow: 'भंगहाबाट, जिम्मेवार यात्रातर्फ',
+    eyebrow: 'भंगाहाबाट, जिम्मेवार यात्रातर्फ',
     greeting: 'नमस्कार, म',
     heroSubtitle: 'इन्जिनियर · लेखक · जिम्मेवारी र अर्थपूर्ण काममा विश्वास गर्ने व्यक्ति',
     heroIntro: 'समस्या बुझ्ने, मानिसका कुरा सुन्ने र जहाँ सक्छु त्यहाँ सकारात्मक कामतर्फ अघि बढ्ने मेरो प्रयास जारी छ।',
     pill1: 'Engineer', pill2: 'Writer @ LifeOfQA', pill3: 'Bhangaha Ward No. 2', pill4: 'People • Dialogue • Action',
     discover: 'मेरो बारेमा थप जान्नुहोस्', connectShort: 'सम्पर्क',
-    identityLine: 'भंगहा नगरपालिका · वडा नं. २ · महोत्तरी, मधेश प्रदेश, नेपाल',
+    identityLine: 'भंगाहा नगरपालिका · वडा नं. २ · महोत्तरी, मधेश प्रदेश, नेपाल',
     portraitAlt: 'दीपक कुमार कर्णको मुख्य तस्वीर',
     aboutPhotoAlt: 'कालो कुर्ता र परम्परागत गम्छामा बसेका दीपक कुमार कर्ण',
     trustLabel: 'एक नजरमा',
@@ -26,13 +26,13 @@ const content = {
     memoryText: 'मेरो बारेमा सबैभन्दा छोटो कुरा यही हो — म हल्लाभन्दा स्पष्टता, अनुमानभन्दा अवलोकन र वाचाभन्दा जिम्मेवार कामलाई महत्त्व दिन्छु।',
     aboutTitle: 'परिचय,<br><em>छोटो र स्पष्ट।</em>',
     aboutLead: 'म दीपक कुमार कर्ण। पेशाले इन्जिनियर। सोच र काम दुवैमा स्पष्टता, जिम्मेवारी र मानिससँगको जोड महत्त्वपूर्ण मान्ने व्यक्ति।',
-    aboutLabel1: 'घर', aboutText1: 'भंगहा नगरपालिका, वडा नं. २, महोत्तरी',
+    aboutLabel1: 'घर', aboutText1: 'भंगाहा नगरपालिका, वडा नं. २, महोत्तरी',
     aboutLabel2: 'पेशागत पृष्ठभूमि', aboutText2: 'सफ्टवेयर परीक्षण, इन्जिनियरिङ र समस्या विश्लेषणमा १२+ वर्ष',
     aboutLabel3: 'लेखन', aboutText3: 'LifeOfQA मार्फत जिज्ञासा, testing र सोच्ने तरिकाबारे लेखन',
     aboutLabel4: 'मान्यता', aboutText4: 'सुन्ने, सिक्ने र कामबाट विश्वास बनाउने दृष्टिकोण',
     aboutCard1Kicker: 'म केमा विश्वास गर्छु', aboutCard1Title: 'समस्या बुझेर काम गर्नुपर्छ', aboutCard1Text: 'अवलोकन, संवाद र व्यावहारिक दृष्टिकोणबिना राम्रो निर्णय सम्भव हुँदैन।',
     aboutCard2Kicker: 'मेरो स्वभाव', aboutCard2Title: 'शान्त, तर सक्रिय', aboutCard2Text: 'म धेरै कुरा ठूलो स्वरमा भन्दा निरन्तर र अर्थपूर्ण तरिकाले गर्न रुचाउँछु।',
-    aboutCard3Kicker: 'भंगहासँग सम्बन्ध', aboutCard3Title: 'घर, जिम्मेवारी र अपनत्व', aboutCard3Text: 'भंगहा मेरो परिचयको केन्द्र हो। यहाँका प्रश्न, सम्भावना र मानिससँग जोडिनु मेरो लागि व्यक्तिगत विषय हो।',
+    aboutCard3Kicker: 'भंगाहासँग सम्बन्ध', aboutCard3Title: 'घर, जिम्मेवारी र अपनत्व', aboutCard3Text: 'भंगाहा मेरो परिचयको केन्द्र हो। यहाँका प्रश्न, सम्भावना र मानिससँग जोडिनु मेरो लागि व्यक्तिगत विषय हो।',
     aboutCard4Kicker: 'म किन यो वेबसाइटमा छु', aboutCard4Title: 'खुला परिचयका लागि', aboutCard4Text: 'यहाँ म आफ्नो पृष्ठभूमि, सोच र यात्रालाई सीधा, सरल र आत्मीय ढंगले साझा गर्न चाहन्छु।',
     focusTitle: 'मलाई महत्त्वपूर्ण<br><em>लाग्ने विषयहरू।</em>',
     idea1Title: 'शिक्षा र अवसर', idea1Text: 'शिक्षाले सोच, आत्मविश्वास र अवसर खोल्नुपर्छ। केवल प्रमाणपत्रमा सीमित हुनुहुँदैन।',
@@ -52,7 +52,7 @@ const content = {
     commAlt7: 'रूखमुनि गाउँलेहरूसँग संवाद',
     commAlt8: 'कार्यक्रममा अनुभव बाँड्दै',
     connectTitle: 'कुरा गरौँ,<br><em>जोडिइरहौँ।</em>', connectDesc: 'यदि तपाईंलाई कुनै विचार, सहकार्य, सार्वजनिक सेवा, community concern वा meaningful conversation बारे कुरा गर्न मन छ भने मसँग सम्पर्क गर्न सक्नुहुन्छ।',
-    emailMe: 'इमेल पठाउनुहोस्', footerNote: 'सुन्ने। बुझ्ने। काम गर्ने।', footerLocation: 'भंगहा नगरपालिका, वडा नं. २ · महोत्तरी, नेपाल'
+    emailMe: 'इमेल पठाउनुहोस्', footerNote: 'सुन्ने। बुझ्ने। काम गर्ने।', footerLocation: 'भंगाहा नगरपालिका, वडा नं. २ · महोत्तरी, नेपाल'
   },
   en: {
     skip: 'Skip to content',
@@ -184,6 +184,7 @@ const lightbox = document.getElementById('lightbox');
 const lightboxImage = document.getElementById('lightbox-image');
 const lightboxClose = document.getElementById('lightbox-close');
 const lightboxBackdrop = document.querySelector('.lightbox-backdrop');
+let lightboxTrigger = null;
 
 function getTranslation(key) {
   const lang = document.documentElement.lang === 'en' ? 'en' : 'ne';
@@ -192,11 +193,13 @@ function getTranslation(key) {
 
 function openLightbox(button) {
   if (!lightbox || !lightboxImage || !button) return;
+  lightboxTrigger = button;
   lightboxImage.src = button.dataset.full;
   const altKey = button.dataset.altKey;
   lightboxImage.alt = altKey ? getTranslation(altKey) : '';
   lightbox.hidden = false;
   document.body.classList.add('lightbox-open');
+  lightboxClose?.focus();
 }
 
 function closeLightbox() {
@@ -205,6 +208,8 @@ function closeLightbox() {
   lightboxImage.src = '';
   lightboxImage.alt = '';
   document.body.classList.remove('lightbox-open');
+  if (lightboxTrigger?.isConnected) lightboxTrigger.focus();
+  lightboxTrigger = null;
 }
 
 bandPhotos.forEach(button => {
@@ -213,5 +218,21 @@ bandPhotos.forEach(button => {
 lightboxClose?.addEventListener('click', closeLightbox);
 lightboxBackdrop?.addEventListener('click', closeLightbox);
 document.addEventListener('keydown', (event) => {
-  if (event.key === 'Escape' && lightbox && !lightbox.hidden) closeLightbox();
+  if (!lightbox || lightbox.hidden) return;
+  if (event.key === 'Escape') {
+    event.preventDefault();
+    closeLightbox();
+  } else if (event.key === 'Tab') {
+    // Keep keyboard focus inside the modal until it is closed.
+    const controls = [lightboxClose, lightboxBackdrop].filter(Boolean);
+    const first = controls[0];
+    const last = controls[controls.length - 1];
+    if (event.shiftKey && document.activeElement === first) {
+      event.preventDefault();
+      last.focus();
+    } else if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault();
+      first.focus();
+    }
+  }
 });
