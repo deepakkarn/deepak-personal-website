@@ -223,16 +223,8 @@ document.addEventListener('keydown', (event) => {
     event.preventDefault();
     closeLightbox();
   } else if (event.key === 'Tab') {
-    // Keep keyboard focus inside the modal until it is closed.
-    const controls = [lightboxClose, lightboxBackdrop].filter(Boolean);
-    const first = controls[0];
-    const last = controls[controls.length - 1];
-    if (event.shiftKey && document.activeElement === first) {
-      event.preventDefault();
-      last.focus();
-    } else if (!event.shiftKey && document.activeElement === last) {
-      event.preventDefault();
-      first.focus();
-    }
+    // The close button is the sole keyboard control in this dialog.
+    event.preventDefault();
+    lightboxClose?.focus();
   }
 });
