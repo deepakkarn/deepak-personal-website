@@ -96,3 +96,72 @@ html[lang="en"] .name-en{font-family:'Noto Sans Devanagari',sans-serif;letter-sp
 @media(max-width:700px){.contact-details{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.contact-details .contact-link{padding:11px 12px;font-size:13px;min-height:58px}.contact-icon{width:30px;height:30px;flex-basis:30px}.contact-icon .bi{font-size:18px}}
 @media(max-width:370px){.contact-details{grid-template-columns:1fr}}
 @media(prefers-reduced-motion:reduce){.contact-details .contact-link{transition:none}.contact-details .contact-link:hover{transform:none}}
+
+
+/* Home refinement: closer rhythm without sacrificing the editorial whitespace. */
+@media(min-width:1101px){
+  .site-header{height:86px}
+  .hero{min-height:auto;gap:clamp(30px,4vw,62px);padding-block:52px 68px}
+  .hero-visual{min-height:550px;padding:20px}
+  .portrait-frame{width:min(100%,425px)}
+}
+.section-pad{padding-block:86px}
+.memory-inner{padding-block:52px}
+.memory-text h2{font-size:clamp(40px,4.1vw,64px)}
+.memory-text p{font-size:16px;line-height:1.75;max-width:720px}
+.about-card{min-height:185px;padding:23px}
+.about-card p{line-height:1.75}
+.ideas-heading{margin-bottom:34px}
+.idea-card{min-height:238px;padding:26px}
+.idea-card h3{margin-top:30px}
+.connect-inner{padding-block:86px}
+.hero-highlights{margin-bottom:21px}
+.hero-subtitle{line-height:1.5}
+.trust-card{padding:18px;bottom:26px;width:min(305px,70%)}
+.latest-writing{padding-block:78px;background:linear-gradient(120deg,#faf7f1,#f6efe5)}
+.latest-layout{display:grid;grid-template-columns:minmax(230px,.76fr) minmax(0,1.24fr);gap:clamp(30px,5vw,95px);align-items:start}
+.latest-copy{padding-top:9px}
+.latest-copy h2{font:500 clamp(40px,4.1vw,62px)/1.17 'Playfair Display','Noto Sans Devanagari',serif;letter-spacing:-.035em;margin:17px 0 18px}
+.latest-copy h2 em{color:var(--accent)}
+.latest-copy p{font-size:16px;line-height:1.8;color:var(--muted);max-width:365px;margin:0 0 26px}
+.latest-all{display:inline-flex;align-items:center;gap:12px;color:var(--accent);font-size:14px;font-weight:800;border-bottom:1px solid rgba(155,103,71,.6);padding-bottom:6px}
+.latest-all:hover{color:var(--ink)}
+.latest-list{display:grid;gap:0;border-top:1px solid var(--line)}
+.latest-post{display:grid;grid-template-columns:112px minmax(0,1fr) 18px;gap:19px;align-items:center;padding:18px 4px;border-bottom:1px solid var(--line);transition:background .2s ease,padding-inline .2s ease}
+.latest-post:hover{background:rgba(255,255,255,.58);padding-inline:12px}
+.latest-thumbnail{width:112px;height:78px;object-fit:cover;border-radius:13px;background:var(--paper-2)}
+.latest-post-copy{min-width:0;display:grid;gap:8px}
+.latest-post-category{font-size:11px;letter-spacing:.05em;font-weight:700;color:var(--accent)}
+.latest-post-title{font:700 clamp(17px,1.3vw,21px)/1.55 'Noto Sans Devanagari','DM Sans',sans-serif;color:var(--ink)}
+.latest-post-arrow{font-size:17px;color:var(--accent);justify-self:end}
+.latest-loading{padding:28px 0;color:var(--muted);font-size:14px}
+@media(max-width:1100px){
+  .hero{padding-block:35px 66px}
+  .hero-visual{min-height:auto}
+  .section-pad{padding-block:80px}
+  .latest-layout{grid-template-columns:minmax(215px,.8fr) minmax(0,1.2fr);gap:30px}
+  .latest-post{grid-template-columns:94px minmax(0,1fr) 18px;gap:14px}
+  .latest-thumbnail{width:94px;height:72px}
+}
+@media(max-width:700px){
+  .hero{padding-block:27px 52px;gap:27px}
+  .hero-visual{display:flex;flex-direction:column;align-items:stretch;gap:14px;padding:14px}
+  .portrait-frame{width:100%;max-width:470px;margin-inline:auto}
+  .trust-card{position:relative;left:auto;right:auto;bottom:auto;width:100%;margin-top:0;padding:16px}
+  .section-pad{padding-block:67px}
+  .memory-inner{padding-block:44px}
+  .memory-text h2,.section-heading h2{font-size:clamp(38px,8.5vw,51px)}
+  .about-card{min-height:0;padding:21px}
+  .idea-card{min-height:0;padding:24px}
+  .idea-card h3{margin-top:23px}
+  .connect-inner{padding-block:74px}
+  .latest-writing{padding-block:66px}
+  .latest-layout{grid-template-columns:1fr;gap:22px}
+  .latest-copy h2{font-size:clamp(36px,8.5vw,48px);margin-bottom:12px}
+  .latest-copy p{font-size:15px;margin-bottom:18px}
+  .latest-post{grid-template-columns:89px minmax(0,1fr) 15px;gap:12px;padding:15px 0}
+  .latest-thumbnail{width:89px;height:68px;border-radius:11px}
+  .latest-post-title{font-size:16px;line-height:1.5}
+  .latest-post-category{font-size:10px}
+  .latest-post:hover{padding-inline:0;background:transparent}
+}

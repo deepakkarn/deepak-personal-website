@@ -2,6 +2,12 @@ const content = {
   ne: {
     skip: 'मुख्य सामग्रीमा जानुहोस्',
     navAbout: 'मेरो बारेमा', navFocus: 'मुख्य सोच', navJourney: 'यात्रा', navBlog: 'ब्लग', navConnect: 'सम्पर्क',
+    latestLabel: 'लेखहरू',
+    latestTitle: 'हालैका<br><em>विचारहरू।</em>',
+    latestIntro: 'समाज, शिक्षा, सार्वजनिक जीवन र अनुभवबारे पछिल्ला लेखहरू।',
+    latestAll: 'सबै लेखहरू पढ्नुहोस्',
+    latestLoading: 'नयाँ लेखहरू पढ्न ब्लगमा जानुहोस्.',
+
     eyebrow: 'भंगहाबाट, जिम्मेवार यात्रातर्फ',
     greeting: 'नमस्कार, म',
     heroSubtitle: 'इन्जिनियर · लेखक · जिम्मेवारी र अर्थपूर्ण काममा विश्वास गर्ने व्यक्ति',
@@ -50,6 +56,12 @@ const content = {
   en: {
     skip: 'Skip to content',
     navAbout: 'About', navFocus: 'Focus', navJourney: 'Journey', navBlog: 'Blog', navConnect: 'Connect',
+    latestLabel: 'Recent writing',
+    latestTitle: 'Ideas worth<br><em>exploring.</em>',
+    latestIntro: 'Recent reflections on society, education, public life and lived experience.',
+    latestAll: 'Explore all writing',
+    latestLoading: 'Browse recent writing on the blog.',
+
     eyebrow: 'ROOTED IN BHANGAHA, MOVING WITH RESPONSIBILITY',
     greeting: 'Hello, I am',
     heroSubtitle: 'Engineer · Writer · Guided by responsibility and meaningful work',
@@ -123,6 +135,7 @@ function setLanguage(lang) {
   label.textContent = lang === 'ne' ? 'EN' : 'ने';
   toggle.setAttribute('aria-pressed', String(lang === 'en'));
   syncName();
+  document.dispatchEvent(new CustomEvent('dk:languagechange', { detail: { language: lang } }));
   try { localStorage.setItem('dk-language', lang); } catch (e) {}
 }
 

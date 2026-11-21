@@ -13,9 +13,11 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Noto+Sans+Devanagari:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20261119-2" />
+  <link rel="stylesheet" href="styles.css?v=20261121-home1" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
-  <script defer src="script.js?v=20261119-2"></script>
+  <script defer src="script.js?v=20261121-home1"></script>
+  <script defer src="blog/posts.js?v=20261121-home1"></script>
+  <script defer src="home-writing.js?v=20261121-home1"></script>
   <script defer src="/analytics.js?v=20261121-1"></script>
 </head>
 <body>
@@ -61,8 +63,7 @@
         <div class="hero-highlights" aria-label="Quick highlights">
           <span class="highlight-pill" data-i18n="pill1">Engineer</span>
           <span class="highlight-pill" data-i18n="pill2">Writer @ LifeOfQA</span>
-          <span class="highlight-pill" data-i18n="pill3">Bhangaha Ward No. 2</span>
-          <span class="highlight-pill" data-i18n="pill4">People • Dialogue • Action</span>
+          
         </div>
 
         <div class="hero-actions">
@@ -231,9 +232,24 @@
       </div>
     </section>
 
+
+    <section class="latest-writing section-border" id="latest-writing" aria-labelledby="latest-writing-title">
+      <div class="wrap latest-layout">
+        <div class="latest-copy">
+          <span class="section-num">05 / <span data-i18n="latestLabel">लेखहरू</span></span>
+          <h2 id="latest-writing-title" data-i18n="latestTitle">हालैका<br><em>विचारहरू।</em></h2>
+          <p data-i18n="latestIntro">अनुभव र अध्ययनबाट उठेका प्रश्नहरू, लेखमार्फत साझा गर्दै।</p>
+          <a class="latest-all" href="/blog/"><span data-i18n="latestAll">सबै लेखहरू पढ्नुहोस्</span><span aria-hidden="true"> ↗</span></a>
+        </div>
+        <div class="latest-list" id="latest-posts" aria-label="Recent blog posts">
+          <p class="latest-loading" data-i18n="latestLoading">नयाँ लेखहरू हेर्नुहोस्।</p>
+        </div>
+      </div>
+    </section>
+
     <section class="connect section-dark" id="connect">
       <div class="wrap connect-inner">
-        <span class="section-num">05 / <span data-i18n="navConnect">सम्पर्क</span></span>
+        <span class="section-num">06 / <span data-i18n="navConnect">सम्पर्क</span></span>
         <div>
           <h2 data-i18n="connectTitle">कुरा गरौँ,<br><em>जोडिइरहौँ।</em></h2>
           <p data-i18n="connectDesc">यदि तपाईंलाई कुनै विचार, सहकार्य, सार्वजनिक सेवा, community concern वा meaningful conversation बारे कुरा गर्न मन छ भने मसँग सम्पर्क गर्न सक्नुहुन्छ।</p>
