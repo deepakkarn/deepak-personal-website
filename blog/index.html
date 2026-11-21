@@ -13,9 +13,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Noto+Sans+Devanagari:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../styles.css">
-  <link rel="stylesheet" href="blog.css?v=20261119-portrait1">
+  <link rel="stylesheet" href="blog.css?v=20261121-content-first1">
   <script defer src="posts.js?v=20261120-two-constituencies"></script>
-  <script defer src="blog.js?v=20261120-shreenagar"></script>
+  <script defer src="blog.js?v=20261121-content-first1"></script>
   <script defer src="/analytics.js?v=20261121-1"></script>
 </head>
 <body>
@@ -46,20 +46,23 @@
       <div class="blog-hero-copy">
         <span class="eyebrow"><span class="eyebrow-line"></span><span data-i18n="eyebrow">विचार · अनुभव · लेखन</span></span>
         <h1 id="blog-title" data-i18n="title">लेखहरू<span class="blog-accent">.</span></h1>
-        <p class="blog-lead" data-i18n="intro">जिज्ञासाबाट सुरु भएका विचार, अनुभवबाट सिकेका कुरा र समयसँगै विकसित हुँदै गरेका दृष्टिकोण। यहाँ मेरा लेख, परियोजनाका अनुभव र व्यक्तिगत नोटहरू रहनेछन्।</p>
-        <a class="blog-back" href="/" data-i18n="back">← मुख्य पृष्ठमा फर्कनुहोस्</a>
+        <p class="blog-lead" data-i18n="intro">समाज, स्थानीय जीवन, प्रविधि र अनुभवबाट उठेका प्रश्नहरूबारे मेरा लेखहरू।</p>
+        <div class="blog-hero-links">
+          <a class="blog-view-posts" href="#articles" data-i18n="viewArticles">नयाँ लेखहरू पढ्नुहोस् <span aria-hidden="true">↓</span></a>
+          <a class="blog-back" href="/" data-i18n="back">← मुख्य पृष्ठ</a>
+        </div>
       </div>
       <figure class="blog-hero-photo">
-        <div class="blog-photo-fallback" aria-hidden="true"><div class="blog-paper paper-one"></div><div class="blog-paper paper-two"></div><div class="blog-paper paper-main"><span>DK<span class="dot">.</span></span><div></div><div></div><div class="short-line"></div></div></div>
-        <img src="assets/deepak-blog-portrait.avif" alt="Deepak Kumar Karn in a white shirt and Mithila-patterned scarf, seated before Mithila artwork" width="850" height="1104" decoding="async" fetchpriority="high" onerror="this.hidden=true">
+        <div class="blog-photo-fallback" aria-hidden="true"><span>DK<span class="dot">.</span></span></div>
+        <img src="assets/deepak-blog-portrait.avif" alt="Deepak Kumar Karn" width="850" height="1104" loading="eager" decoding="async" onerror="this.hidden=true">
       </figure>
     </section>
-    <section class="blog-section section-border">
+    <section class="blog-section section-border" id="articles" aria-labelledby="articles-heading">
       <div class="wrap">
         <div class="blog-section-top">
           <div>
             <span class="section-num">01 / <span data-i18n="sectionLabel">लेखन</span></span>
-            <h2 data-i18n="sectionTitle">नयाँ लेख र नोटहरू</h2>
+            <h2 id="articles-heading" data-i18n="sectionTitle">नयाँ लेखहरू</h2>
           </div>
           <p data-i18n="sectionHint">समयसँगै थपिँदै जाने विचार र अनुभवहरू।</p>
         </div>
