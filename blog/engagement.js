@@ -74,18 +74,33 @@
       return;
     }
     for (const item of items) {
-      const box = document.createElement('div');
+      const box = document.createElement('article');
       box.className = 'engagement-comment';
-      const header = document.createElement('div');
+      const header = document.createElement('header');
       header.className = 'engagement-comment-meta';
+      const readerName = String(item.author_name || 'Reader').trim() || 'Reader';
+      const avatar = document.createElement('span');
+      avatar.className = 'engagement-comment-avatar';
+      avatar.setAttribute('aria-hidden', 'true');
+      avatar.textContent = Array.from(readerName)[0].toLocaleUpperCase();
+      const identity = document.createElement('div');
+      identity.className = 'engagement-comment-identity';
       const name = document.createElement('strong');
-      name.textContent = String(item.author_name || 'Reader');
+      name.textContent = readerName;
+      const kind = document.createElement('span');
+      kind.className = 'engagement-comment-kind';
+      kind.textContent = 'Reader comment';
+      identity.append(name, kind);
       const date = document.createElement('time');
       const utc = String(item.created_at || '').replace(' ', 'T') + 'Z';
       const value = new Date(utc);
-      date.textContent = Number.isNaN(value.valueOf()) ? '' : value.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
-      header.append(name, date);
+      if (!Number.isNaN(value.valueOf())) {
+        date.dateTime = value.toISOString();
+        date.textContent = value.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+      }
+      header.append(avatar, identity, date);
       const message = document.createElement('p');
+      message.className = 'engagement-comment-message';
       message.textContent = String(item.message || ''); // Never interpret reader content as HTML.
       box.append(header, message);
       if (Array.isArray(item.replies) && item.replies.length) {
@@ -96,17 +111,28 @@
           replyBox.className = 'engagement-reply';
           const replyHeader = document.createElement('div');
           replyHeader.className = 'engagement-reply-meta';
+          const authorName = String(reply.author_name || 'Deepak Kumar Karn').trim() || 'Deepak Kumar Karn';
+          const authorAvatar = document.createElement('span');
+          authorAvatar.className = 'engagement-reply-avatar';
+          authorAvatar.setAttribute('aria-hidden', 'true');
+          authorAvatar.textContent = Array.from(authorName.split(/\s+/).filter(Boolean).map(part => Array.from(part)[0]).slice(0, 2).join('')).join('').toLocaleUpperCase();
+          const authorIdentity = document.createElement('div');
+          authorIdentity.className = 'engagement-reply-identity';
           const author = document.createElement('strong');
-          author.textContent = String(reply.author_name || 'Deepak Kumar Karn');
+          author.textContent = authorName;
           const label = document.createElement('span');
           label.textContent = 'Author';
           label.className = 'engagement-author-label';
+          authorIdentity.append(author, label);
           const replyDate = document.createElement('time');
           const replyValue = new Date(String(reply.created_at || '').replace(' ', 'T') + 'Z');
-          replyDate.textContent = Number.isNaN(replyValue.valueOf()) ? '' :
-            replyValue.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
-          replyHeader.append(author, label, replyDate);
+          if (!Number.isNaN(replyValue.valueOf())) {
+            replyDate.dateTime = replyValue.toISOString();
+            replyDate.textContent = replyValue.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+          }
+          replyHeader.append(authorAvatar, authorIdentity, replyDate);
           const replyText = document.createElement('p');
+          replyText.className = 'engagement-reply-message';
           replyText.textContent = String(reply.message || '');
           replyBox.append(replyHeader, replyText);
           if (reply.updated_at) {
