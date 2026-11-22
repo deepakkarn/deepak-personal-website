@@ -80,3 +80,69 @@
 .engagement-reply p{font-size:14px;line-height:1.85;white-space:pre-wrap;overflow-wrap:anywhere;margin:8px 0 0}
 .engagement-reply-edited{font-size:11px;color:#73827b}
 @media(max-width:650px){.engagement-replies{margin-left:6px}.engagement-reply{padding:12px}}
+
+
+/* Reader conversation cards: clear identity, message and threaded author replies. */
+.engagement-comment-list{display:grid;gap:13px;padding-top:6px}
+.engagement-comment,.engagement-comment:last-child{
+  padding:18px 19px 19px;
+  border:1px solid #e1e7df;
+  border-radius:18px;
+  background:#f7f9f5;
+  box-shadow:0 4px 18px rgba(32,55,44,.035);
+}
+.engagement-comment-meta{
+  display:grid;grid-template-columns:40px minmax(0,1fr) auto;
+  gap:11px;align-items:center;justify-content:initial;
+}
+.engagement-comment-avatar{
+  display:grid;place-items:center;width:40px;height:40px;border-radius:50%;
+  background:#dce9e0;color:#31584a;
+  font:800 16px/1 'DM Sans','Noto Sans Devanagari',sans-serif;
+}
+.engagement-comment-identity{display:flex;flex-direction:column;min-width:0;gap:2px}
+.engagement-comment-meta strong{font-size:14px;line-height:1.45;overflow-wrap:anywhere}
+.engagement-comment-kind{font:600 10px/1.4 'DM Sans',sans-serif;letter-spacing:.025em;color:#73847b}
+.engagement-comment-meta time{font-size:11px;line-height:1.4;color:#75827a;white-space:nowrap}
+.engagement-comment .engagement-comment-message{
+  margin:11px 0 0;padding-left:51px;
+  font-size:15px;line-height:1.75;color:#31423b;
+  white-space:pre-wrap;overflow-wrap:anywhere;
+}
+.engagement-replies{
+  margin:17px 0 0 51px;padding-left:14px;
+  border-left:2px solid #d9cab9;
+  display:grid;gap:10px;
+}
+.engagement-reply{
+  border:1px solid #e7d8c8;border-left:3px solid #b8815f;
+  border-radius:0 13px 13px 0;background:#fff8f0;padding:13px 15px;
+}
+.engagement-reply-meta{
+  display:grid;grid-template-columns:32px minmax(0,1fr) auto;
+  gap:9px;align-items:center;
+}
+.engagement-reply-avatar{
+  display:grid;place-items:center;width:32px;height:32px;border-radius:50%;
+  background:#eee0d2;color:#81533d;
+  font:800 11px/1 'DM Sans','Noto Sans Devanagari',sans-serif;
+}
+.engagement-reply-identity{display:flex;align-items:center;flex-wrap:wrap;column-gap:7px;row-gap:3px;min-width:0}
+.engagement-reply-meta strong{font-size:13px;line-height:1.5;overflow-wrap:anywhere}
+.engagement-reply-meta time{font-size:11px;line-height:1.4;margin-left:0;white-space:nowrap}
+.engagement-reply .engagement-reply-message{margin:9px 0 0;padding-left:41px;font-size:14px;line-height:1.75;color:#37443e}
+.engagement-reply-edited{display:block;margin:6px 0 0 41px}
+@media(max-width:550px){
+  .engagement-comment,.engagement-comment:last-child{padding:14px;border-radius:15px}
+  .engagement-comment-meta{grid-template-columns:36px minmax(0,1fr);gap:3px 10px}
+  .engagement-comment-avatar{width:36px;height:36px;grid-row:1 / span 2}
+  .engagement-comment-meta time{grid-column:2;grid-row:2;font-size:11px}
+  .engagement-comment .engagement-comment-message{padding-left:0;margin-top:13px}
+  .engagement-replies{margin-left:5px;padding-left:10px}
+  .engagement-reply{padding:11px 12px}
+  .engagement-reply-meta{grid-template-columns:30px minmax(0,1fr);gap:3px 8px}
+  .engagement-reply-avatar{grid-row:1 / span 2;width:30px;height:30px}
+  .engagement-reply-meta time{grid-column:2;grid-row:2}
+  .engagement-reply .engagement-reply-message{padding-left:0}
+  .engagement-reply-edited{margin-left:0}
+}
