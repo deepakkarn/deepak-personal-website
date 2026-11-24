@@ -7,6 +7,14 @@
 > Default branch: `main`  
 > Latest revision: follow the current `main` branch (do not rely on a stale pinned SHA)
 
+## Project documentation policy: ONE canonical context file
+
+**`PROJECT_CONTEXT.md` is the sole project-wide record of development rules, architecture, decisions, issues, verification, and maintenance history.** On 24 November 2026, the former short `context.md` was consolidated here and retired. Do not recreate it or introduce a parallel `CONTEXT.md`, handoff, or rules tracker. The repository's `README.md` may link here, but must not become another project history.
+
+**Before any future development:** read this file, inspect the latest `main` branch and relevant implementation, then follow the applicable technical references. **After substantial changes:** update this same file with what changed, why, how it was checked, and what remains unverified. Keep decisions current without deleting useful historical context or rewriting facts as production verification.
+
+The former `context.md`'s mandatory requirements are preserved in this file: one shared design across all five published Blog posts; the 1100px hero/790px reading-column contract; equal mobile gutters without page-wide overflow; a shared, accessible and high-contrast floating Back-to-top/Reactions stack; no one-off article language switch; shared article template and regression checks; and truthful separation of static tests from live Cloudflare/device validation. Full specifications are in section 0 and the dated implementation records below. `blog/README.md`, `blog/article-standard.css`, `blog/posts/_template.html` and `blog/check_article_design.py` remain **implementation resources**, not competing project-wide context documents.
+
 ## 0. MANDATORY BLOG DESIGN RULE (read before any article change)
 
 **User confirmed on 24 November 2026 that every published blog article must have the same layout, theme, typography, header, footers and mobile reading margins. This is a hard requirement, not a styling suggestion.**
@@ -309,6 +317,12 @@ User requested strict consistency of English/Nepali switching across all publish
 - FIXED at source instead of creating another page-specific patch: shared `blog/engagement.js` now builds ONE accessible `<nav class="blog-floating-actions">` with (1) `button.blog-back-to-top` and (2) `a.engagement-jump`. The ↑ control appears after ~320px of scroll and remains accessible in ALL article sections including below the comments; the reaction shortcut appears while comments are still below viewport and hides when they are reached. Handles click, scroll, resize, pageshow, scroll restoration and `prefers-reduced-motion`.
 - `blog/engagement.css` provides a responsive fixed vertical stack, safe-area offsets, ample tap targets, a dark #253d34 background with explicit white #fff text including link/visited/hover and child labels, accessible focus outlines and a smaller arrow-only mobile reaction button. Its text/background contrast ratio is approximately 11.69:1. This high-specificity shared rule overrides the Bhangaha page's inherited anchor color. Print mode hides the floating controls.
 - Removed the old Bhangaha `#back-to-top` DOM node and its one-off JS and CSS rules. Import shared CSS/JS with cache key `20261124-floating-nav2` on ALL five Blog articles and `blog/posts/_template.html`. No change to Like/Comment backend, data, source references, regular sharing or other site pages.
-- Regression guard `blog/check_article_design.py` checks floating CSS+JS imports, absence of stale `#back-to-top`, shared JS visibility policy, stacking, visible label and high contrast styles. The developer must check this rule for every published article, never just the Bhangaha page. `blog/README.md` and `context.md` point back to this canonical behavior.
+- Regression guard `blog/check_article_design.py` checks floating CSS+JS imports, absence of stale `#back-to-top`, shared JS visibility policy, stacking, visible label and high contrast styles. The developer must check this rule for every published article, never just the Bhangaha page. `blog/README.md` and this `PROJECT_CONTEXT.md` preserve the canonical behavior.
 - Verified source: 6/6 pages (five live posts + template) have both updated imports, no duplicate legacy button, and reactions root present. JS syntax and CSS brace check pass; verified the shared link text/background WCAG contrast calculation (~11.69:1). Simulated DOM/scroll tests pass at top, mid-article, approaching feedback, after feedback, and Up/Reaction clicks. Live Cloudflare/mobile visual rendering is not verified and must not be claimed as tested.
 
+
+### 2026-11-24: Merged and retired the duplicate project context file
+
+- Consolidated the former `context.md` quick-reference rules into the top-level documentation policy and retained the complete design, navigation, QA, and verification requirements already documented here. This file is now the **only** maintained project-wide handoff/rules/history document.
+- Retired `context.md` and linked this file from the repository's top-level `README.md`. Existing `blog/README.md` remains the detailed technical publishing checklist; source files and test scripts remain unchanged.
+- Documentation-only change: no application assets, routes, layouts, analytics, or behavior modified; no claim of production-browser verification.
