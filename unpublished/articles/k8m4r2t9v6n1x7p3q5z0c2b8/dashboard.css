@@ -234,3 +234,5 @@ body.bhangaha-article{margin:0;background:#fbf7f0;color:#25332f;font-family:'Not
 .bhangaha-article .scenario-axis>span:last-child{transform:translateX(-100%)}
 @media(max-width:700px){.bhangaha-article .scenario-axis{padding:0;margin-left:calc(33% + 8px);margin-right:86px}}
 @media(max-width:520px){.bhangaha-article .scenario-axis{padding:0;margin-left:0;margin-right:84px}}
+.bhangaha-article .scenario-scale{display:flex;align-items:center;gap:7px;flex-wrap:wrap;font:600 11px/1.6 'DM Sans','Noto Sans Devanagari',sans-serif;color:#6b7c72;margin:12px 0 0!important}
+.bhangaha-article .scenario-tick{height:17px;border-left:2px dashed #344f47;width:2px;display:inline-block}
