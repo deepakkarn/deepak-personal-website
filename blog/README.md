@@ -30,6 +30,8 @@ viewport, and must NOT override the common visual frame. Ordinary figures
 should align with the 790px reading column. Wide photo stories may use the
 1100px visual region where needed.
 
+**Important:** Bhangaha's KPI cards, TOC, Data Explorer, charts, section headings and paragraphs must use the **same centered 790px reading measure**. Only its hero and cover are wide. The explicit shared CSS block `Bhangaha content-column correction` is regression-tested and must not be deleted or overridden. Alternating 790px/990px/1100px internal columns are a known screenshot-confirmed defect.
+
 **Important:** the Shreenagar article historically had
 `.story-section > p { margin:0 0 25px }`, which accidentally canceled its
 horizontal centering. Explicit `margin-inline:auto` in the common stylesheet
