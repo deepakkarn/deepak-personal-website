@@ -14,6 +14,7 @@ const content = {
     heroIntro: 'समस्या बुझ्ने, मानिसका कुरा सुन्ने र जहाँ सक्छु त्यहाँ सकारात्मक कामतर्फ अघि बढ्ने मेरो प्रयास जारी छ।',
     pill1: 'Engineer', pill2: 'Writer @ LifeOfQA', pill3: 'Bhangaha Ward No. 2', pill4: 'People • Dialogue • Action',
     discover: 'मेरो बारेमा थप जान्नुहोस्', connectShort: 'सम्पर्क', connectJumpAria: 'सम्पर्क खण्डमा जानुहोस्',
+    printPdf: 'प्रिन्ट / PDF', printPdfAria: 'प्रिन्ट गर्नुहोस् वा PDF मा सुरक्षित गर्न ब्राउजरमा Save as PDF छान्नुहोस्',
     identityLine: 'भंगाहा नगरपालिका · वडा नं. २ · महोत्तरी, मधेश प्रदेश, नेपाल',
     portraitAlt: 'दीपक कुमार कर्णको मुख्य तस्वीर',
     aboutPhotoAlt: 'कालो कुर्ता र परम्परागत गम्छामा बसेका दीपक कुमार कर्ण',
@@ -75,6 +76,7 @@ const content = {
     heroIntro: 'I keep trying to understand problems carefully, listen to people, and move toward positive, practical work wherever I can.',
     pill1: 'Engineer', pill2: 'Writer @ LifeOfQA', pill3: 'Bhangaha Ward No. 2', pill4: 'People • Dialogue • Action',
     discover: 'Learn more about me', connectShort: 'Connect', connectJumpAria: 'Jump to Connect section',
+    printPdf: 'Print / PDF', printPdfAria: 'Print this page, or select Save as PDF in your browser',
     identityLine: 'Bhangaha Municipality · Ward No. 2 · Mahottari, Madhesh Province, Nepal',
     portraitAlt: 'Main portrait of Deepak Kumar Karn',
     aboutPhotoAlt: 'Deepak Kumar Karn seated in a black kurta with a traditional scarf',
@@ -130,6 +132,7 @@ const mobile = document.getElementById('mobile-nav');
 const heading = document.getElementById('hero-title');
 const connectJump = document.getElementById('home-connect-jump');
 const connectSection = document.getElementById('connect');
+const printButton = document.getElementById('print-pdf');
 
 function setLanguage(lang) {
   const dict = content[lang];
@@ -153,6 +156,8 @@ function setLanguage(lang) {
   toggle.setAttribute('aria-label', lang === 'ne' ? 'Switch to English' : 'नेपालीमा परिवर्तन गर्नुहोस्');
   connectJump?.setAttribute('aria-label', dict.connectJumpAria);
   connectJump?.setAttribute('title', dict.connectJumpAria);
+  printButton?.setAttribute('aria-label', dict.printPdfAria);
+  printButton?.setAttribute('title', dict.printPdfAria);
   syncName();
   document.dispatchEvent(new CustomEvent('dk:languagechange', { detail: { language: lang } }));
   try { localStorage.setItem('dk-language', lang); } catch (e) {}
@@ -169,6 +174,7 @@ try { if (localStorage.getItem('dk-language') === 'ne') starting = 'ne'; } catch
 setLanguage(starting);
 
 toggle.addEventListener('click', () => setLanguage(document.documentElement.lang === 'ne' ? 'en' : 'ne'));
+printButton?.addEventListener('click', () => window.print());
 menu.addEventListener('click', () => {
   const open = menu.getAttribute('aria-expanded') === 'true';
   menu.setAttribute('aria-expanded', String(!open));
