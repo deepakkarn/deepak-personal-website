@@ -195,7 +195,7 @@
     });
   }
 
-  if (explorer && dataTabs.length === 13 && dataPanels.length === 13) {
+  if (explorer && dataTabs.length === 9 && dataPanels.length === 9) {
     document.body.classList.add('dx-enhanced');
     const hash = /^#data-([a-z]+)$/.exec(window.location.hash);
     activateTopic(hash && panelByTopic.has(hash[1]) ? hash[1] : 'overview');
