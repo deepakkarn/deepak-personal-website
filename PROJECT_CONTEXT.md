@@ -176,3 +176,13 @@ When returning to the project:
 ### Prompt to use in a new chat
 
 > Continue development of https://deepakkarn.com. The repository is `deepakkarn/deepak-personal-website` on `main`. Start by reading `PROJECT_CONTEXT.md`, checking the latest commits, and inspecting the relevant source code. Preserve the existing bilingual minimal-editorial design and features. Verify code and live behavior before making claims; make targeted changes and update the context file after major decisions.
+
+## 12. New unpublished data-journalism research dashboard (2026-11-24)
+
+- **Branch only:** `draft/bhangaha-population-dashboard-2026`. This development was deliberately kept off `main` and out of public Blog catalog. Do not merge, deploy, or list before explicit user approval.
+- Draft files: `research-preview/bhangaha-population-analysis/`. Entry `index.html`; scoped `dashboard.css`, `dashboard.js`, separately source-traceable `dashboard-data.js`, unchanged uploaded `deep-research-report.md`, and detailed `REVIEW_NOTES.md`.
+- The separate branch is NOT a password-private preview; access controls required for confidential preview. Meta `noindex` is not privacy protection.
+- 15 working source-code tab panels, bilingual dashboard controls, hash links, KPI cards, population / age / ward / literacy / employment / migration / poverty graphs, gender and percentage toggles where supported, searchable sortable datasets, ward multi-filter, CSV download, print, and 20 references. Full research report rendered plus original download.
+- Nine independent population/status table totals reconcile, and mocked-DOM smoke test rendered components successfully. Browser/device/Cloudflare preview not tested. Some official NSO data-file extractions remain unavailable; caste/religion/language/housing/ward social data are explicitly marked missing, never guessed.
+- For review requirements, critical verification issues, planned publication integration and disclaimer, **read `research-preview/bhangaha-population-analysis/REVIEW_NOTES.md` before touching the article**.
+- Future intended route `/blog/posts/bhangaha-population-analysis/` is NOT live. Relative assets, Worker routes, OG image, Blog listing, source verification, peer review, and noindex removal only after user approves publication.
