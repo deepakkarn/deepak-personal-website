@@ -5,44 +5,9 @@
   // English translation attributes remain in the source for a future site-wide
   // feature, but no single-post translation toggle or global preference applies.
   const backToTop = document.getElementById('back-to-top');
-  const copyLink = document.getElementById('copy-link');
-  const feedback = document.getElementById('share-status');
   const language = 'ne';
 
-  const pageUrl = window.location.href.split('#')[0];
-  const whatsapp = document.getElementById('share-whatsapp');
-  const facebook = document.getElementById('share-facebook');
-  if (whatsapp) {
-    whatsapp.href = 'https://wa.me/?text=' + encodeURIComponent('तथ्याङ्कमा भंगाहा: ' + pageUrl);
-  }
-  if (facebook) {
-    facebook.href = 'https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(pageUrl);
-  }
-
-  copyLink?.addEventListener('click', async () => {
-    let copied = false;
-    try {
-      if (navigator.clipboard && window.isSecureContext) {
-        await navigator.clipboard.writeText(pageUrl);
-        copied = true;
-      } else {
-        const input = document.createElement('textarea');
-        input.value = pageUrl;
-        input.style.position = 'fixed';
-        input.style.left = '-10000px';
-        document.body.appendChild(input);
-        input.select();
-        copied = document.execCommand('copy');
-        input.remove();
-      }
-    } catch (_) {
-      copied = false;
-    }
-    if (feedback) feedback.textContent = copied
-      ? (language === 'ne' ? 'लिंक कपी भयो।' : 'Link copied.')
-      : (language === 'ne' ? 'लिंक कपी गर्न सकिएन।' : 'Could not copy the link.');
-  });
-
+  // Blog share interactions are provided by the shared /blog/share.js component.
   const preferReducedMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   backToTop?.addEventListener('click', () => {
     window.scrollTo({top:0,behavior:preferReducedMotion()?'auto':'smooth'});
