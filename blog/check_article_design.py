@@ -20,7 +20,7 @@ POST_NAMES = (
     "shreenagar-tin-mudha-ek-khola.html",
     "rsp-naya-netritwa.html",
 )
-VERSION = "20261124-design-system2"
+VERSION = "20261124-design-system3"
 
 
 def check(condition: bool, message: str, failures: list[str]) -> None:
@@ -81,6 +81,21 @@ def main() -> int:
           "canonical reading/hero widths changed unexpectedly", failures)
     check(".story-section > p { margin-inline: auto; }" in stylesheet,
           "Shreenagar margin centering regression returned", failures)
+    # Bhangaha had multiple alternating 790/990/1100px columns. The
+    # specific CSS contract below keeps all reading components aligned;
+    # only the feature cover and the article masthead are deliberately wide.
+    for selector in (
+        "main > .reading-wrap:not(.article-mast):not(.bhangaha-post-cover)",
+        "main > .article-body.reading-wrap",
+        "main > .reading-wrap .dx-explorer",
+        "main > .reading-wrap .kpi-grid",
+        ".article-body .figure",
+        ".article-body .section-paragraph",
+    ):
+        check(selector in stylesheet,
+              "Bhangaha unified content-column rule missing: " + selector, failures)
+    check("Bhangaha content-column correction" in stylesheet,
+          "Bhangaha column regression fix was removed", failures)
 
     for filename in POST_NAMES:
         inspect_page(filename, failures)
