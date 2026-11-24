@@ -243,3 +243,36 @@ html[lang="en"] .name-en{font-family:'Noto Sans Devanagari',sans-serif;letter-sp
   .perspective-kicker{font-size:10px}
 }
 @media(prefers-reduced-motion:reduce){.perspective-link{scroll-behavior:auto}}
+
+
+/* Two authentic personal frames complement the community gallery without replacing it. */
+.personal-moments{max-width:790px;margin:40px auto 0;padding-top:26px;border-top:1px solid var(--line)}
+.personal-moments-heading{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:16px}
+.personal-moments-hint{font-size:12px;line-height:1.5;color:var(--muted)}
+.personal-moments-grid{display:grid;grid-template-columns:0.574fr 0.682fr;gap:17px;align-items:stretch}
+.personal-moments .personal-moment{
+  display:block;width:100%;height:auto;min-width:0;flex:none;
+  border:1px solid rgba(49,60,54,.1);border-radius:23px;
+  background:#efe8de;box-shadow:0 15px 35px rgba(34,48,44,.09);
+  overflow:hidden;position:relative;transition:transform .25s ease,box-shadow .25s ease;
+}
+.personal-moments .personal-moment-evening{aspect-ratio:1170/2040}
+.personal-moments .personal-moment-portrait{aspect-ratio:1170/1715}
+.personal-moments .personal-moment img{display:block;width:100%;height:100%;object-fit:cover}
+.personal-moments .personal-moment:hover{transform:translateY(-3px);box-shadow:0 19px 45px rgba(34,48,44,.14)}
+.personal-moments .personal-moment:focus-visible{outline:3px solid var(--accent);outline-offset:4px}
+.personal-photo-index{
+  position:absolute;right:13px;bottom:13px;z-index:1;display:grid;place-items:center;
+  min-width:30px;height:30px;padding:0 7px;border-radius:50%;
+  background:rgba(255,253,248,.9);color:#354940;font:800 11px/1 'DM Sans',sans-serif;
+  box-shadow:0 3px 10px rgba(0,0,0,.12);pointer-events:none;
+}
+@media(max-width:700px){
+  .personal-moments{margin-top:29px;padding-top:20px}
+  .personal-moments-grid{gap:10px}
+  .personal-moments .personal-moment{border-radius:15px}
+  .personal-moments-heading{align-items:flex-start;flex-direction:column;gap:3px;margin-bottom:12px}
+  .personal-moments-hint{font-size:11px}
+  .personal-photo-index{min-width:26px;height:26px;right:9px;bottom:9px;font-size:10px}
+}
+@media(prefers-reduced-motion:reduce){.personal-moments .personal-moment{transition:none}}
