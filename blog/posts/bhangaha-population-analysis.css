@@ -106,7 +106,6 @@ body.bhangaha-article{margin:0;background:#fbf7f0;color:#25332f;font-family:'Not
 .bhangaha-article .article-footer{border-top:1px solid #e5ded3;padding:24px 0;background:#f7f2eb}
 .bhangaha-article .article-footer-inner{display:flex;gap:20px;flex-wrap:wrap;align-items:center;justify-content:space-between}
 .bhangaha-article .article-footer a{text-decoration:none}
-.bhangaha-article #back-to-top{position:fixed;right:19px;bottom:20px;z-index:30;background:#28473f;color:#fff;width:45px;height:45px;border:0;border-radius:50%;box-shadow:0 7px 23px rgba(35,59,49,.21);font-size:24px;cursor:pointer}
 @media(max-width:800px){
  .bhangaha-article .reading-wrap{width:calc(100% - 42px)}
  .bhangaha-article .kpi-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
@@ -138,7 +137,7 @@ body.bhangaha-article{margin:0;background:#fbf7f0;color:#25332f;font-family:'Not
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 @media print{
  body.bhangaha-article{background:#fff}
- .bhangaha-article .site-header,.bhangaha-article .draft-back,.bhangaha-article .contents,.bhangaha-article #back-to-top,.bhangaha-article .share-actions,.bhangaha-article .article-footer{display:none!important}
+ .bhangaha-article .site-header,.bhangaha-article .draft-back,.bhangaha-article .contents,.bhangaha-article .share-actions,.bhangaha-article .article-footer{display:none!important}
  .bhangaha-article .reading-wrap{width:100%}
  .bhangaha-article .figure,.bhangaha-article .kpi,.bhangaha-article .insight{box-shadow:none;break-inside:avoid}
  .bhangaha-article .article-body>section{margin-top:25px}
@@ -378,9 +377,7 @@ body.bhangaha-article{margin:0;background:#fbf7f0;color:#25332f;font-family:'Not
 }
 
 /* Published blog reactions shortcut lives below the fixed return-to-top arrow. */
-.bhangaha-article #back-to-top{bottom:calc(88px + env(safe-area-inset-bottom));}
 .bhangaha-article .blog-engagement{max-width:760px;}
-@media(max-width:550px){.bhangaha-article #back-to-top{right:16px;bottom:calc(78px + env(safe-area-inset-bottom));}}
 
 
 /* Keep the opening of this data article visually consistent with the website's
