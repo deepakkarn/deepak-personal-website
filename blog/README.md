@@ -72,6 +72,14 @@ bodies remain in Nepali.
 
 ## Quality checks before any Blog release
 
+Run the dependency-free static regression command from the repository root:
+
+```bash
+python3 blog/check_article_design.py
+```
+
+This checks consistent article classes/styles/links and a few critical data counts. It does **not** replace browser-based responsive, deployment or factual checks.
+
 - Compare **all five current published posts** and the new post for the
   same hero, category, title, deck, byline, image, body, footer and spacing.
 - Check viewport widths 320, 375, 390, 430, 768, 1024 and 1440px.
