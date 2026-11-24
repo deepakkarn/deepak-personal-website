@@ -4,24 +4,11 @@
   // Editorial policy: all published articles are presented in Nepali.
   // English translation attributes remain in the source for a future site-wide
   // feature, but no single-post translation toggle or global preference applies.
-  const backToTop = document.getElementById('back-to-top');
   const language = 'ne';
 
-  // Blog share interactions are provided by the shared /blog/share.js component.
+  // Shared /blog/engagement.js owns BOTH floating article shortcuts.
+  // Blog share interactions are provided by /blog/share.js.
   const preferReducedMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  backToTop?.addEventListener('click', () => {
-    window.scrollTo({top:0,behavior:preferReducedMotion()?'auto':'smooth'});
-  });
-  let queued = false;
-  function onScroll() {
-    if (!backToTop || queued) return;
-    queued = true;
-    window.requestAnimationFrame(() => {
-      backToTop.hidden = window.scrollY < 760;
-      queued = false;
-    });
-  }
-  window.addEventListener('scroll', onScroll, {passive:true});
 
   // One shared data viewport; the article below remains an ordinary reading experience.
   const explorer = document.getElementById('data-explorer');
@@ -138,5 +125,4 @@
     activateTopic(hash && panelByTopic.has(hash[1]) ? hash[1] : 'overview');
     displayWard();
   }
-  onScroll();
 })();
