@@ -17,7 +17,7 @@ window.DK_BLOG_POSTS = [
   {
     url: 'posts/bhangaha-population-analysis.html',
     date: '2026-11-24',
-    image: 'assets/deepak-blog-portrait.avif',
+    image: 'assets/bhangaha-population-cover.webp?v=20261124-bhangaha-thumb1',
     category: { ne: 'अनुसन्धान · तथ्याङ्क', en: 'Research · Demographics' },
     title: {
       ne: 'तथ्याङ्कमा भंगाहा: जनसंख्या, समाज र आर्थिक अवस्था',
