@@ -483,3 +483,29 @@ body.bhangaha-article{margin:0;background:#fbf7f0;color:#25332f;font-family:'Not
   .bhangaha-article .reading-wrap { width: 100%; }
   .bhangaha-article .article-language-switch { display: none; }
 }
+
+
+/* Prose uses the same readable rhythm as the other long-form blog posts. */
+.bhangaha-article .intro.reading-col > p,
+.bhangaha-article .article-body .section-paragraph > p {
+  font: 400 clamp(17px, 1.65vw, 19px)/2.08 'Noto Sans Devanagari','DM Sans',sans-serif;
+  color: #34453d;
+  margin: 0 0 27px;
+}
+.bhangaha-article .article-body .section-head > h2 {
+  font: 750 clamp(27px, 3vw, 37px)/1.48 'Noto Sans Devanagari',sans-serif;
+  letter-spacing: -.025em;
+}
+.bhangaha-article .article-body > section:not(:first-of-type) > .section-head {
+  padding-top: 25px;
+  border-top: 1px solid #ded4c8;
+}
+@media (max-width: 700px) {
+  .bhangaha-article .intro.reading-col > p,
+  .bhangaha-article .article-body .section-paragraph > p {
+    font-size: 17px;
+    line-height: 1.95;
+    margin-bottom: 24px;
+  }
+  .bhangaha-article .article-body .section-head > h2 { font-size: 28px; }
+}
