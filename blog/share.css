@@ -48,3 +48,13 @@
 
 /* Match the divider before Share to the one between Share and feedback. */
 .longform > .article-share.share-before-feedback{margin-top:0}
+
+
+/* Shared article PDF action lives beside the standard Share control. */
+.article-share-copy{max-width:335px}
+.share-widget{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.article-pdf-button{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:46px;padding:12px 15px;background:#fffdf9;color:#253d34;border:1px solid #9caa9d;border-radius:999px;font:700 13px/1.4 'Noto Sans Devanagari','DM Sans',sans-serif;cursor:pointer;white-space:nowrap}
+.article-pdf-button .bi{font-size:17px;line-height:1}
+.article-pdf-button:hover{background:#e7f0e9;border-color:#38594c}
+.article-pdf-button:focus-visible{outline:3px solid #9b6747;outline-offset:3px}
+@media(max-width:700px){.share-widget{width:100%;display:flex;flex-direction:column;align-items:stretch}.article-pdf-button{width:100%}}
