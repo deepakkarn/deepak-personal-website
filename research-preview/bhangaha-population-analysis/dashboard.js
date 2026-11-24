@@ -45,7 +45,7 @@
   const colors=['#187f7b','#5d8fba','#b17e5a','#7469a4','#a8aaa4'];
   const schemes={total:'#187f7b',male:'#4e82a5',female:'#b17e6d'};
   function drawBars(entries,opts){
-    const max=Math.max(1,...entries.map(x=>Number(x.value)||0));
+    const max=opts&&Number(opts.max)>0?Number(opts.max):Math.max(1,...entries.map(x=>Number(x.value)||0));
     return '<div class="bd-bar-list" role="list" aria-label="'+esc(t('chart'))+'">'+entries.map((v,i)=>{
       const pct=Math.max(0,Math.min(100,(Number(v.value)||0)/max*100));
       const col=opts&&opts.palette?colors[i%colors.length]:((opts&&opts.color)||'#187f7b');
@@ -164,11 +164,11 @@
   function renderOverview(){
     const pop=d.population;
     const bars=[
-      {label:useLang('०–१४ वर्ष','Age 0–14'),value:pop.age0to14,shown:pcf(pop.age0to14/pop.year2021*100)},
-      {label:useLang('१५–५९ वर्ष','Age 15–59'),value:pop.age15to59,shown:pcf(pop.age15to59/pop.year2021*100)},
-      {label:useLang('६०+ वर्ष','Age 60+'),value:pop.age60plus,shown:pcf(pop.age60plus/pop.year2021*100)}
+      {label:useLang('०–१४ वर्ष','Age 0–14'),value:pop.age0to14/pop.year2021*100,shown:pcf(pop.age0to14/pop.year2021*100)},
+      {label:useLang('१५–५९ वर्ष','Age 15–59'),value:pop.age15to59/pop.year2021*100,shown:pcf(pop.age15to59/pop.year2021*100)},
+      {label:useLang('६०+ वर्ष','Age 60+'),value:pop.age60plus/pop.year2021*100,shown:pcf(pop.age60plus/pop.year2021*100)}
     ];
-    output('bd-overview-ages',drawBars(bars,{palette:true})+sourceFoot('S02',2021,'55,354 '+t('population')));
+    output('bd-overview-ages',drawBars(bars,{palette:true,max:100})+sourceFoot('S02',2021,'55,354 '+t('population')));
     output('bd-overview-sex','<div class="bd-segmented" aria-label="'+esc(useLang('महिला र पुरुषको वितरण','Sex distribution'))+'"><span style="width:'+(pop.male2021/pop.year2021*100).toFixed(3)+'%;background:#4e82a5"></span><span style="width:'+(pop.female2021/pop.year2021*100).toFixed(3)+'%;background:#b17e6d"></span></div>'+
       '<div class="bd-legend"><span><b style="background:#4e82a5"></b>'+t('male')+': '+nf(pop.male2021)+' ('+pcf(pop.male2021/pop.year2021*100)+')</span><span><b style="background:#b17e6d"></b>'+t('female')+': '+nf(pop.female2021)+' ('+pcf(pop.female2021/pop.year2021*100)+')</span></div>'+sourceFoot('S01',2021,'55,354 '+t('population')));
   }
@@ -233,7 +233,7 @@
     const empty='<tr><td colspan="3">'+esc(t('empty'))+'</td></tr>';
     output('bd-table-'+kind,'<div class="bd-data-table-wrap"><table class="bd-table" data-table-name="'+kind+'"><caption class="bd-sr-only">'+esc(kind)+' ('+nf(denom)+')</caption>'+head+'<tbody>'+(body||empty)+'</tbody></table></div>');
     const vizItems=items.map(x=>({label:x.name,value:selected==='percent'?x.share:x.value,shown:selected==='percent'?pcf(x.share):nf(x.value)}));
-    output('bd-bars-'+kind,drawBars(vizItems,{color:kind==='migrationReasons'?'#b18340':kind==='employment'?'#486d99':'#187f7b'}));
+    output('bd-bars-'+kind,drawBars(vizItems,{color:kind==='migrationReasons'?'#b18340':kind==='employment'?'#486d99':'#187f7b',max:selected==='percent'?100:undefined}));
     const note=byId('bd-foot-'+kind);
     if(note){const sourceID=({wards:'S04',age:'S02',literacy:'S02',employment:'S02',marital:'S02',migrationReasons:'S02',lowActivity:'S02'})[kind];note.innerHTML=sourceFoot(sourceID,2021,useLang('आधार समूह: ','Denominator: ')+nf(denom));}
   }
@@ -251,7 +251,7 @@
       {label:useLang('गरिबी दर (FGT0)','Poverty headcount (FGT0)'),value:p.headcount,shown:pcf(p.headcount)},
       {label:useLang('गरिबी अन्तर (FGT1)','Poverty gap (FGT1)'),value:p.gap,shown:pcf(p.gap)},
       {label:useLang('गरिबी गहनता (FGT2)','Poverty severity (FGT2)'),value:p.severity,shown:pcf(p.severity)}
-    ],{color:'#ad5e57'})+'<p class="bd-note">'+useLang('यो सांख्यिकीय अनुमान हो, प्रत्यक्ष जनगणनामा गरिब गनिएको संख्या होइन। २०२३ को model population ५५,३५१ र २०२१ Census को ५५,३५४ बीच ३ जनाको अन्तर छ।','This is a model estimate, not a direct census enumeration of poor persons. The 2023 model base is 55,351 versus 55,354 residents in Census 2021.')+'</p>'+sourceFoot('S06',2023,'model base 55,351'));
+    ],{color:'#ad5e57',max:100})+'<p class="bd-note">'+useLang('यो सांख्यिकीय अनुमान हो, प्रत्यक्ष जनगणनामा गरिब गनिएको संख्या होइन। २०२३ को model population ५५,३५१ र २०२१ Census को ५५,३५४ बीच ३ जनाको अन्तर छ।','This is a model estimate, not a direct census enumeration of poor persons. The 2023 model base is 55,351 versus 55,354 residents in Census 2021. FGT0, FGT1 and FGT2 are different poverty measures; their bars share a 0–100% reference scale.')+'</p>'+sourceFoot('S06',2023,'model base 55,351'));
   }
   function integrity(){
     const sums={
