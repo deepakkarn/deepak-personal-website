@@ -6,7 +6,7 @@ subject or whether the article includes data charts, photos or long-form text.
 
 ## Single source of truth for visual layout
 
-**Shared CSS:** `/blog/article-standard.css` (load LAST in the article's `<head>`).
+**Shared CSS:** `/blog/article-standard.css` (load LAST in the article's `<head>`). Current version query: `?v=20261124-design-system3`; bump this in every article and template after editing the shared CSS.
 
 Published article `<body>` must have `class="blog-article"`. An article may
 keep a second specialized class, e.g. `class="blog-article bhangaha-article"`.
