@@ -226,3 +226,11 @@ body.bhangaha-article{margin:0;background:#fbf7f0;color:#25332f;font-family:'Not
  .bhangaha-article .recent-card,.bhangaha-article .scenario-row,.bhangaha-article .age-composition{break-inside:avoid}
  .bhangaha-article .recent-grid{grid-template-columns:1fr 1fr}
 }
+
+/* Exact chart tick positions on a 0–65,000 absolute scale. */
+.bhangaha-article .scenario-axis{position:relative;display:block;height:20px;padding:0;margin-left:calc(36% + 8px);margin-right:113px;margin-top:10px}
+.bhangaha-article .scenario-axis>span{position:absolute;left:var(--x);top:0;transform:translateX(-50%);white-space:nowrap}
+.bhangaha-article .scenario-axis>span:first-child{transform:translateX(0)}
+.bhangaha-article .scenario-axis>span:last-child{transform:translateX(-100%)}
+@media(max-width:700px){.bhangaha-article .scenario-axis{padding:0;margin-left:calc(33% + 8px);margin-right:86px}}
+@media(max-width:520px){.bhangaha-article .scenario-axis{padding:0;margin-left:0;margin-right:84px}}
