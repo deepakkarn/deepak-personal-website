@@ -58,6 +58,31 @@ published post are implemented. Homepage language preferences and Blog
 listing bilingual metadata are separate features; current published article
 bodies remain in Nepali.
 
+
+## Universal floating buttons (mandatory)
+
+All five current articles and `posts/_template.html` use:
+- `/blog/engagement.css?v=20261124-floating-nav2`
+- `/blog/engagement.js?v=20261124-floating-nav2`
+
+The shared engagement script creates a bottom-right fixed stack:
+`↑ Back to top` (after 320px; remains available in every article section,
+including below the comment area) and `प्रतिक्रिया ↓` (visible until the
+Like/Comments section is reached). They automatically adjust to phone widths,
+respect safe-area insets, keyboard focus and reduced motion. The reaction text
+is explicitly white on deep green for high contrast (approximately 11.69:1).
+CSS specifically overrides article-level link colors, including visited links.
+
+**Do not build page-specific `#back-to-top` buttons or duplicate scroll
+handlers.** The Bhangaha implementation was removed after it caused
+inconsistent availability across Blog posts. If floating UX changes, modify
+the shared `engagement.js` and `engagement.css`, bump the version in
+ALL five published posts and the template, then test the controls at:
+top, mid-article, close to feedback, below feedback and after clicking ↑/↓.
+At every viewport the two controls must be readable and never overlap.
+`blog/check_article_design.py` protects this contract in static checks.
+Live browser/device and deployed Cloudflare verification are separate.
+
 ## Publishing
 
 1. Copy `posts/_template.html` to `posts/your-article-slug.html`.
