@@ -176,3 +176,130 @@
   .engagement-jump{transition:none}
   .engagement-jump:hover{transform:none}
 }
+
+
+/* Shared floating article navigation, November 2026.
+   Both buttons are in one fixed stack, preventing collision and ensuring
+   the back-to-top control is available throughout ALL published articles. */
+body.blog-article .blog-floating-actions {
+  position: fixed;
+  right: calc(20px + env(safe-area-inset-right, 0px));
+  bottom: calc(24px + env(safe-area-inset-bottom, 0px));
+  z-index: 70;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 12px;
+  max-width: calc(100vw - 32px);
+  pointer-events: none;
+}
+body.blog-article .blog-floating-actions[hidden],
+body.blog-article .blog-floating-actions .engagement-jump[hidden],
+body.blog-article .blog-floating-actions .blog-back-to-top[hidden] {
+  display: none !important;
+}
+body.blog-article .blog-floating-actions > * {
+  pointer-events: auto;
+}
+body.blog-article .blog-floating-actions .blog-back-to-top {
+  position: static;
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  min-width: 52px;
+  min-height: 52px;
+  padding: 0;
+  border: 1px solid #577269;
+  border-radius: 50%;
+  background: #253d34;
+  color: #fff;
+  font: 700 31px/1 'DM Sans', sans-serif;
+  text-align: center;
+  cursor: pointer;
+  box-shadow: 0 9px 25px rgba(17, 36, 28, .25);
+  transition: background .2s ease, transform .2s ease;
+}
+body.blog-article .blog-floating-actions .blog-back-to-top:hover {
+  background: #365d4c;
+  color: #fff;
+  transform: translateY(-2px);
+}
+body.blog-article .blog-floating-actions .engagement-jump,
+body.blog-article .blog-floating-actions .engagement-jump:link,
+body.blog-article .blog-floating-actions .engagement-jump:visited {
+  position: static;
+  right: auto;
+  bottom: auto;
+  z-index: auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 50px;
+  padding: 9px 10px 9px 18px;
+  background: #253d34;
+  border: 1px solid #577269;
+  border-radius: 999px;
+  color: #fff;
+  font: 800 14px/1.5 'Noto Sans Devanagari', 'DM Sans', sans-serif;
+  text-decoration: none;
+  text-shadow: none;
+  box-shadow: 0 9px 25px rgba(17, 36, 28, .25);
+}
+body.blog-article .blog-floating-actions .engagement-jump-label,
+body.blog-article .blog-floating-actions .engagement-jump-arrow {
+  color: #fff;
+  opacity: 1;
+}
+body.blog-article .blog-floating-actions .engagement-jump-arrow {
+  display: grid;
+  place-items: center;
+  background: rgba(255, 255, 255, .20);
+}
+body.blog-article .blog-floating-actions .engagement-jump:hover,
+body.blog-article .blog-floating-actions .engagement-jump:focus-visible {
+  background: #365d4c;
+  color: #fff;
+}
+body.blog-article .blog-floating-actions .blog-back-to-top:focus-visible,
+body.blog-article .blog-floating-actions .engagement-jump:focus-visible {
+  outline: 3px solid #e5af7e;
+  outline-offset: 3px;
+}
+@media (max-width: 650px) {
+  body.blog-article .blog-floating-actions {
+    right: calc(15px + env(safe-area-inset-right, 0px));
+    bottom: calc(18px + env(safe-area-inset-bottom, 0px));
+    gap: 10px;
+  }
+  body.blog-article .blog-floating-actions .blog-back-to-top {
+    width: 48px;
+    height: 48px;
+    min-width: 48px;
+    min-height: 48px;
+    font-size: 29px;
+  }
+  body.blog-article .blog-floating-actions .engagement-jump {
+    width: 48px;
+    height: 48px;
+    min-width: 48px;
+    min-height: 48px;
+    padding: 0;
+  }
+  body.blog-article .blog-floating-actions .engagement-jump-label { display: none; }
+  body.blog-article .blog-floating-actions .engagement-jump-arrow {
+    width: 38px;
+    height: 38px;
+    font-size: 26px;
+    background: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  body.blog-article .blog-floating-actions .blog-back-to-top,
+  body.blog-article .blog-floating-actions .engagement-jump { transition: none; }
+  body.blog-article .blog-floating-actions .blog-back-to-top:hover,
+  body.blog-article .blog-floating-actions .engagement-jump:hover { transform: none; }
+}
+@media print {
+  body.blog-article .blog-floating-actions { display: none !important; }
+}
