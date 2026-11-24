@@ -1,41 +1,13 @@
 /* Minimal blog article enhancements. All charts and numbers remain visible without JavaScript. */
 (() => {
   'use strict';
-  const toggle = document.getElementById('article-lang-toggle');
+  // Editorial policy: all published articles are presented in Nepali.
+  // English translation attributes remain in the source for a future site-wide
+  // feature, but no single-post translation toggle or global preference applies.
   const backToTop = document.getElementById('back-to-top');
   const copyLink = document.getElementById('copy-link');
   const feedback = document.getElementById('share-status');
-  let language = 'ne';
-
-  try {
-    const preferred = localStorage.getItem('dk-language');
-    if (preferred === 'en' || preferred === 'ne') language = preferred;
-  } catch (_) {
-    // Local storage may be unavailable; Nepali is the article default.
-  }
-
-  function setLanguage(lang) {
-    language = lang;
-    document.documentElement.lang = lang;
-    document.querySelectorAll('[data-ne][data-en]').forEach(element => {
-      element.textContent = element.getAttribute('data-' + lang);
-    });
-    if (toggle) {
-      toggle.textContent = lang === 'ne' ? 'English' : 'नेपाली';
-      toggle.setAttribute('aria-label', lang === 'ne' ? 'Read in English' : 'नेपालीमा पढ्नुहोस्');
-    }
-    if (backToTop) backToTop.setAttribute('aria-label', lang === 'ne' ? 'पृष्ठको माथि जानुहोस्' : 'Back to top');
-    document.title = lang === 'ne'
-      ? 'तथ्याङ्कमा भंगाहा: जनसंख्या, समाज र आर्थिक अवस्था | Deepak Karn'
-      : 'Bhangaha in Numbers: Population, Society & Socioeconomic Insights | Deepak Karn';
-    if (typeof displayWard === 'function') displayWard();
-  }
-
-  toggle?.addEventListener('click', () => {
-    const next = language === 'ne' ? 'en' : 'ne';
-    try { localStorage.setItem('dk-language', next); } catch (_) {}
-    setLanguage(next);
-  });
+  const language = 'ne';
 
   const pageUrl = window.location.href.split('#')[0];
   const whatsapp = document.getElementById('share-whatsapp');
@@ -202,5 +174,4 @@
     displayWard();
   }
   onScroll();
-  setLanguage(language);
 })();
