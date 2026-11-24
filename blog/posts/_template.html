@@ -3,68 +3,91 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="robots" content="noindex">
-  <title>Article Template | Deepak Kumar Karn</title>
-  <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="theme-color" content="#fbf7f0">
+  <meta name="author" content="Deepak Kumar Karn">
+  <meta name="description" content="REPLACE_WITH_POST_DESCRIPTION">
+  <title>REPLACE_WITH_ARTICLE_TITLE | Deepak Kumar Karn</title>
+  <!-- Before publishing: add the REAL canonical URL, Open Graph image,
+       og:title, og:description, and other article metadata. -->
+  <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Noto+Sans+Devanagari:wght@400;500;600;700;800&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../styles.css">
-  <link rel="stylesheet" href="../blog.css">
-  <style>
-    .article-wrap{max-width:850px;margin:0 auto;padding:75px 22px 110px}
-    .article-back{display:inline-block;color:var(--accent);font-size:14px;font-weight:700;margin-bottom:55px}
-    .article-category{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);font-weight:800}
-    .article-wrap h1{font:500 clamp(40px,6vw,70px)/1.2 'Playfair Display','Noto Sans Devanagari',serif;letter-spacing:-.04em;margin:18px 0 20px}
-    .article-meta{font-size:13px;color:var(--muted);border-bottom:1px solid var(--line);padding-bottom:28px;margin-bottom:36px}
-    .article-body{font-size:18px;line-height:2;color:#35433f}
-    .article-body h2{font-size:28px;line-height:1.45;color:var(--ink);margin:42px 0 12px}
-    .article-body p{margin-bottom:24px}.article-body a{color:var(--accent);text-decoration:underline}
-  </style>
-  <link rel="stylesheet" href="../share.css?v=20261119-1">
+  <link rel="stylesheet" href="../share.css?v=20261124-matching-divider">
+  <link rel="stylesheet" href="../engagement.css?v=20261124-reaction-jump1">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <script defer src="../share.js?v=20261119-1"></script>
+  <script defer src="../engagement.js?v=20261124-reaction-jump1"></script>
+  <!-- IMPORTANT: Keep this shared design stylesheet LAST.
+       Do not add another article-specific masthead/gutter/footer stylesheet. -->
+  <link rel="stylesheet" href="../article-standard.css?v=20261124-design-system1">
 </head>
-<body>
+<body class="blog-article">
+  <a href="#full-article" class="skip-link">मुख्य लेखमा जानुहोस्</a>
   <header class="site-header">
-    <a class="wordmark" href="/">DK<span class="dot">.</span></a>
-    <nav class="desktop-nav" aria-label="Navigation">
-      <a href="/">Home</a>
-      <a href="/blog/">Blog</a>
+    <a class="wordmark" href="/" aria-label="Deepak Kumar Karn home">DK<span class="dot">.</span></a>
+    <nav class="desktop-nav" aria-label="Primary navigation">
+      <a href="/">Home</a><a href="/blog/" aria-current="page">Blog</a><a href="/#connect">Connect</a>
     </nav>
+    <a class="language-toggle" href="/blog/">← BLOG</a>
   </header>
-  <main class="article-wrap">
-    <a class="article-back" href="/blog/">← Back to blog</a>
-    <span class="article-category">Your category</span>
-    <h1>Your article title</h1>
-    <p class="article-meta"><time datetime="2026-11-19">19 November 2026</time> · Deepak Kumar Karn</p>
-    <article class="article-body">
-      <p>Replace this introduction with your own writing.</p>
-      <h2>Your first section</h2>
-      <p>Write your ideas, observations, project experiences, or reflections here.</p>
+  <main id="main" class="longform">
+    <header class="longform-head">
+      <a class="return-link" href="/blog/">← सबै लेखहरू</a>
+      <div class="article-kicker">REPLACE_WITH_CATEGORY</div>
+      <h1>REPLACE_WITH_ARTICLE_TITLE</h1>
+      <p class="longform-deck">REPLACE_WITH_ARTICLE_SUBTITLE</p>
+      <div class="longform-meta">
+        <span>दीपक कुमार कर्ण</span>
+        <time datetime="YYYY-MM-DD">REPLACE_WITH_PUBLICATION_DATE</time>
+        <span>REPLACE_WITH_ARTICLE_TYPE</span>
+      </div>
+    </header>
+    <!-- Optional feature image: USE a real uploaded image, otherwise OMIT this figure.
+    <figure class="longform-cover">
+      <img src="../assets/REAL-COVER.webp" alt="DESCRIPTIVE_ALT_TEXT" width="1280" height="720" fetchpriority="high" decoding="async">
+    </figure>
+    -->
+    <article class="prose read-column" id="full-article">
+      <p>REPLACE_WITH_INTRODUCTION</p>
+      <h2>REPLACE_WITH_FIRST_SECTION_HEADING</h2>
+      <p>REPLACE_WITH_ARTICLE_CONTENT</p>
     </article>
-
-    <section class="article-share" aria-label="लेख साझा गर्नुहोस्">
+    <hr class="blog-interaction-divider blog-article-end-divider" aria-hidden="true">
+    <section class="article-share share-before-feedback" aria-label="लेख साझा गर्नुहोस्">
       <div class="article-share-copy">
         <h2>यो लेख अरूसँग साझा गर्नुहोस्</h2>
         <p>Facebook, WhatsApp, LinkedIn वा सीधै लिंक पठाउन सक्नुहुन्छ।</p>
       </div>
       <div class="share-widget" data-article-share>
-        <button class="share-toggle" type="button" aria-controls="share-options" aria-expanded="false">
-          <i class="bi bi-share" aria-hidden="true"></i>
-          <span>Share this article</span>
-          <i class="bi bi-chevron-down" aria-hidden="true"></i>
+        <button class="share-toggle" type="button" aria-controls="share-options-template" aria-expanded="false">
+          <i class="bi bi-share" aria-hidden="true"></i><span>Share this article</span><i class="bi bi-chevron-down" aria-hidden="true"></i>
         </button>
-        <div class="share-menu" id="share-options" hidden aria-label="Share options">
+        <div class="share-menu" id="share-options-template" hidden aria-label="Share options">
           <a data-share="facebook" href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer"><i class="bi bi-facebook" aria-hidden="true"></i>Facebook</a>
           <a data-share="whatsapp" href="https://wa.me/" target="_blank" rel="noopener noreferrer"><i class="bi bi-whatsapp" aria-hidden="true"></i>WhatsApp</a>
           <a data-share="linkedin" href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer"><i class="bi bi-linkedin" aria-hidden="true"></i>LinkedIn</a>
-          <button type="button" data-share="copy"><i class="bi bi-link-45deg" aria-hidden="true"></i>Copy link</button>
-          <button type="button" data-share="native" hidden><i class="bi bi-phone" aria-hidden="true"></i>More sharing options</button>
+          <button data-share="copy" type="button"><i class="bi bi-link-45deg" aria-hidden="true"></i>Copy link</button>
+          <button data-share="native" type="button" hidden><i class="bi bi-phone" aria-hidden="true"></i>More sharing options</button>
         </div>
         <p class="share-status" role="status" aria-live="polite"></p>
       </div>
     </section>
+    <hr class="blog-interaction-divider" aria-hidden="true">
+    <section class="blog-engagement" data-blog-engagement></section>
+    <nav class="after-article read-column" aria-label="Blog navigation">
+      <a href="/blog/">← अरू लेखहरू</a>
+      <a href="/">मुख्य पृष्ठ</a>
+    </nav>
   </main>
-  <footer class="site-footer"><div class="wrap footer-inner"><a class="footer-name" href="/">Deepak Kumar Karn<span class="dot">.</span></a><a href="/blog/">Blog</a></div></footer>
+  <footer class="article-footer">
+    <div class="wrap">
+      <a class="footer-name" href="/">Deepak Kumar Karn<span class="dot">.</span></a>
+      <a href="/blog/">Blog</a>
+      <span class="copyright">© 2026 Deepak Kumar Karn</span>
+    </div>
+  </footer>
 </body>
 </html>
