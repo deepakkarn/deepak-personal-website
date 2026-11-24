@@ -190,3 +190,56 @@ html[lang="en"] .name-en{font-family:'Noto Sans Devanagari',sans-serif;letter-sp
 .photo-band:focus-within .photo-track{animation-play-state:paused}
 .band-photo:focus-visible{outline:3px solid var(--accent);outline-offset:-3px}
 .menu-toggle:focus-visible,.language-toggle:focus-visible,.mobile-nav a:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+
+
+/* An editorial bridge between engineering practice and everyday questions. */
+.journey-perspective{
+  position:relative;display:grid;grid-template-columns:minmax(0,.94fr) minmax(0,1.06fr);
+  gap:clamp(24px,4vw,68px);align-items:center;overflow:hidden;
+  margin:0 0 30px;padding:clamp(25px,3.4vw,42px);
+  border:1px solid rgba(157,139,116,.24);border-radius:26px;
+  background:linear-gradient(115deg,#f8efe2 0%,#fffdf8 57%,#eef5f0 100%);
+  box-shadow:0 14px 40px rgba(34,48,44,.045);
+}
+.journey-perspective::before{
+  content:"";position:absolute;right:-80px;top:-95px;width:270px;height:270px;
+  border:1px solid rgba(66,102,85,.13);border-radius:50%;pointer-events:none;
+  box-shadow:0 0 0 32px rgba(66,102,85,.025),0 0 0 75px rgba(66,102,85,.018);
+}
+.perspective-head,.perspective-body{position:relative;z-index:1;min-width:0}
+.perspective-kicker{
+  display:inline-flex;align-items:center;gap:10px;
+  color:var(--accent);font-size:11px;letter-spacing:.11em;font-weight:800;text-transform:uppercase;
+}
+.perspective-kicker::before{content:"";display:block;width:21px;height:1px;background:var(--accent)}
+.journey-perspective h3{
+  font:500 clamp(29px,3.1vw,45px)/1.28 'Playfair Display','Noto Sans Devanagari',serif;
+  letter-spacing:-.035em;margin:15px 0 0;
+}
+.journey-perspective h3 em{font-weight:400;color:var(--accent);font-style:italic}
+.perspective-body p{color:#4b5e55;font-size:15px;line-height:1.92;margin:0}
+.perspective-path{display:flex;align-items:center;flex-wrap:wrap;gap:9px;margin-top:19px}
+.perspective-path>span:not(.perspective-connector){
+  padding:8px 11px;border:1px solid rgba(70,94,81,.14);
+  border-radius:999px;background:rgba(255,255,255,.8);
+  color:#344c41;font-size:11px;line-height:1.45;font-weight:700;
+}
+.perspective-connector{display:inline-grid;place-items:center;color:var(--accent);font-size:15px}
+.perspective-link{
+  display:inline-flex;align-items:center;gap:12px;margin-top:20px;
+  padding-bottom:4px;border-bottom:1px solid rgba(155,103,71,.55);
+  color:var(--accent);font-size:13px;font-weight:800;line-height:1.5;
+}
+.perspective-link:hover{color:var(--ink);border-color:var(--ink)}
+.perspective-link:focus-visible{outline:3px solid var(--accent);outline-offset:4px;border-radius:3px}
+@media(max-width:980px){
+  .journey-perspective{grid-template-columns:1fr;gap:14px;padding:27px}
+  .journey-perspective h3{font-size:clamp(28px,4.7vw,40px)}
+}
+@media(max-width:700px){
+  .journey-perspective{margin-bottom:24px;padding:22px 20px;border-radius:20px;gap:13px}
+  .journey-perspective h3{font-size:clamp(27px,6.4vw,36px)}
+  .perspective-body p{font-size:14px;line-height:1.85}
+  .perspective-kicker{font-size:10px}
+}
+@media(prefers-reduced-motion:reduce){.perspective-link{scroll-behavior:auto}}
