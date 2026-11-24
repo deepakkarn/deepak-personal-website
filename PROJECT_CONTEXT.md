@@ -326,3 +326,10 @@ User requested strict consistency of English/Nepali switching across all publish
 - Consolidated the former `context.md` quick-reference rules into the top-level documentation policy and retained the complete design, navigation, QA, and verification requirements already documented here. This file is now the **only** maintained project-wide handoff/rules/history document.
 - Retired `context.md` and linked this file from the repository's top-level `README.md`. Existing `blog/README.md` remains the detailed technical publishing checklist; source files and test scripts remain unchanged.
 - Documentation-only change: no application assets, routes, layouts, analytics, or behavior modified; no claim of production-browser verification.
+
+### 2026-11-24: Enlarged desktop header navigation typography
+
+- User screenshot of the Nepalese-language homepage header showed the five top navigation labels looking disproportionately small next to the DK wordmark and language pill. Source cause: `styles.css` set both desktop nav labels and language toggle to `font-size:12px` in a shared declaration.
+- Separated the selectors: desktop navigation now uses `16px` bold text with restrained letter spacing, comfortable line height, and `32px` gaps at wide widths. Intermediate widths (821–1100px) use `15px` labels and `22px` gaps to avoid crowding. The language pill stays at its original `12px` and the existing mobile menu (≤820px) is unchanged.
+- Added visible keyboard-focus styling to desktop navigation links, matching existing focus indications on other header controls. Bumped homepage stylesheet cache key to `20261124-header-nav1` in `index.html` only; no JavaScript, routes, sections, or site-wide blog layout changed.
+- Rechecked source selectors and cache-key references on the latest GitHub `main`. Real browser viewport screenshots and live Cloudflare deployment remain unverified; do not describe source inspection as visual production testing.
