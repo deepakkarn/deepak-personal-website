@@ -1,0 +1,334 @@
+/* Deepak Karn | Shared published-article design system.
+   This file is the sole source of truth for article gutters, hero hierarchy,
+   reading typography, imagery, common spacing and footer alignment.
+   Article-specific CSS may add components, but MUST NOT override these basics.
+   Load this stylesheet LAST, after per-post styles. */
+
+body.blog-article {
+  --blog-reading: 790px;
+  --blog-wide: 1100px;
+  --blog-gutter: clamp(28px, 7vw, 62px);
+  --blog-ink: #25312f;
+  --blog-muted: #5c6762;
+  --blog-accent: #9b6747;
+  --blog-paper: #fbf7f0;
+  background: var(--blog-paper);
+  color: var(--blog-ink);
+}
+body.blog-article :where(main, article, section, header, figure, aside, nav) {
+  min-width: 0;
+}
+body.blog-article :where(main, article) {
+  overflow-wrap: break-word;
+}
+/* A consistent 1100px hero with the same side gutter for every post. */
+body.blog-article :is(
+  .longform-head,
+  .story-top,
+  .article-header,
+  .article-mast.reading-wrap
+) {
+  box-sizing: border-box;
+  width: min(var(--blog-wide), calc(100% - var(--blog-gutter) - var(--blog-gutter)));
+  max-width: none;
+  margin-inline: auto;
+  padding: 60px 0 0;
+}
+body.blog-article :is(.return-link, .story-back, .article-back, .draft-back) {
+  display: inline-block;
+  margin: 0 0 34px;
+  padding: 0;
+  color: var(--blog-accent);
+  font: 700 13px/1.7 'Noto Sans Devanagari', 'DM Sans', sans-serif;
+  text-decoration: none;
+}
+body.blog-article :is(.return-link, .story-back, .article-back, .draft-back):hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+/* Article category is metadata, not a decorative pill. */
+body.blog-article :is(.article-kicker, .story-label, .article-tag) {
+  display: inline-block;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  color: var(--blog-accent);
+  font: 800 11px/1.5 'DM Sans', 'Noto Sans Devanagari', sans-serif;
+  letter-spacing: .12em;
+}
+body.blog-article .article-kicker-row { display: block; }
+body.blog-article :is(.longform-head h1, .story-top h1, .article-header h1, .article-mast h1) {
+  box-sizing: border-box;
+  max-width: 1050px;
+  margin: 18px 0;
+  color: var(--blog-ink);
+  font-family: 'Noto Sans Devanagari', sans-serif;
+  font-size: clamp(34px, 5.2vw, 67px);
+  font-weight: 800;
+  line-height: 1.4;
+  letter-spacing: -.025em;
+  text-wrap: pretty;
+}
+body.blog-article :is(.longform-deck, .story-subtitle, .article-deck) {
+  max-width: 910px;
+  margin: 0 0 24px;
+  font: 400 clamp(17px, 2vw, 22px)/1.95 'Noto Sans Devanagari', sans-serif;
+  color: var(--blog-muted);
+  font-style: normal;
+}
+body.blog-article :is(.longform-meta, .story-meta, .article-header .article-meta, .article-mast .article-meta) {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 0;
+  color: #65716c;
+  font-family: 'Noto Sans Devanagari', 'DM Sans', sans-serif;
+  font-size: 13px;
+  line-height: 1.8;
+  font-weight: 500;
+}
+body.blog-article .story-meta > :is(time, span):not(:first-child)::before { color: #a9b1aa; }
+/* All primary article covers occupy the same editorial width. */
+body.blog-article :is(.longform-cover, .story-cover, .article-cover, .bhangaha-post-cover.reading-wrap) {
+  box-sizing: border-box;
+  width: min(var(--blog-wide), calc(100% - var(--blog-gutter) - var(--blog-gutter)));
+  max-width: none;
+  padding: 0;
+  margin: 46px auto 56px;
+}
+body.blog-article :is(.longform-cover, .story-cover, .article-cover, .bhangaha-post-cover) img {
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  border-radius: 24px;
+  box-shadow: 0 16px 48px rgba(25,36,36,.10);
+}
+/* Canonical 790px reading measure for every format. */
+body.blog-article :is(
+  .read-column,
+  .story-intro,
+  .story-section-heading,
+  .story-section > p,
+  .story-foot,
+  .bhangaha-article .intro.reading-col
+) {
+  box-sizing: border-box;
+  width: min(var(--blog-reading), calc(100% - var(--blog-gutter) - var(--blog-gutter)));
+  max-width: none;
+  margin-left: auto;
+  margin-right: auto;
+}
+body.blog-article:not(.bhangaha-article) .article-body {
+  box-sizing: border-box;
+  width: min(var(--blog-reading), calc(100% - var(--blog-gutter) - var(--blog-gutter)));
+  max-width: none;
+  margin-inline: auto;
+  padding: 0 0 72px;
+}
+body.blog-article .prose,
+body.blog-article .story-content,
+body.blog-article:not(.bhangaha-article) .article-body {
+  color: var(--blog-ink);
+  font-family: 'Noto Sans Devanagari', sans-serif;
+}
+/* No topic-specific article should look denser, more condensed or smaller. */
+body.blog-article :is(
+  .prose > p,
+  .story-intro p,
+  .story-section > p,
+  .story-split-copy p,
+  .article-body > p,
+  .bhangaha-article .section-paragraph > p,
+  .bhangaha-article .intro > p
+) {
+  font-family: 'Noto Sans Devanagari', sans-serif;
+  font-size: clamp(17px, 1.65vw, 19px);
+  font-weight: 400;
+  line-height: 2.05;
+  color: #34453d;
+  margin-top: 0;
+  margin-bottom: 27px;
+}
+body.blog-article .story-section > p { margin-inline: auto; }
+body.blog-article :is(.prose h2, .story-section h2, .bhangaha-article .section-head > h2) {
+  font-family: 'Noto Sans Devanagari', sans-serif;
+  font-size: clamp(27px, 3vw, 37px);
+  font-weight: 750;
+  line-height: 1.48;
+  letter-spacing: -.025em;
+  color: var(--blog-ink);
+}
+/* Shreenagar keeps its reporting photographs without changing reading margins. */
+body.blog-article .story-intro { margin-bottom: 46px; }
+body.blog-article .story-section { padding: 0 0 20px; }
+body.blog-article .story-section-heading {
+  margin: 54px auto 26px;
+  padding-top: 28px;
+  border-top: 1px solid #ded4c8;
+}
+body.blog-article .story-section h2 { margin: 16px 0 0; }
+body.blog-article .story-split {
+  box-sizing: border-box;
+  width: min(var(--blog-wide), calc(100% - var(--blog-gutter) - var(--blog-gutter)));
+  max-width: none;
+  margin: 39px auto 50px;
+}
+body.blog-article .story-wide {
+  box-sizing: border-box;
+  width: min(990px, calc(100% - var(--blog-gutter) - var(--blog-gutter)));
+  max-width: none;
+}
+body.blog-article .story-split-copy,
+body.blog-article .story-figure { min-width: 0; }
+body.blog-article .story-split-copy p { margin-bottom: 23px; }
+body.blog-article .story-figure img { max-width: 100%; }
+/* Bhangaha has richer evidence graphics, but the visual center line and
+   paragraph width are the SAME as every other article. */
+body.blog-article.bhangaha-article .article-body.reading-wrap {
+  box-sizing: border-box;
+  width: min(var(--blog-wide), calc(100% - var(--blog-gutter) - var(--blog-gutter)));
+  max-width: none;
+  margin-inline: auto;
+}
+body.blog-article.bhangaha-article .intro.reading-col {
+  margin-top: 0;
+  margin-bottom: 43px;
+}
+body.blog-article.bhangaha-article .article-body :is(.section-head, .section-paragraph, .insight, .note-last) {
+  box-sizing: border-box;
+  width: min(var(--blog-reading), 100%);
+  max-width: none;
+  margin-left: auto;
+  margin-right: auto;
+}
+body.blog-article.bhangaha-article .article-body .figure {
+  box-sizing: border-box;
+  width: min(var(--blog-reading), 100%);
+  max-width: none;
+  margin: 23px auto 26px;
+}
+body.blog-article.bhangaha-article .dx-explorer {
+  box-sizing: border-box;
+  width: min(990px, 100%);
+  max-width: none;
+  margin-inline: auto;
+}
+body.blog-article.bhangaha-article .article-body .section-paragraph > p {
+  font-size: clamp(17px, 1.65vw, 19px);
+  line-height: 2.05;
+}
+body.blog-article.bhangaha-article .article-body > section { margin-top: 59px; }
+body.blog-article.bhangaha-article .article-body > section:first-child { margin-top: 22px; }
+body.blog-article.bhangaha-article .article-body .section-head {
+  padding-top: 28px;
+  border-top: 1px solid #ded4c8;
+}
+/* Shared data-card tables must scroll inside their card, never widen the page. */
+body.blog-article.bhangaha-article .dx-table-scroll {
+  max-width: 100%;
+  overflow-x: auto;
+}
+body.blog-article.bhangaha-article .figure .simple-table-wrap {
+  max-width: 100%;
+  overflow-x: auto;
+}
+/* Standard bottom links and footer are part of the page's reading system. */
+body.blog-article :is(.after-article.read-column, .story-foot) {
+  box-sizing: border-box;
+  width: min(var(--blog-reading), calc(100% - var(--blog-gutter) - var(--blog-gutter)));
+  max-width: none;
+  margin: 36px auto 60px;
+  padding: 23px 0 0;
+  border-top: 1px solid #ded4c8;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+body.blog-article :is(.after-article, .story-foot) a {
+  color: var(--blog-accent);
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+}
+body.blog-article :is(.after-article, .story-foot) a:hover { text-decoration: underline; }
+body.blog-article :is(.article-footer, .story-footer) {
+  background: var(--blog-paper);
+  border-top: 1px solid #ded4c8;
+  padding: 28px 0;
+}
+body.blog-article :is(.article-footer, .story-footer) .wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+body.blog-article .article-share.share-before-feedback {
+  box-sizing: border-box;
+  width: min(var(--blog-reading), calc(100% - var(--blog-gutter) - var(--blog-gutter)));
+  max-width: none;
+  margin: 0 auto;
+}
+body.blog-article .blog-interaction-divider {
+  box-sizing: border-box;
+  width: min(760px, calc(100% - var(--blog-gutter) - var(--blog-gutter)));
+}
+/* Better reading and tap target consistency on mobile devices. */
+@media (max-width: 800px) {
+  body.blog-article .story-split {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 18px;
+  }
+  body.blog-article .story-split .story-split-copy { width: 100%; margin-inline: 0; }
+}
+@media (max-width: 700px) {
+  body.blog-article { --blog-gutter: clamp(27px, 7vw, 36px); }
+  body.blog-article :is(.longform-head, .story-top, .article-header, .article-mast.reading-wrap) {
+    padding-top: 34px;
+  }
+  body.blog-article :is(.longform-head h1, .story-top h1, .article-header h1, .article-mast h1) {
+    font-size: clamp(32px, 8vw, 45px);
+  }
+  body.blog-article :is(.longform-cover, .story-cover, .article-cover, .bhangaha-post-cover.reading-wrap) {
+    margin-top: 35px;
+    margin-bottom: 43px;
+  }
+  body.blog-article :is(.longform-cover, .story-cover, .article-cover, .bhangaha-post-cover) img {
+    border-radius: 16px;
+  }
+  body.blog-article :is(
+    .prose > p, .story-intro p, .story-section > p, .story-split-copy p,
+    .article-body > p, .bhangaha-article .section-paragraph > p,
+    .bhangaha-article .intro > p
+  ) {
+    font-size: 17px;
+    line-height: 1.95;
+    margin-bottom: 24px;
+  }
+  body.blog-article :is(.prose h2, .story-section h2, .bhangaha-article .section-head > h2) {
+    font-size: 28px;
+  }
+  body.blog-article .story-intro { margin-bottom: 32px; }
+  body.blog-article .story-section-heading { margin-top: 42px; }
+  body.blog-article .article-share.share-before-feedback {
+    margin-inline: auto;
+  }
+}
+@media (max-width: 420px) {
+  body.blog-article .blog-engagement { max-width: calc(100% - 30px); }
+}
+@media print {
+  body.blog-article { --blog-gutter: 0px; }
+  body.blog-article :is(.article-share, .blog-engagement, .engagement-jump, .after-article, .story-foot) { display: none!important; }
+  body.blog-article :is(.longform-cover, .story-cover, .article-cover, .bhangaha-post-cover) img { box-shadow: none; }
+}
