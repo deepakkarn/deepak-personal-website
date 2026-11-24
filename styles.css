@@ -281,12 +281,3 @@ html[lang="en"] .name-en{font-family:'Noto Sans Devanagari',sans-serif;letter-sp
   .home-connect-jump{transition:none}
   .home-connect-jump:hover{transform:none}
 }
-
-
-/* Quiet, accessible homepage export action. Printing styles live in print.css. */
-.print-pdf-button{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:48px;padding:12px 18px;border:1px solid rgba(32,40,40,.12);border-radius:999px;background:var(--paper-2);color:var(--ink);font-size:13px;font-weight:700;line-height:1.4;cursor:pointer;transition:background .2s ease,border-color .2s ease}
-.print-pdf-button .bi{font-size:16px;line-height:1}
-.print-pdf-button:hover{background:#ebe1d4;border-color:rgba(32,40,40,.24)}
-.print-pdf-button:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
-@media(max-width:700px){.print-pdf-button{width:100%}}
-@media(prefers-reduced-motion:reduce){.print-pdf-button{transition:none}}
