@@ -13,7 +13,7 @@ const content = {
     heroSubtitle: 'इन्जिनियर · लेखक · जिम्मेवारी र अर्थपूर्ण काममा विश्वास गर्ने व्यक्ति',
     heroIntro: 'समस्या बुझ्ने, मानिसका कुरा सुन्ने र जहाँ सक्छु त्यहाँ सकारात्मक कामतर्फ अघि बढ्ने मेरो प्रयास जारी छ।',
     pill1: 'Engineer', pill2: 'Writer @ LifeOfQA', pill3: 'Bhangaha Ward No. 2', pill4: 'People • Dialogue • Action',
-    discover: 'मेरो बारेमा थप जान्नुहोस्', connectShort: 'सम्पर्क',
+    discover: 'मेरो बारेमा थप जान्नुहोस्', connectShort: 'सम्पर्क', connectJumpAria: 'सम्पर्क खण्डमा जानुहोस्',
     identityLine: 'भंगाहा नगरपालिका · वडा नं. २ · महोत्तरी, मधेश प्रदेश, नेपाल',
     portraitAlt: 'दीपक कुमार कर्णको मुख्य तस्वीर',
     aboutPhotoAlt: 'कालो कुर्ता र परम्परागत गम्छामा बसेका दीपक कुमार कर्ण',
@@ -74,7 +74,7 @@ const content = {
     heroSubtitle: 'Engineer · Writer · Guided by responsibility and meaningful work',
     heroIntro: 'I keep trying to understand problems carefully, listen to people, and move toward positive, practical work wherever I can.',
     pill1: 'Engineer', pill2: 'Writer @ LifeOfQA', pill3: 'Bhangaha Ward No. 2', pill4: 'People • Dialogue • Action',
-    discover: 'Learn more about me', connectShort: 'Connect',
+    discover: 'Learn more about me', connectShort: 'Connect', connectJumpAria: 'Jump to Connect section',
     identityLine: 'Bhangaha Municipality · Ward No. 2 · Mahottari, Madhesh Province, Nepal',
     portraitAlt: 'Main portrait of Deepak Kumar Karn',
     aboutPhotoAlt: 'Deepak Kumar Karn seated in a black kurta with a traditional scarf',
@@ -128,6 +128,8 @@ const label = document.getElementById('language-label');
 const menu = document.getElementById('menu-toggle');
 const mobile = document.getElementById('mobile-nav');
 const heading = document.getElementById('hero-title');
+const connectJump = document.getElementById('home-connect-jump');
+const connectSection = document.getElementById('connect');
 
 function setLanguage(lang) {
   const dict = content[lang];
@@ -149,6 +151,8 @@ function setLanguage(lang) {
   label.textContent = lang === 'ne' ? 'EN' : 'ने';
   toggle.setAttribute('aria-pressed', String(lang === 'ne'));
   toggle.setAttribute('aria-label', lang === 'ne' ? 'Switch to English' : 'नेपालीमा परिवर्तन गर्नुहोस्');
+  connectJump?.setAttribute('aria-label', dict.connectJumpAria);
+  connectJump?.setAttribute('title', dict.connectJumpAria);
   syncName();
   document.dispatchEvent(new CustomEvent('dk:languagechange', { detail: { language: lang } }));
   try { localStorage.setItem('dk-language', lang); } catch (e) {}
@@ -199,6 +203,37 @@ document.querySelectorAll('a.wordmark[href="#page-top"], a.footer-name[href="#pa
 
 document.getElementById('year').textContent = new Date().getFullYear();
 
+// Fixed Connect shortcut: available from the hero onward and disappears when
+// the Connect section enters view, without covering its links or the footer.
+if (connectJump && connectSection) {
+  let shortcutFramePending = false;
+  function updateConnectJump() {
+    shortcutFramePending = false;
+    const sectionTop = connectSection.getBoundingClientRect().top;
+    connectJump.hidden = sectionTop <= window.innerHeight - 88 || !mobile.hidden;
+  }
+  function queueConnectJump() {
+    if (shortcutFramePending) return;
+    shortcutFramePending = true;
+    window.requestAnimationFrame(updateConnectJump);
+  }
+  connectJump.addEventListener('click', event => {
+    event.preventDefault();
+    const targetHeading = connectSection.querySelector('h2');
+    if (targetHeading) {
+      targetHeading.tabIndex = -1;
+      targetHeading.focus({ preventScroll: true });
+    }
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    connectSection.scrollIntoView({ block: 'start', behavior: reduceMotion ? 'auto' : 'smooth' });
+    queueConnectJump();
+  });
+  window.addEventListener('scroll', queueConnectJump, { passive: true });
+  window.addEventListener('resize', queueConnectJump);
+  window.addEventListener('load', queueConnectJump);
+  menu.addEventListener('click', queueConnectJump);
+  queueConnectJump();
+}
 
 const bandPhotos = Array.from(document.querySelectorAll('.band-photo:not([aria-hidden="true"])'));
 const lightbox = document.getElementById('lightbox');
