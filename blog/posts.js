@@ -15,6 +15,21 @@
  */
 window.DK_BLOG_POSTS = [
   {
+    url: 'posts/bhangaha-population-analysis.html',
+    date: '2026-11-24',
+    image: 'assets/deepak-blog-portrait.avif',
+    category: { ne: 'अनुसन्धान · तथ्याङ्क', en: 'Research · Demographics' },
+    title: {
+      ne: 'तथ्याङ्कमा भंगाहा: जनसंख्या, समाज र आर्थिक अवस्था',
+      en: 'Bhangaha in Numbers: Population, Society & Socioeconomic Insights'
+    },
+    excerpt: {
+      ne: '२०२१ को जनगणनाबाट नौ वडाको जनसंख्या, साक्षरता, रोजगारी र बसाइँसराइ बुझ्ने प्रयास। २०२३ को गरिबी अनुमान र स्पष्ट छुट्याइएका २०२६ परिदृश्यसहित।',
+      en: 'An evidence-based exploration of population, nine wards, literacy, livelihoods and migration, with the 2023 poverty estimate and separately labelled 2026 scenarios.'
+    }
+  },
+
+  {
     url: 'posts/vidyalaya-chha-tara-sikne-batawaran-kasto-chha.html',
     date: '2026-11-21',
     image: 'assets/vidyalaya-sikai-cover.avif',
