@@ -492,3 +492,29 @@ body.bhangaha-article{margin:0;background:#fbf7f0;color:#25332f;font-family:'Not
   }
   .bhangaha-article .article-body .section-head > h2 { font-size: 28px; }
 }
+
+
+/* Uploaded Bhangaha thumbnail: same cover rhythm as other long-form posts. */
+.bhangaha-article .bhangaha-post-cover.reading-wrap {
+  width: min(1100px, calc(100% - var(--article-reading-gutter) - var(--article-reading-gutter)));
+  margin: 46px auto 0;
+}
+.bhangaha-article .bhangaha-post-cover img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1279 / 720;
+  border-radius: 24px;
+  background: #0a303b;
+  box-shadow: 0 16px 48px rgba(25,36,36,.1);
+}
+.bhangaha-article .bhangaha-post-cover + .intro.reading-col { margin-top: 38px; }
+@media (max-width:700px) {
+  .bhangaha-article .bhangaha-post-cover.reading-wrap { margin-top: 35px; }
+  .bhangaha-article .bhangaha-post-cover img { border-radius: 16px; }
+  .bhangaha-article .bhangaha-post-cover + .intro.reading-col { margin-top: 34px; }
+}
+@media print {
+  .bhangaha-article .bhangaha-post-cover.reading-wrap { width: 100%; margin: 20px auto; }
+  .bhangaha-article .bhangaha-post-cover img { box-shadow: none; }
+}
