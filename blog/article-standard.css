@@ -389,3 +389,76 @@ body.blog-article .longform .prose h3 {
   body.blog-article .longform .prose h2 { margin-top: 60px; }
   body.blog-article .longform .prose h3 { margin-top: 34px; font-size: 22px; }
 }
+
+
+/* 2026-11-24 | Bhangaha content-column correction.
+   The overview had 1100px KPI/contents and analysis wrappers, a 990px
+   Data Explorer, and 790px paragraphs. Although centered individually,
+   this made their left/right edges zigzag through the article.
+   Keep the feature cover / masthead wide (same as other posts), but align
+   EVERY component below the cover to the same 790px reading measure.
+   The Explorer's own data tables retain local horizontal scrolling.
+   These selectors intentionally override older page-specific layout rules. */
+body.blog-article.bhangaha-article main > .reading-wrap:not(.article-mast):not(.bhangaha-post-cover),
+body.blog-article.bhangaha-article main > .intro.reading-col,
+body.blog-article.bhangaha-article main > .article-body.reading-wrap {
+  box-sizing: border-box;
+  width: min(var(--blog-reading), calc(100% - var(--blog-gutter) - var(--blog-gutter)));
+  max-width: none;
+  margin-left: auto;
+  margin-right: auto;
+}
+body.blog-article.bhangaha-article .article-body > section,
+body.blog-article.bhangaha-article .article-body .section-head,
+body.blog-article.bhangaha-article .article-body .section-paragraph,
+body.blog-article.bhangaha-article .article-body .figure,
+body.blog-article.bhangaha-article .article-body .insight,
+body.blog-article.bhangaha-article .article-body .note-last,
+body.blog-article.bhangaha-article main > .reading-wrap .dx-explorer {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+body.blog-article.bhangaha-article main > .reading-wrap .kpi-grid,
+body.blog-article.bhangaha-article main > .reading-wrap .contents,
+body.blog-article.bhangaha-article main > .reading-wrap .key-context {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
+}
+body.blog-article.bhangaha-article .article-body .section-head > h2 {
+  font-family: 'Noto Sans Devanagari', sans-serif;
+  font-size: clamp(27px, 3vw, 37px);
+  line-height: 1.48;
+  letter-spacing: -.025em;
+}
+body.blog-article.bhangaha-article .article-body .section-paragraph > p {
+  font-family: 'Noto Sans Devanagari', sans-serif;
+  font-size: clamp(17px, 1.65vw, 19px);
+  line-height: 2.05;
+  margin: 0 0 27px;
+}
+body.blog-article.bhangaha-article .article-body .figure .figure-head,
+body.blog-article.bhangaha-article .article-body .figure .simple-bars,
+body.blog-article.bhangaha-article .article-body .figure .compare-grid,
+body.blog-article.bhangaha-article .dx-shell {
+  min-width: 0;
+  max-width: 100%;
+}
+body.blog-article.bhangaha-article .dx-table-scroll,
+body.blog-article.bhangaha-article .simple-table-wrap {
+  max-width: 100%;
+  overflow-x: auto;
+}
+@media (max-width: 700px) {
+  body.blog-article.bhangaha-article .article-body .section-head > h2 {
+    font-size: 28px;
+  }
+  body.blog-article.bhangaha-article .article-body .section-paragraph > p {
+    font-size: 17px;
+    line-height: 1.95;
+    margin-bottom: 24px;
+  }
+}
