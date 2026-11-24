@@ -6,7 +6,7 @@ subject or whether the article includes data charts, photos or long-form text.
 
 ## Single source of truth for visual layout
 
-**Shared CSS:** `/blog/article-standard.css` (load LAST in the article's `<head>`). Current version query: `?v=20261124-design-system3`; bump this in every article and template after editing the shared CSS.
+**Shared CSS:** `/blog/article-standard.css` (load LAST in the article's `<head>`). Current version query: `?v=20261124-design-system4`; bump this in every article and template after editing the shared CSS.
 
 Published article `<body>` must have `class="blog-article"`. An article may
 keep a second specialized class, e.g. `class="blog-article bhangaha-article"`.
@@ -47,7 +47,7 @@ Keep, in this order:
 2. `← सबै लेखहरू`, subdued category, title, optional deck, author/date/type.
 3. Optional user-provided featured cover (natural photo, no unrelated stock).
 4. `<article>` with readable body sections and optional meaningful figures.
-5. Shared expandable share menu (`share.css` / `share.js`).
+5. Shared expandable share menu and **PDF / प्रिन्ट** export (`share.css` / `share.js`).
 6. Shared Like/Comment area (`engagement.css` / `engagement.js`).
 7. `← अरू लेखहरू` and `मुख्य पृष्ठ` navigation.
 8. Standard footer (brand, Blog, copyright).
@@ -58,6 +58,36 @@ published post are implemented. Homepage language preferences and Blog
 listing bilingual metadata are separate features; current published article
 bodies remain in Nepali.
 
+
+## PDF / Print on every article (mandatory)
+
+Every published article, including articles created from the starter template,
+loads the versioned shared `share.js` and `share.css` assets
+(`?v=20261124-article-pdf1`). These automatically add a
+**PDF / प्रिन्ट** button beside the standard Share button at the end
+of the article. **Do not implement a separate PDF handler in each post.**
+
+The button calls the browser's native print dialog. Readers choose **Save as
+PDF** as the printer/destination. This generates a PDF locally through the
+browser; it is **not** a direct-download PDF endpoint or a third-party service.
+The main homepage intentionally has no PDF action.
+
+The shared LAST stylesheet (`article-standard.css`) provides A4 print
+formatting, legible Nepali typography, original headline, author/date, cover,
+text, source links and supporting images. Hide navigation, sharing UI, reaction
+controls and comments in the PDF. Preserve actual article content and citations.
+
+For **Bhangaha population analysis**, PDF output must include all nine Data
+Explorer panels, not just the active on-screen tab. Print all ward rows,
+open detailed data tables temporarily, and restore the visitor's selected ward
+and closed details when printing ends. Never turn 2026 scenarios into official
+figures or drop source limitations. Keep data tables inside the A4 page.
+
+When updating the print/share functionality, change the shared files, bump
+their query versions in all five posts plus the template, then run the
+regression script. Test browser print preview on both a regular essay and the
+population analysis, and check long-table pagination in a real PDF before
+claiming visual verification.
 
 ## Universal floating buttons (mandatory)
 
@@ -128,7 +158,7 @@ This checks consistent article classes/styles/links and a few critical data coun
 - `/PROJECT_CONTEXT.md`: long-term project handoff, decisions and history.
 - `/blog/article-standard.css`: the canonical design system.
 - `/blog/posts/_template.html`: the starter for every new published post.
-- `/blog/share.css`, `/blog/share.js`: sharing controls.
+- `/blog/share.css`, `/blog/share.js`: sharing and article PDF action.
 - `/blog/engagement.css`, `/blog/engagement.js`: reader reactions.
 - `/blog/posts.js`: list and card metadata.
 
