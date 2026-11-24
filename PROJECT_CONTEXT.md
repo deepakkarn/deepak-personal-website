@@ -5,7 +5,7 @@
 > Last reviewed: 2026-11-24  
 > Repository: https://github.com/deepakkarn/deepak-personal-website  
 > Default branch: `main`  
-> Latest commit reviewed: `5fcef025b2d0ca12a1d374d4f0af1cb892843021`
+> Latest commit reviewed: `ca03a8b633ba5e8ca2499ff13b3a56c20ba4f154`
 
 ## 1. Project purpose
 
