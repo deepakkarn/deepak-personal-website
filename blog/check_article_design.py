@@ -21,6 +21,7 @@ POST_NAMES = (
     "rsp-naya-netritwa.html",
 )
 VERSION = "20261124-design-system3"
+FLOATING_VERSION = "20261124-floating-nav2"
 
 
 def check(condition: bool, message: str, failures: list[str]) -> None:
@@ -65,6 +66,12 @@ def inspect_page(filename: str, failures: list[str]) -> None:
         closes = len(re.findall(rf"</{tag}>", html))
         check(opens == closes, note + f"unbalanced {tag} tags", failures)
     check("article-language-switch" not in html, note + "one-off translation control", failures)
+    check(("engagement.css?v=" + FLOATING_VERSION) in html,
+          note + "outdated shared floating navigation CSS", failures)
+    check(("engagement.js?v=" + FLOATING_VERSION) in html,
+          note + "outdated shared floating navigation JavaScript", failures)
+    check('id="back-to-top"' not in html,
+          note + "obsolete article-only Up button would duplicate shared control", failures)
     if filename == "bhangaha-population-analysis.html":
         check(len(re.findall(r'data-dx-tab=', html)) == 9, note + "expected 9 data tabs", failures)
         check(len(re.findall(r'data-dx-panel=', html)) == 9, note + "expected 9 data panels", failures)
@@ -96,6 +103,31 @@ def main() -> int:
               "Bhangaha unified content-column rule missing: " + selector, failures)
     check("Bhangaha content-column correction" in stylesheet,
           "Bhangaha column regression fix was removed", failures)
+
+    engagement_js = read("blog/engagement.js")
+    engagement_css = read("blog/engagement.css")
+    check(engagement_css.count("{") == engagement_css.count("}"),
+          "blog/engagement.css has unbalanced braces", failures)
+    for token in (
+        "backToTop.hidden = window.scrollY < 320",
+        "jumpLink.hidden = reactionsTop <= window.innerHeight - 72",
+        "floatingActions.append(backToTop, jumpLink)",
+        "window.addEventListener('scroll', queueFloatingActions",
+        "window.addEventListener('pageshow', queueFloatingActions",
+    ):
+        check(token in engagement_js,
+              "shared floating button JS missing: " + token, failures)
+    for token in (
+        "body.blog-article .blog-floating-actions",
+        "flex-direction: column",
+        "body.blog-article .blog-floating-actions .engagement-jump-label",
+        "background: #253d34",
+        "color: #fff",
+        "body.blog-article .blog-floating-actions .blog-back-to-top",
+        ".blog-floating-actions[hidden]",
+    ):
+        check(token in engagement_css,
+              "shared floating button CSS missing: " + token, failures)
 
     for filename in POST_NAMES:
         inspect_page(filename, failures)
