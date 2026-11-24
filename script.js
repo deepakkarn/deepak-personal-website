@@ -49,8 +49,6 @@ const content = {
     work2Desc: 'testing, जिज्ञासा र practical thinking बारे लेख्ने मेरो व्यक्तिगत मंच।',
     work3Title: 'समुदायसँग संवाद', work3Desc: 'स्थानीय आवश्यकता, सार्वजनिक सेवा र मानिसका अनुभवलाई नजिकबाट बुझ्ने चासो।',
     momentsLabel: 'केही झलक',
-    personalMomentsLabel: 'केही व्यक्तिगत झलक',
-    personalMomentsHint: 'तस्वीर ठूलो गरी हेर्न थिच्नुहोस्',
     personalEveningAlt: 'साँझको उज्यालोमा काठको घरअगाडि उभिएको दीपक कर्णको तस्वीर',
     personalPortraitAlt: 'पुरानो भित्ताको अगाडि उभिएको दीपक कर्णको तस्वीर',
     commAlt1: 'जुलुस तथा सामुदायिक कार्यक्रममा सहभागी हुँदै',
@@ -114,8 +112,6 @@ const content = {
     work2Desc: 'My personal space for writing about testing, curiosity and practical thinking.',
     work3Title: 'Conversations with community', work3Desc: 'An ongoing interest in understanding local needs, public services and lived experiences closely.',
     momentsLabel: 'A few moments',
-    personalMomentsLabel: 'A few personal frames',
-    personalMomentsHint: 'Select a photo to view it larger',
     personalEveningAlt: 'Deepak Karn in evening light beside a wooden building',
     personalPortraitAlt: 'Deepak Karn standing in front of a weathered wall',
     commAlt1: 'Taking part in a local procession and community event',
@@ -153,6 +149,10 @@ function setLanguage(lang) {
   document.querySelectorAll('[data-i18n-alt]').forEach(el => {
     const value = dict[el.dataset.i18nAlt];
     if (value !== undefined) el.alt = value;
+  });
+  document.querySelectorAll('[data-i18n-aria-label]').forEach(el => {
+    const value = dict[el.dataset.i18nAriaLabel];
+    if (value !== undefined) el.setAttribute('aria-label', value);
   });
   label.textContent = lang === 'ne' ? 'EN' : 'ने';
   toggle.setAttribute('aria-pressed', String(lang === 'ne'));
