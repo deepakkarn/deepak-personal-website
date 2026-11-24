@@ -12,7 +12,7 @@ the site.
 - Publishing and regression rules: **[blog/README.md](blog/README.md)**.
 - Starter for every new article: **[blog/posts/_template.html](blog/posts/_template.html)**.
 - Published pages MUST use `body.blog-article` and load
-  `/blog/article-standard.css?v=20261124-design-system2` **LAST**.
+  `/blog/article-standard.css?v=20261124-design-system3` **LAST**.
 - Keep the same DK/Blog header, 1100px hero, 790px reading column, balanced
   side gutters, warm colors, typography, image treatment, sharing, comments,
   article navigation and footer. On phones (320–430px), left/right margins
@@ -33,3 +33,5 @@ a shared design system. The detailed decisions and previous work are in
 
 This is a pointer, not a duplicate project specification. Maintain the
 canonical context and Blog README for future changes.
+
+**Bhangaha-specific verified layout fix (2026-11-24):** Bhangaha's KPI cards, TOC, Data Explorer and every analysis figure/section all use a 790px centered reading measure now. ONLY the hero/featured image stays wide. See the `Bhangaha content-column correction` block in `blog/article-standard.css`. Avoid reintroducing 1100px wrappers or 990px chart cards, even if each alone is centered.
