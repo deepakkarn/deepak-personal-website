@@ -35,3 +35,14 @@ This is a pointer, not a duplicate project specification. Maintain the
 canonical context and Blog README for future changes.
 
 **Bhangaha-specific verified layout fix (2026-11-24):** Bhangaha's KPI cards, TOC, Data Explorer and every analysis figure/section all use a 790px centered reading measure now. ONLY the hero/featured image stays wide. See the `Bhangaha content-column correction` block in `blog/article-standard.css`. Avoid reintroducing 1100px wrappers or 990px chart cards, even if each alone is centered.
+
+## Required floating navigation on all Blog posts
+
+**Hard rule (24 November 2026):** Every published article (and `blog/posts/_template.html`) must load `blog/engagement.css` and `blog/engagement.js` with `?v=20261124-floating-nav2`. These files, **not individual post scripts**, own the persistent floating controls:
+- A high-contrast dark-green ↑ button with white icon, visible whenever readers scroll more than 320px, including all article sections and past the Like/Comments area.
+- A clearly readable `प्रतिक्रिया ↓` shortcut, visible until the Like/Comments section enters view; on narrow phones this becomes an accessible ↓ icon.
+- Both are stacked together at bottom-right with safe-area spacing, keyboard focus styles and reduced-motion support. **No overlap, low-contrast text, or separate custom `#back-to-top` buttons.**
+- All five current posts and the template have been updated. The Bhangaha-only duplicate handler, DOM button and styles have been removed.
+- Update `blog/check_article_design.py` and run it for changes. The canonical implementation and history are in `PROJECT_CONTEXT.md` and `blog/README.md`. Don't add a page-only floating shortcut or forget its CSS/JS version on other pages.
+- Only code/scroll simulations are currently verified; live Cloudflare/mobile visual verification is still required.
+
