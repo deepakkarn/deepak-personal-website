@@ -341,3 +341,38 @@ body.bhangaha-article{margin:0;background:#fbf7f0;color:#25332f;font-family:'Not
  .bhangaha-article .dx-table-scroll,.bhangaha-article .dx-reference-list{max-height:none;overflow:visible}
  .bhangaha-article .dx-reference-list{max-height:none}
 }
+
+
+/* 2026-11-24: align the standalone introduction with article/KPI gutters on every viewport.
+   Unlike .reading-wrap, .intro is a direct child of <main>, so max-width alone
+   previously left text flush to the screen edge on phones. */
+.bhangaha-article .intro.reading-col {
+  box-sizing: border-box;
+  width: min(790px, calc(100% - 56px));
+  max-width: 790px;
+  margin: 25px auto 0;
+}
+.bhangaha-article .article-mast.reading-wrap,
+.bhangaha-article main > .reading-wrap,
+.bhangaha-article .article-body.reading-wrap,
+.bhangaha-article .article-footer .reading-wrap {
+  box-sizing: border-box;
+}
+.bhangaha-article .article-body .section-head,
+.bhangaha-article .article-body .section-paragraph,
+.bhangaha-article .article-body .insight,
+.bhangaha-article .article-body .note-last,
+.bhangaha-article .figure,
+.bhangaha-article .dx-explorer {
+  min-width: 0;
+}
+.bhangaha-article .dx-shell, .bhangaha-article .dx-panels,
+.bhangaha-article .dx-panel, .bhangaha-article .figure {
+  max-width: 100%;
+}
+@media (max-width: 800px) {
+  .bhangaha-article .intro.reading-col { width: calc(100% - 42px); }
+}
+@media (max-width: 550px) {
+  .bhangaha-article .intro.reading-col { width: calc(100% - 34px); }
+}
