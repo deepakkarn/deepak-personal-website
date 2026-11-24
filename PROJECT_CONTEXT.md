@@ -5,7 +5,26 @@
 > Last reviewed: 2026-11-24  
 > Repository: https://github.com/deepakkarn/deepak-personal-website  
 > Default branch: `main`  
-> Latest commit reviewed: `224d8b29bc857b384e928f8d27ade08546308055`
+> Latest commit reviewed: `37042338353f887e44969007c3432aaa8824eb3c`
+
+## 0. MANDATORY BLOG DESIGN RULE (read before any article change)
+
+**User confirmed on 24 November 2026 that every published blog article must have the same layout, theme, typography, header, footers and mobile reading margins. This is a hard requirement, not a styling suggestion.**
+
+- The **single source of truth** is `/blog/article-standard.css`, currently referenced as `?v=20261124-design-system2`. It MUST be the **last stylesheet loaded** on every published post (after any per-page CSS).
+- Every published article uses `<body class="blog-article">` (or `class="blog-article bhangaha-article"` when specialized data components exist).
+- New posts **MUST** start from the rewritten `/blog/posts/_template.html`, NOT fresh ad-hoc HTML. Read `/blog/README.md` for the complete publishing contract/checklist.
+- Unified design: warm paper `#fbf7f0`, deep green-black typography, subtle warm brown accents, Noto Sans Devanagari / DM Sans, 1100px hero/cover, **790px centered prose**, consistent section rhythm; side gutter `clamp(28px,7vw,62px)` desktop, `clamp(27px,7vw,36px)` mobile.
+- Shared article anatomy: global DK header with `← BLOG`, `← सबै लेखहरू`, neutral category, large heading, optional subtitle, author/date/type, optional real cover, reading-column text, shared expandable Share menu, shared Like/Comments, `← अरू लेखहरू` / `मुख्य पृष्ठ`, standard footer.
+- Specialized content (Bhangaha demographics data tables/charts, Shreenagar photographs/split layouts) may keep distinct visualizations, **but cannot change the overall layout or theme**. Bhangaha chart cards should align to the 790px reading width, not extend to 990px next to narrower paragraphs. Prevent page-wide overflow; keep table overflow inside scrollable containers.
+- The Shreenagar article had a real centering regression because a paragraph rule reset `margin-inline:auto`. Protect `.story-section > p { margin-inline:auto; }` and identical mobile gutters. It now uses the same common header, category styling, photo width, narrative typography and end links as other articles.
+- All five public articles have been attached to the same design sheet: `bhangaha-population-analysis.html`, `vidyalaya-chha-tara-sikne-batawaran-kasto-chha.html`, `eutai-palika-dui-nirwachan-kshetra.html`, `shreenagar-tin-mudha-ek-khola.html`, `rsp-naya-netritwa.html`. The obsolete `_template.html` was replaced; do not revert it.
+- **Any future design change:** fix the shared CSS once, update its cache version in ALL affected articles and the template, then regression-check **every post**, not just the one requested.
+- Do not add a unique per-post English/Nepali toggle; published body text is Nepali-only until an actual site-wide full translation system is designed. Homepage/Blog listing language switch is separate.
+- QA viewport matrix: **320, 375, 390, 430, 768, 1024, 1440px**, check full-page horizontal overflow, equal horizontal gutters, centered content, legible headings and chart labels, image cropping, share/comments, links, table scrolling, contrast and keyboard navigation. Preserve content and references.
+- GitHub source/static tests were run on 24 November 2026: five posts + template each import shared style last; duplicate IDs 0, broken internal anchors 0, structural tag imbalance 0, sharing/comments/navigation present. Shared CSS braces matched; Bhangaha nine tabs and ten references intact. **Live Cloudflare page and real-device screenshot verification could not be completed from the available tools. Never claim it has been completed.**
+
+**Canonical instructions:** `blog/README.md` + `blog/article-standard.css` + `blog/posts/_template.html`. Read these and inspect existing posts BEFORE editing, even for small fixes. No standalone reinvention of the article format.
 
 ## 1. Project purpose
 
@@ -261,3 +280,14 @@ User requested strict consistency of English/Nepali switching across all publish
 - Changed `blog/posts/bhangaha-population-analysis.html` to use EXACT same canonical footer structure (normalized markup comparison PASS) with expandable Share this article menu: Facebook, WhatsApp, LinkedIn, Copy, native share, followed by existing Like/Comment shared component and `← अरू लेखहरू` / `मुख्य पृष्ठ` navigation. Standard footer brand / Blog links retained and normalized to original standard.
 - Added `/blog/share.css` and `/blog/share.js` imports and Bootstrap icons CDN already used by school post, scoped footer layout tweaks in `blog/posts/bhangaha-population-analysis.css`, and removed obsolete custom share code in `bhangaha-population-analysis.js`. Cache query versions set to `20261124-standard-footer1` for updated assets.
 - QA: 15/15 static checks PASS for markup matching, standard assets, sharing controls, reactions, nav, balanced HTML, IDs, source links, CSS and JS. Existing 9 data tabs, 10 official citations, Blog catalog and canonical URL intact. Live domain inaccessible through web fetch; deployment rendering not independently verified. Do not create one-off footer share designs in future Blog posts; use the existing shared components.
+
+### 2026-11-24: All five Blog posts normalized to one shared editorial design system
+
+- User supplied screenshot of Bhangaha charts and explicit links to the election-area, school, Shreenagar and RSP posts, stating all Blog posts must visually match and Shreenagar also had margin issues.
+- Root cause identified: the five pages had **four independent article layout systems**, plus repeated Bhangaha-specific CSS patches and a stale Blog template. A past Shreenagar `margin:0 0 25px` override caused non-centered paragraph blocks. Bhangaha chart cards were up to 990px while text ran at 790px, creating the visually inconsistent widths shown in screenshots.
+- Implemented `blog/article-standard.css` as the long-term shared source of truth, imported LAST on all five articles and `blog/posts/_template.html` with `body.blog-article` class; final cache key `20261124-design-system2`. Applied same title/category/byline/deck, cover width, centered reading body, responsive gutters, paragraph and heading scale, data visual alignment, footer and navigation.
+- Preserved essential differences: Shreenagar photo/text layout, Bhangaha's nine-topic Data Explorer, official figures, ten citations, charts and authorship; school and election articles' contents; RSP article text. Harmonized RSP and Shreenagar end nav labels to `← अरू लेखहरू` and `मुख्य पृष्ठ`.
+- Updated `blog/posts/_template.html` to reusable standard header, article, sharing, reactions and footer. Rewrote `blog/README.md` with publishing checklist and concrete visual QA criteria.
+- Regression checks: all five articles and template use one common last stylesheet, correct body class, common Share / Like / Comment / navigation, zero duplicate IDs or broken hash anchors, semantically balanced major HTML tags, common CSS balanced braces, Bhangaha nine topic tabs and ten sources unchanged, JS syntax valid. Did not execute actual browser screenshots on Cloudflare; real device review remains unverified.
+- Future article authoring MUST reference the design contract above and never duplicate a per-page article design without explicit request.
+
