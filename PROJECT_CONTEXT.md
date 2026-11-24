@@ -5,7 +5,7 @@
 > Last reviewed: 2026-11-24  
 > Repository: https://github.com/deepakkarn/deepak-personal-website  
 > Default branch: `main`  
-> Latest commit reviewed: `37042338353f887e44969007c3432aaa8824eb3c`
+> Latest revision: follow the current `main` branch (do not rely on a stale pinned SHA)
 
 ## 0. MANDATORY BLOG DESIGN RULE (read before any article change)
 
@@ -21,6 +21,7 @@
 - All five public articles have been attached to the same design sheet: `bhangaha-population-analysis.html`, `vidyalaya-chha-tara-sikne-batawaran-kasto-chha.html`, `eutai-palika-dui-nirwachan-kshetra.html`, `shreenagar-tin-mudha-ek-khola.html`, `rsp-naya-netritwa.html`. The obsolete `_template.html` was replaced; do not revert it.
 - **Any future design change:** fix the shared CSS once, update its cache version in ALL affected articles and the template, then regression-check **every post**, not just the one requested.
 - Do not add a unique per-post English/Nepali toggle; published body text is Nepali-only until an actual site-wide full translation system is designed. Homepage/Blog listing language switch is separate.
+- Automated static regression guard: run `python3 blog/check_article_design.py` from the repository root whenever changing any published post or its stylesheet. This command is documented in `blog/README.md`; it is a source validation aid, not a substitute for real responsive/browser screenshots.
 - QA viewport matrix: **320, 375, 390, 430, 768, 1024, 1440px**, check full-page horizontal overflow, equal horizontal gutters, centered content, legible headings and chart labels, image cropping, share/comments, links, table scrolling, contrast and keyboard navigation. Preserve content and references.
 - GitHub source/static tests were run on 24 November 2026: five posts + template each import shared style last; duplicate IDs 0, broken internal anchors 0, structural tag imbalance 0, sharing/comments/navigation present. Shared CSS braces matched; Bhangaha nine tabs and ten references intact. **Live Cloudflare page and real-device screenshot verification could not be completed from the available tools. Never claim it has been completed.**
 
