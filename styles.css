@@ -243,3 +243,39 @@ html[lang="en"] .name-en{font-family:'Noto Sans Devanagari',sans-serif;letter-sp
   .perspective-kicker{font-size:10px}
 }
 @media(prefers-reduced-motion:reduce){.perspective-link{scroll-behavior:auto}}
+
+
+/* Light-touch floating shortcut matching the article reactions jump. */
+#connect{scroll-margin-top:92px}
+.home-connect-jump{
+  position:fixed;right:24px;bottom:calc(26px + env(safe-area-inset-bottom));z-index:19;
+  display:inline-flex;align-items:center;justify-content:center;gap:11px;
+  min-height:49px;padding:8px 10px 8px 18px;border-radius:999px;
+  border:1px solid rgba(255,255,255,.16);background:#283e36;color:#fff;
+  font:700 12px/1.4 'Noto Sans Devanagari','DM Sans',sans-serif;
+  box-shadow:0 9px 28px rgba(25,45,36,.22);
+  transition:background .2s ease,transform .2s ease,box-shadow .2s ease;
+}
+.home-connect-jump[hidden],body.lightbox-open .home-connect-jump{display:none}
+.home-connect-jump:hover{color:#fff;background:#38594c;transform:translateY(-2px);box-shadow:0 12px 31px rgba(25,45,36,.26)}
+.home-connect-jump:focus-visible{outline:3px solid #b98766;outline-offset:4px}
+.home-connect-jump-arrow{
+  display:grid;place-items:center;width:29px;height:29px;
+  border-radius:50%;background:rgba(255,255,255,.16);
+  font:800 21px/1 'DM Sans',sans-serif;
+}
+#connect h2:focus-visible{outline:2px solid #dfb499;outline-offset:5px;border-radius:4px}
+@media(max-width:650px){
+  #connect{scroll-margin-top:78px}
+  .home-connect-jump{
+    right:calc(15px + env(safe-area-inset-right));
+    bottom:calc(18px + env(safe-area-inset-bottom));
+    min-height:47px;padding:7px 9px 7px 14px;gap:7px;
+    font-size:11px;
+  }
+  .home-connect-jump-arrow{width:27px;height:27px;font-size:21px}
+}
+@media(prefers-reduced-motion:reduce){
+  .home-connect-jump{transition:none}
+  .home-connect-jump:hover{transform:none}
+}
