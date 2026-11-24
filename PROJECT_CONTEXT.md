@@ -176,3 +176,11 @@ When returning to the project:
 ### Prompt to use in a new chat
 
 > Continue development of https://deepakkarn.com. The repository is `deepakkarn/deepak-personal-website` on `main`. Start by reading `PROJECT_CONTEXT.md`, checking the latest commits, and inspecting the relevant source code. Preserve the existing bilingual minimal-editorial design and features. Verify code and live behavior before making claims; make targeted changes and update the context file after major decisions.
+
+### 2026-11-24: Unlisted Bhangaha demographics dashboard web preview
+
+- At user's explicit request for the same direct-view link experience as prior unpublished articles, copied the data dashboard from branch `draft/bhangaha-population-dashboard-2026` to default branch under `unpublished/articles/k8m4r2t9v6n1x7p3q5z0c2b8/` (five files: index, CSS, JS, data JS, original Markdown report).
+- Review URL: `https://deepakkarn.com/unpublished/articles/k8m4r2t9v6n1x7p3q5z0c2b8/`. Static deployment through GitHub-to-Cloudflare pipeline is expected but NOT externally verified: available web/curl clients could not access `deepakkarn.com` in this environment. Do not assert it loads until checked in a user browser or via a working external check.
+- Homepage and Blog index/catalog were not modified. Preview retains `noindex` but this is **unlisted, not access-controlled/private**; anyone with URL may view.
+- Adjusted shared CSS, favicon and navigation to root-relative paths for 3-level unlisted route; verified all five files and fifteen tabs/twenty source cards in default-branch GitHub.
+- On user approval after peer review, migrate to regular `blog/posts/bhangaha-population-analysis/`, verify primary CSV rows, check browser interactions and print, update SEO metadata, then add Blog listing.
