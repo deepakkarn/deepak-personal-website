@@ -146,3 +146,33 @@
   .engagement-reply .engagement-reply-message{padding-left:0}
   .engagement-reply-edited{margin-left:0}
 }
+
+
+/* Discreet right-side shortcut to Like / Comments on long-form posts. */
+.blog-engagement{scroll-margin-top:90px}
+.engagement-header h2:focus-visible{outline:2px solid #9b6747;outline-offset:5px;border-radius:3px}
+.engagement-jump{
+  position:fixed;right:max(21px,env(safe-area-inset-right));
+  bottom:calc(26px + env(safe-area-inset-bottom));z-index:45;
+  display:inline-flex;gap:12px;align-items:center;justify-content:center;
+  min-height:49px;padding:8px 10px 8px 18px;
+  border:1px solid rgba(255,255,255,.16);border-radius:999px;
+  background:#283e36;color:#fff;text-decoration:none;
+  box-shadow:0 9px 28px rgba(25,45,36,.22);
+  font:700 12px/1.4 'Noto Sans Devanagari','DM Sans',sans-serif;
+  transition:background .2s ease,transform .2s ease,box-shadow .2s ease;
+}
+.engagement-jump[hidden]{display:none}
+.engagement-jump:hover{background:#38594c;color:#fff;transform:translateY(-2px);box-shadow:0 12px 31px rgba(25,45,36,.26)}
+.engagement-jump:focus-visible{outline:3px solid #b98766;outline-offset:4px}
+.engagement-jump-arrow{display:grid;place-items:center;width:29px;height:29px;border-radius:50%;background:rgba(255,255,255,.16);font:800 21px/1 'DM Sans',sans-serif}
+@media(max-width:650px){
+  .blog-engagement{scroll-margin-top:24px}
+  .engagement-jump{right:calc(15px + env(safe-area-inset-right));bottom:calc(18px + env(safe-area-inset-bottom));width:48px;height:48px;min-height:48px;padding:0;gap:0}
+  .engagement-jump-label{display:none}
+  .engagement-jump-arrow{width:35px;height:35px;font-size:24px;background:none}
+}
+@media(prefers-reduced-motion:reduce){
+  .engagement-jump{transition:none}
+  .engagement-jump:hover{transform:none}
+}
