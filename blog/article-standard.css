@@ -462,3 +462,121 @@ body.blog-article.bhangaha-article .simple-table-wrap {
     margin-bottom: 24px;
   }
 }
+
+
+/* Universal article PDF printing. Keep this in the LAST shared stylesheet,
+   so every post has identical print rules regardless of its topic. */
+@page { size: A4; margin: 16mm 14mm; }
+@media print {
+  html { scroll-behavior: auto!important; }
+  body.blog-article {
+    --blog-gutter: 0px;
+    background: #fff!important;
+    color: #1f2828!important;
+    font-size: 10pt!important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  body.blog-article :is(
+    .site-header, .mobile-nav, .skip-link, .article-footer, .story-footer,
+    .article-share, .blog-interaction-divider, .blog-engagement,
+    .blog-floating-actions, .engagement-jump, .after-article, .story-foot,
+    .share-menu, .share-status, .back-to-top
+  ) { display: none!important; }
+  body.blog-article main { width: 100%!important; max-width: none!important; margin: 0!important; padding: 0!important; }
+  body.blog-article main::before {
+    content: "Deepak Kumar Karn  ·  deepakkarn.com";
+    display: block;
+    border-bottom: 1px solid #c6cec5;
+    padding: 0 0 3mm;
+    margin: 0 0 7mm;
+    font: 700 9pt/1.5 'DM Sans','Noto Sans Devanagari',sans-serif;
+    letter-spacing: .03em;
+    color: #344a40;
+  }
+  body.blog-article :is(
+    .longform-head, .story-top, .article-header, .article-mast.reading-wrap,
+    .read-column, .reading-col, .reading-wrap, .prose, .story-content,
+    .story-intro, .story-section, .article-body, .section-paragraph,
+    .dx-explorer, .article-body .figure
+  ) { box-sizing: border-box!important; width: 100%!important; max-width: 100%!important; margin-inline: auto!important; }
+  body.blog-article :is(.longform-head, .story-top, .article-header, .article-mast.reading-wrap) {
+    padding: 0!important;
+    margin-top: 0!important;
+    margin-bottom: 5mm!important;
+  }
+  body.blog-article :is(.longform-head h1, .story-top h1, .article-header h1, .article-mast h1) {
+    font-size: 23pt!important;
+    line-height: 1.27!important;
+    margin-bottom: 3mm!important;
+    break-after: avoid-page;
+  }
+  body.blog-article :is(.longform-deck, .story-deck, .article-deck) {
+    font-size: 11pt!important;
+    line-height: 1.55!important;
+  }
+  body.blog-article :is(.longform-cover, .story-cover, .article-cover, .bhangaha-post-cover) {
+    box-sizing: border-box!important;
+    width: 100%!important;
+    max-width: 100%!important;
+    margin: 5mm auto 8mm!important;
+    break-inside: avoid-page;
+  }
+  body.blog-article :is(.longform-cover, .story-cover, .article-cover, .bhangaha-post-cover) img {
+    display: block;
+    width: 100%!important;
+    max-height: 110mm!important;
+    height: auto!important;
+    object-fit: contain!important;
+    box-shadow: none!important;
+    border-radius: 0!important;
+  }
+  body.blog-article :is(.prose p, .story-section p, .story-intro p, .article-body p, .intro p, .section-paragraph p) {
+    font-size: 10pt!important;
+    line-height: 1.65!important;
+    orphans: 3;
+    widows: 3;
+  }
+  body.blog-article :is(.prose h2, .story-section h2, .article-body h2, .section-head h2) {
+    font-size: 15pt!important;
+    line-height: 1.4!important;
+    break-after: avoid-page;
+  }
+  body.blog-article :is(.prose h3, .story-section h3, .article-body h3) {
+    break-after: avoid-page;
+  }
+  body.blog-article :is(.kpi, .insight, .compare-card, .story-photo, .source-note) {
+    box-shadow: none!important;
+    break-inside: avoid-page;
+  }
+  body.blog-article img { max-width: 100%!important; }
+  body.blog-article :is(.table-scroll, .simple-table-wrap, .dx-table-scroll, .dx-reference-list, .source-table-wrap) {
+    max-width: 100%!important;
+    max-height: none!important;
+    overflow: visible!important;
+  }
+  body.blog-article table { max-width: 100%!important; width: 100%!important; border-collapse: collapse!important; font-size: 8pt!important; }
+  body.blog-article th, body.blog-article td { overflow-wrap: anywhere!important; word-break: normal!important; }
+  body.blog-article thead { display: table-header-group; }
+  body.blog-article tr { break-inside: avoid-page; }
+  body.blog-article details.more-table { display: block!important; }
+  /* The data explorer is interactive on screen; a PDF must contain ALL 9 data panels. */
+  body.blog-article.bhangaha-article .dx-explorer { break-before: auto!important; margin-top: 5mm!important; }
+  body.blog-article.bhangaha-article .dx-panel,
+  body.blog-article.bhangaha-article .dx-panel[hidden],
+  body.blog-article.bhangaha-article .dx-panel[data-active="false"] {
+    display: block!important;
+    visibility: visible!important;
+    min-height: 0!important;
+    break-inside: auto!important;
+    page-break-inside: auto!important;
+    margin: 5mm 0!important;
+    padding: 3mm 0!important;
+    border-bottom: 1px solid #d3ddd4!important;
+  }
+  body.blog-article.bhangaha-article [data-ward-row][hidden] { display: table-row!important; }
+  body.blog-article.bhangaha-article .dx-tab-controls,
+  body.blog-article.bhangaha-article .dx-scroll-button,
+  body.blog-article.bhangaha-article .dx-ward-controls { display: none!important; }
+  body.blog-article.bhangaha-article .dx-panel :is(h3, h4) { break-after: avoid-page; }
+}
