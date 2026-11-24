@@ -370,3 +370,22 @@ body.blog-article.bhangaha-article .figure .bar-row {
   body.blog-article.bhangaha-article .figure .bar-value { font-size: 12px; }
   body.blog-article.bhangaha-article .figure figcaption { font-size: 12px; }
 }
+
+
+/* Standard long-form narrative headings. The reusable article template relies
+   on these, instead of embedding another unique set of section rules. */
+body.blog-article .longform .prose h2 {
+  margin: 72px 0 29px;
+  padding-top: 28px;
+  border-top: 1px solid #ded4c8;
+  scroll-margin-top: 110px;
+}
+body.blog-article .longform .prose h3 {
+  margin: 46px 0 18px;
+  font-size: clamp(21px, 2.1vw, 26px);
+  line-height: 1.5;
+}
+@media (max-width: 700px) {
+  body.blog-article .longform .prose h2 { margin-top: 60px; }
+  body.blog-article .longform .prose h3 { margin-top: 34px; font-size: 22px; }
+}
