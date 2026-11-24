@@ -34,10 +34,23 @@
       <p class="engagement-submit-status" role="status" aria-live="polite"></p>
     </form>`;
 
-  // A small, fixed shortcut for long-form readers to reach Like and Comments.
-  // It exists only on published article pages handled by this component.
+  // Every published blog uses ONE shared floating navigation component.
+  // Keep the Up arrow usable throughout every section below the first screen.
+  // The reactions shortcut disappears when the reactions area comes into view.
   root.id = 'article-reactions';
   const reactionsHeading = root.querySelector('.engagement-header h2');
+  const floatingActions = document.createElement('nav');
+  floatingActions.className = 'blog-floating-actions';
+  floatingActions.setAttribute('aria-label', 'लेखमा छिटो जानुहोस्');
+
+  const backToTop = document.createElement('button');
+  backToTop.className = 'blog-back-to-top';
+  backToTop.type = 'button';
+  backToTop.setAttribute('aria-label', 'लेखको सुरुमा फर्कनुहोस्');
+  backToTop.title = 'लेखको सुरुमा फर्कनुहोस्';
+  backToTop.textContent = '↑';
+  backToTop.hidden = true;
+
   const jumpLink = document.createElement('a');
   jumpLink.className = 'engagement-jump';
   jumpLink.href = '#article-reactions';
@@ -45,33 +58,40 @@
   jumpLink.title = 'लाइक र कमेन्टमा जानुहोस्';
   jumpLink.innerHTML = '<span class="engagement-jump-label">प्रतिक्रिया</span><span class="engagement-jump-arrow" aria-hidden="true">↓</span>';
   jumpLink.hidden = true;
-  document.body.append(jumpLink);
 
-  // Hide the shortcut as the reactions panel enters view or has been passed.
-  let jumpCheckQueued = false;
-  function updateJumpVisibility() {
-    jumpCheckQueued = false;
-    const targetTop = root.getBoundingClientRect().top;
-    jumpLink.hidden = targetTop <= window.innerHeight - 72;
+  floatingActions.append(backToTop, jumpLink);
+  document.body.append(floatingActions);
+  const reduceMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let floatingUpdateQueued = false;
+  function updateFloatingActions() {
+    floatingUpdateQueued = false;
+    backToTop.hidden = window.scrollY < 320;
+    const reactionsTop = root.getBoundingClientRect().top;
+    jumpLink.hidden = reactionsTop <= window.innerHeight - 72;
+    floatingActions.hidden = backToTop.hidden && jumpLink.hidden;
   }
-  function queueJumpVisibility() {
-    if (jumpCheckQueued) return;
-    jumpCheckQueued = true;
-    window.requestAnimationFrame(updateJumpVisibility);
+  function queueFloatingActions() {
+    if (floatingUpdateQueued) return;
+    floatingUpdateQueued = true;
+    window.requestAnimationFrame(updateFloatingActions);
   }
+  backToTop.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: reduceMotion() ? 'auto' : 'smooth' });
+    queueFloatingActions();
+  });
   jumpLink.addEventListener('click', event => {
     event.preventDefault();
     if (reactionsHeading) {
       reactionsHeading.tabIndex = -1;
       reactionsHeading.focus({ preventScroll: true });
     }
-    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    root.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
-    queueJumpVisibility();
+    root.scrollIntoView({ behavior: reduceMotion() ? 'auto' : 'smooth', block: 'start' });
+    queueFloatingActions();
   });
-  window.addEventListener('scroll', queueJumpVisibility, { passive: true });
-  window.addEventListener('resize', queueJumpVisibility);
-  queueJumpVisibility();
+  window.addEventListener('scroll', queueFloatingActions, { passive: true });
+  window.addEventListener('resize', queueFloatingActions);
+  window.addEventListener('pageshow', queueFloatingActions);
+  queueFloatingActions();
 
   const likeButton = root.querySelector('.engagement-like');
   const likeCount = root.querySelector('.engagement-like-count');
