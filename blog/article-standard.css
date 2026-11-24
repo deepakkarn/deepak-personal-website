@@ -332,3 +332,41 @@ body.blog-article .blog-interaction-divider {
   body.blog-article :is(.article-share, .blog-engagement, .engagement-jump, .after-article, .story-foot) { display: none!important; }
   body.blog-article :is(.longform-cover, .story-cover, .article-cover, .bhangaha-post-cover) img { box-shadow: none; }
 }
+
+
+/* Explicit Bhangaha adapters: body carries the Bhangaha class itself. */
+body.blog-article.bhangaha-article .intro.reading-col {
+  box-sizing: border-box;
+  width: min(var(--blog-reading), calc(100% - var(--blog-gutter) - var(--blog-gutter)));
+  max-width: none;
+  margin-inline: auto;
+}
+body.blog-article.bhangaha-article .intro.reading-col > p {
+  font-family: 'Noto Sans Devanagari', sans-serif;
+  font-size: clamp(17px, 1.65vw, 19px);
+  line-height: 2.05;
+  color: #34453d;
+  margin-bottom: 27px;
+}
+/* Dense charts should remain readable at actual phone sizes. */
+body.blog-article.bhangaha-article .figure .bar-label,
+body.blog-article.bhangaha-article .figure .bar-value {
+  font-size: 13px;
+}
+body.blog-article.bhangaha-article .figure figcaption {
+  font-size: 13px;
+  line-height: 1.8;
+}
+body.blog-article.bhangaha-article .figure .bar-row {
+  min-width: 0;
+}
+@media (max-width: 700px) {
+  body.blog-article.bhangaha-article .intro.reading-col > p {
+    font-size: 17px;
+    line-height: 1.95;
+    margin-bottom: 24px;
+  }
+  body.blog-article.bhangaha-article .figure .bar-label,
+  body.blog-article.bhangaha-article .figure .bar-value { font-size: 12px; }
+  body.blog-article.bhangaha-article .figure figcaption { font-size: 12px; }
+}
