@@ -20,7 +20,8 @@ POST_NAMES = (
     "shreenagar-tin-mudha-ek-khola.html",
     "rsp-naya-netritwa.html",
 )
-VERSION = "20261124-design-system3"
+VERSION = "20261124-design-system4"
+PDF_VERSION = "20261124-article-pdf1"
 FLOATING_VERSION = "20261124-floating-nav2"
 
 
@@ -66,6 +67,8 @@ def inspect_page(filename: str, failures: list[str]) -> None:
         closes = len(re.findall(rf"</{tag}>", html))
         check(opens == closes, note + f"unbalanced {tag} tags", failures)
     check("article-language-switch" not in html, note + "one-off translation control", failures)
+    check(("share.css?v=" + PDF_VERSION) in html, note + "stale PDF/share CSS version", failures)
+    check(("share.js?v=" + PDF_VERSION) in html, note + "stale PDF/share JS version", failures)
     check(("engagement.css?v=" + FLOATING_VERSION) in html,
           note + "outdated shared floating navigation CSS", failures)
     check(("engagement.js?v=" + FLOATING_VERSION) in html,
@@ -103,6 +106,29 @@ def main() -> int:
               "Bhangaha unified content-column rule missing: " + selector, failures)
     check("Bhangaha content-column correction" in stylesheet,
           "Bhangaha column regression fix was removed", failures)
+
+    # Universal PDF handling must be shared, accessible and print all data.
+    share_js = read("blog/share.js")
+    share_css = read("blog/share.css")
+    check(share_css.count("{") == share_css.count("}"),
+          "blog/share.css has unbalanced CSS braces", failures)
+    for token in (
+        "article-pdf-button", "window.print()", "beforeprint", "afterprint",
+        "main details:not([open])", "data-ward",
+    ):
+        check(token in share_js,
+              "shared PDF behavior missing: " + token, failures)
+    for token in (".article-pdf-button", ".share-widget", ":focus-visible"):
+        check(token in share_css,
+              "shared PDF styling missing: " + token, failures)
+    for token in (
+        "@page { size: A4", "body.blog-article.bhangaha-article .dx-panel[hidden]",
+        "body.blog-article.bhangaha-article [data-ward-row][hidden]",
+        "body.blog-article main::before",
+        "body.blog-article details.more-table",
+    ):
+        check(token in stylesheet,
+              "shared print layout/data completeness missing: " + token, failures)
 
     engagement_js = read("blog/engagement.js")
     engagement_css = read("blog/engagement.css")
