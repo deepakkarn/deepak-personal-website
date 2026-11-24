@@ -23,6 +23,46 @@
   }
   if (native && typeof navigator.share === 'function') native.hidden = false;
 
+  // Browser-native article PDF export, shared by every published post.
+  // The button is created here so future articles inherit it automatically.
+  const pdfButton = document.createElement('button');
+  pdfButton.type = 'button';
+  pdfButton.className = 'article-pdf-button';
+  pdfButton.setAttribute('aria-label', 'प्रिन्ट वा PDF मा सुरक्षित गर्नुहोस्');
+  pdfButton.title = 'PDF बनाउन प्रिन्ट संवादमा Save as PDF छान्नुहोस्';
+  pdfButton.innerHTML = '<i class="bi bi-file-earmark-pdf" aria-hidden="true"></i><span>PDF / प्रिन्ट</span>';
+  widget.insertBefore(pdfButton, menu);
+  pdfButton.addEventListener('click', () => {
+    setOpen(false);
+    window.print();
+  });
+
+  // Print everything the article contains, including closed source tables
+  // and every demographic tab. Restore the reader's interactive state after.
+  const temporarilyOpened = new Set();
+  let wardToRestore = null;
+  window.addEventListener('beforeprint', () => {
+    document.querySelectorAll('main details:not([open])').forEach(details => {
+      temporarilyOpened.add(details);
+      details.open = true;
+    });
+    const allWards = document.querySelector('[data-ward="all"]');
+    const selectedWard = document.querySelector('[data-ward][aria-pressed="true"]');
+    if (allWards && !wardToRestore && selectedWard && selectedWard !== allWards) {
+      wardToRestore = selectedWard;
+      allWards.click();
+    }
+  });
+  window.addEventListener('afterprint', () => {
+    temporarilyOpened.forEach(details => {
+      if (details.isConnected) details.open = false;
+    });
+    temporarilyOpened.clear();
+    if (wardToRestore && wardToRestore.isConnected) wardToRestore.click();
+    wardToRestore = null;
+  });
+
+
   function setOpen(open) {
     menu.hidden = !open;
     toggle.setAttribute('aria-expanded', String(open));
