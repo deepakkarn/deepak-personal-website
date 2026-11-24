@@ -34,6 +34,45 @@
       <p class="engagement-submit-status" role="status" aria-live="polite"></p>
     </form>`;
 
+  // A small, fixed shortcut for long-form readers to reach Like and Comments.
+  // It exists only on published article pages handled by this component.
+  root.id = 'article-reactions';
+  const reactionsHeading = root.querySelector('.engagement-header h2');
+  const jumpLink = document.createElement('a');
+  jumpLink.className = 'engagement-jump';
+  jumpLink.href = '#article-reactions';
+  jumpLink.setAttribute('aria-label', 'लाइक र कमेन्टमा जानुहोस्');
+  jumpLink.title = 'लाइक र कमेन्टमा जानुहोस्';
+  jumpLink.innerHTML = '<span class="engagement-jump-label">प्रतिक्रिया</span><span class="engagement-jump-arrow" aria-hidden="true">↓</span>';
+  jumpLink.hidden = true;
+  document.body.append(jumpLink);
+
+  // Hide the shortcut as the reactions panel enters view or has been passed.
+  let jumpCheckQueued = false;
+  function updateJumpVisibility() {
+    jumpCheckQueued = false;
+    const targetTop = root.getBoundingClientRect().top;
+    jumpLink.hidden = targetTop <= window.innerHeight - 72;
+  }
+  function queueJumpVisibility() {
+    if (jumpCheckQueued) return;
+    jumpCheckQueued = true;
+    window.requestAnimationFrame(updateJumpVisibility);
+  }
+  jumpLink.addEventListener('click', event => {
+    event.preventDefault();
+    if (reactionsHeading) {
+      reactionsHeading.tabIndex = -1;
+      reactionsHeading.focus({ preventScroll: true });
+    }
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    root.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
+    queueJumpVisibility();
+  });
+  window.addEventListener('scroll', queueJumpVisibility, { passive: true });
+  window.addEventListener('resize', queueJumpVisibility);
+  queueJumpVisibility();
+
   const likeButton = root.querySelector('.engagement-like');
   const likeCount = root.querySelector('.engagement-like-count');
   const commentList = root.querySelector('.engagement-comment-list');
