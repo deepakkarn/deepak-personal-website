@@ -17,17 +17,17 @@ window.DK_BLOG_POSTS = [
   {
     url: 'posts/bhangaha-population-analysis.html',
     date: '2026-11-24',
-    image: 'assets/bhangaha-population-cover.webp?v=20261124-bhangaha-thumb1',
+    image: 'assets/bhangaha-population-story-cover.avif?v=20261125-story1',
     category: { ne: 'अनुसन्धान · तथ्याङ्क', en: 'Research · Demographics' },
     title: {
-      ne: 'तथ्याङ्कमा भंगाहा: जनसंख्या, समाज र आर्थिक अवस्था',
-      en: 'Bhangaha in Numbers: Population, Society & Socioeconomic Insights'
+      ne: '५५,३५४ मानिस। तर के हामीले उनीहरूको जीवन बुझेका छौँ?',
+      en: '55,354 people. But do we understand how they live?'
     },
     excerpt: {
-      ne: '२०२१ को जनगणनाबाट नौ वडाको जनसंख्या, साक्षरता, रोजगारी र बसाइँसराइ बुझ्ने प्रयास। २०२३ को गरिबी अनुमान र स्पष्ट छुट्याइएका २०२६ परिदृश्यसहित।',
-      en: 'An evidence-based exploration of population, nine wards, literacy, livelihoods and migration, with the 2023 poverty estimate and separately labelled 2026 scenarios.'
+      ne: 'भंगाहाको जनसंख्या, शिक्षा, रोजगारी, वैदेशिक बसाइँ र आर्थिक अवस्थाका तथ्याङ्कले देखाएका केही वास्तविकता र अझै उत्तर खोज्न बाँकी प्रश्नहरू।',
+      en: 'A story-led reading of Bhangaha’s 55,354 residents: education, livelihoods, migration and poverty, with original data tables and all sources.'
     }
-  },
+  }
 
   {
     url: 'posts/vidyalaya-chha-tara-sikne-batawaran-kasto-chha.html',
