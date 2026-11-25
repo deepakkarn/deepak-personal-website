@@ -27,7 +27,7 @@ window.DK_BLOG_POSTS = [
       ne: 'भंगाहाको जनसंख्या, शिक्षा, रोजगारी, वैदेशिक बसाइँ र आर्थिक अवस्थाका तथ्याङ्कले देखाएका केही वास्तविकता र अझै उत्तर खोज्न बाँकी प्रश्नहरू।',
       en: 'A story-led reading of Bhangaha’s 55,354 residents: education, livelihoods, migration and poverty, with original data tables and all sources.'
     }
-  }
+  },
 
   {
     url: 'posts/vidyalaya-chha-tara-sikne-batawaran-kasto-chha.html',
