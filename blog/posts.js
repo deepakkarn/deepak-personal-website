@@ -17,7 +17,7 @@ window.DK_BLOG_POSTS = [
   {
     url: 'posts/bhangaha-population-analysis.html',
     date: '2026-11-24',
-    image: 'assets/bhangaha-population-story-cover.avif?v=20261125-story1',
+    image: 'assets/bhangaha-population-story-hq.jpg?v=20261125-hq2',
     category: { ne: 'अनुसन्धान · तथ्याङ्क', en: 'Research · Demographics' },
     title: {
       ne: '५५,३५४ मानिस। तर के हामीले उनीहरूको जीवन बुझेका छौँ?',
