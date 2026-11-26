@@ -21,6 +21,13 @@ body.blog-article :where(main, article, section, header, figure, aside, nav) {
 body.blog-article :where(main, article) {
   overflow-wrap: break-word;
 }
+/* Header navigation matches the Blog listing: the section stays highlighted
+   on an article, while aria-current="location" avoids claiming the listing
+   itself is the current page. */
+body.blog-article .desktop-nav a[aria-current="location"],
+body.blog-article .mobile-nav a[aria-current="location"] {
+  color: var(--accent);
+}
 /* A consistent 1100px hero with the same side gutter for every post. */
 body.blog-article :is(
   .longform-head,
