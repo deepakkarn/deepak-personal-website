@@ -6,7 +6,7 @@ subject or whether the article includes data charts, photos or long-form text.
 
 ## Single source of truth for visual layout
 
-**Shared CSS:** `/blog/article-standard.css` (load LAST in the article's `<head>`). Current version query: `?v=20261126-site-grid2`; bump this in every article and template after editing the shared CSS.
+**Shared CSS:** `/blog/article-standard.css` (load LAST in the article's `<head>`). Current version query: `?v=20261126-story-restore1`; bump this in every article and template after editing the shared CSS.
 
 Published article `<body>` must have `class="blog-article"`. An article may
 keep a second specialized class, e.g. `class="blog-article bhangaha-article"`.
@@ -25,17 +25,22 @@ gutter (`--editorial-gutter: clamp(17px, 4vw, 44px)` on every viewport).
 It intentionally matches the blog design exemplified by the school essay.
 
 Article-specific features (Bhangaha's Data Explorer and charts; Shreenagar's
-photo/text stories) are **allowed**, but must be constrained to the
-viewport, aligned to the common editorial start, and must NOT override the visual frame. Ordinary figures
-should align with the 790px reading column. Wide photo stories may use the
-1100px visual region where needed.
+photo/text stories) are **allowed** and may have different internal composition.
+Maintain the shared navigation, typography, responsive safe gutters and
+outer article width. Long-form paragraphs remain at a readable 790px measure,
+but Shreenagar's alternating photograph/text story must keep its **centered**
+reading column and wider photo sequences. Do not force its nested story
+sections into a second 1100px container.
 
 **Important:** Bhangaha's KPI cards, TOC, Data Explorer, charts, section headings and paragraphs must use the **same 790px reading measure, aligned to the masthead's left edge**. Only its hero and cover are wide. The explicit shared CSS block `Bhangaha content-column correction` is regression-tested and must not be deleted or overridden. Alternating 790px/990px/1100px internal columns are a known screenshot-confirmed defect.
 
-**Important:** Shreenagar previously had inconsistent paragraph margins; its
-story prose now starts at the outer editorial frame, while wide photographs
-may occupy the complete 1100px space. Do not reintroduce centered
-standalone paragraphs or 990px Bhangaha figures alongside 790px text.
+**Important:** Shreenagar's centered narrative and alternating photograph/text
+layout is deliberately preserved. The previous site-grid2 `main > .story-content`
+and `--blog-frame-start` rules were rolled back because they narrowed
+nested photographs and shifted text. Do not reintroduce that universal
+left-edge reflow without genuine responsive browser screenshots and tests.
+It has five story-split rows, six story figures, and seven story sections.
+Bhangaha's own 790px research column remains a separate protected layout.
 
 ## One website-wide grid: homepage, Blog and articles
 
@@ -53,18 +58,22 @@ masthead and cover must have the same horizontal start and outer margins.
   `--section-heading-size`; homepage section spacing uses
   `--section-space`. Content types may keep distinct heading
   hierarchy and layout (e.g., hero vs research article).
-- **Long Nepali text is still 790px wide**, but its left edge now starts
-  at the same outer editorial frame as its 1100px title and cover.
-  Do not stretch paragraphs to 1100px and do not independently recenter
-  paragraph components beneath wide covers. The last-loaded
-  `blog/article-standard.css` owns the shared `--blog-frame-start`
-  and the narrow reading measure.
-- Bhangaha's Data Explorer, KPI cards and references stay in the same
-  790px column without changing any figures, values or interactions.
-  Shreenagar's reporting photographs may use the wider frame.
-- Current CSS query key: `20261126-site-grid2` in `styles.css`
-  (every page), `blog/blog.css` (listing) and
-  `blog/article-standard.css` (all articles and starter template).
+- **Long Nepali text stays no wider than 790px.** This is a reading
+  measure, not an instruction to left-align every nested content block.
+  Preserve the existing article-specific internal rhythm where it is already
+  designed (particularly the centered Shreenagar story).
+  Common alignment comes from shared masthead, cover, header, navigation
+  and site gutters, not forced repositioning of arbitrary article descendants.
+- Bhangaha's Data Explorer, KPI cards, tables and references remain unchanged.
+  Its 790px analysis content must not be replaced with screenshots.
+- Never use a broad `main > .story-content` width override or a new
+  `--blog-frame-start` to reflow Shreenagar's story sequence. Changes to
+  photo-story layout require desktop/tablet/mobile rendered tests.
+
+- Current CSS query keys: `20261126-site-grid2` for `styles.css`
+  (every page) and `blog/blog.css` (listing);
+  `20261126-story-restore1` for `blog/article-standard.css`
+  (all articles and starter template).
 - Validate 320, 375, 390, 430, 768, 1024, 1440px widths for equal outer
   margins, scroll containment and touch targets. Print remains white
   A4 with its own zero-gutter rules. Source-level checks do not constitute
