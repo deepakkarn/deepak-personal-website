@@ -6,8 +6,8 @@
 
 body.blog-article {
   --blog-reading: 790px;
-  --blog-wide: 1100px;
-  --blog-gutter: var(--editorial-gutter, clamp(27px, 5vw, 44px));
+  --blog-wide: var(--editorial-wide, 1100px);
+  --blog-gutter: var(--editorial-gutter, clamp(17px, 4vw, 44px));
   --blog-ink: #25312f;
   --blog-muted: #5c6762;
   --blog-accent: #9b6747;
