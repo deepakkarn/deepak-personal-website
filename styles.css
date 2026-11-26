@@ -13,6 +13,10 @@
   --dark:#22302c;
   --dark-soft:#30413d;
   --wrap:1320px;
+  /* Shared outer alignment for the Blog listing and article mastheads.
+     Keep homepage's broader layout and the articles' narrow reading column. */
+  --editorial-wide:1100px;
+  --editorial-gutter:clamp(27px, 5vw, 44px);
   --shadow:0 20px 60px rgba(34,48,44,.08);
 }
 *{box-sizing:border-box}
