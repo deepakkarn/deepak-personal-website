@@ -22,7 +22,7 @@ POST_NAMES = (
 )
 VERSION = "20261126-story-restore1"
 EDITORIAL_VERSION = "20261126-site-grid2"
-ARTICLE_HEADER_VERSION = "20261126-nav1"
+ARTICLE_HEADER_VERSION = "20261126-data-nav1"
 THEME_SCRIPT_VERSION = "20261126-theme1"
 THEME_CSS_VERSION = "20261126-theme3"
 PDF_VERSION = "20261124-article-pdf1"
@@ -71,7 +71,7 @@ def inspect_page(filename: str, failures: list[str]) -> None:
         opens = len(re.findall(rf"<{tag}(?:\s|>)", html))
         closes = len(re.findall(rf"</{tag}>", html))
         check(opens == closes, note + f"unbalanced {tag} tags", failures)
-    # Article headers use the same five-link main-site navigation as Blog.
+    # Article headers use the same six-link main-site navigation as Blog.
     header = re.search(r'<header class="site-header"[^>]*>(.*?)</header>', html, flags=re.S)
     desktop = header.group(1) if header else ""
     mobile_match = re.search(r'<nav id="mobile-nav"[^>]*>(.*?)</nav>', html, flags=re.S)
@@ -81,7 +81,7 @@ def inspect_page(filename: str, failures: list[str]) -> None:
     for key, dest in (
         ("navAbout", "/#about"), ("navFocus", "/#focus"),
         ("navJourney", "/#journey"), ("navBlog", "/blog/"),
-        ("navConnect", "/#connect"),
+        ("navData", "/data/"), ("navConnect", "/#connect"),
     ):
         for section, label in ((desktop, "desktop"), (mobile_text, "mobile")):
             check(('href="' + dest + '"') in section and ('data-i18n="' + key + '"') in section,
@@ -231,7 +231,7 @@ def main() -> int:
 
     article_nav = read("blog/article-header.js")
     for required in (
-        "dk-language", "data-i18n", "language-toggle", "menu-toggle",
+        "dk-language", "data-i18n", "navData", "language-toggle", "menu-toggle",
         "mobile-nav", "aria-expanded", "Escape", "localStorage.setItem",
     ):
         check(required in article_nav,
@@ -336,6 +336,20 @@ def main() -> int:
               path + " does not load shared theme CSS", failures)
         check(head.find("theme.js?v=") < head.find("theme.css?v="),
               path + " theme JS must be before CSS", failures)
+
+    # The new public /data/ section must not disappear from the sitewide
+    # navigation or be omitted from the homepage/Blog language switch.
+    for path in ("index.html", "blog/index.html"):
+        page = read(path)
+        check(page.count('data-i18n="navData"') == 2,
+              path + " missing Data navigation on desktop/mobile", failures)
+    check("navData:" in read("script.js") and
+          "navData:" in read("blog/blog.js") and
+          "navData:" in article_nav,
+          "Missing bilingual shared Data navigation label", failures)
+    check("script.js?v=20261126-data-nav1" in read("index.html") and
+          "blog.js?v=20261126-data-nav1" in read("blog/index.html"),
+          "Data navigation script cache keys not refreshed", failures)
 
     for filename in POST_NAMES:
         inspect_page(filename, failures)
