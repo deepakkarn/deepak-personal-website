@@ -21,7 +21,8 @@ POST_NAMES = (
     "rsp-naya-netritwa.html",
 )
 VERSION = "20261126-theme1"
-THEME_VERSION = "20261126-theme1"
+THEME_SCRIPT_VERSION = "20261126-theme1"
+THEME_CSS_VERSION = "20261126-theme2"
 PDF_VERSION = "20261124-article-pdf1"
 FLOATING_VERSION = "20261124-floating-nav2"
 
@@ -68,9 +69,9 @@ def inspect_page(filename: str, failures: list[str]) -> None:
         closes = len(re.findall(rf"</{tag}>", html))
         check(opens == closes, note + f"unbalanced {tag} tags", failures)
     check("article-language-switch" not in html, note + "one-off translation control", failures)
-    check(('theme.js?v=' + THEME_VERSION) in head,
+    check(('theme.js?v=' + THEME_SCRIPT_VERSION) in head,
           note + "missing early shared theme controller", failures)
-    check(('theme.css?v=' + THEME_VERSION) in head,
+    check(('theme.css?v=' + THEME_CSS_VERSION) in head,
           note + "missing shared theme stylesheet", failures)
     check(bool(stylesheets and len(stylesheets) >= 2
                and "theme.css" in stylesheets[-2]),
@@ -185,6 +186,17 @@ def main() -> int:
     ):
         check(needle in theme_css,
               "shared dark style requirement missing: " + needle, failures)
+    # User-reported homepage contrast regressions: dark details inside
+    # About cards and near-white text on unchanged pastel Focus cards.
+    for needle in (
+        'html[data-theme="dark"] .about-intro-card .about-bullets li span',
+        'html[data-theme="dark"] .idea-card.idea-saffron',
+        'html[data-theme="dark"] .idea-card.idea-blue',
+        'html[data-theme="dark"] .idea-card.idea-green',
+        'html[data-theme="dark"] .idea-card :is(h3,p)',
+    ):
+        check(needle in theme_css,
+              "homepage dark card contrast regression: " + needle, failures)
     check("Theme v20261126-theme1" in stylesheet,
           "last article stylesheet missing dark typography", failures)
     check("body.blog-article .theme-toggle { display:none!important; }" in stylesheet,
@@ -192,9 +204,9 @@ def main() -> int:
     for path in ("index.html", "blog/index.html"):
         page = read(path)
         head = page.split("</head>", 1)[0]
-        check("theme.js?v=" + THEME_VERSION in head,
+        check("theme.js?v=" + THEME_SCRIPT_VERSION in head,
               path + " does not load shared theme JS", failures)
-        check("theme.css?v=" + THEME_VERSION in head,
+        check("theme.css?v=" + THEME_CSS_VERSION in head,
               path + " does not load shared theme CSS", failures)
         check(head.find("theme.js?v=") < head.find("theme.css?v="),
               path + " theme JS must be before CSS", failures)
