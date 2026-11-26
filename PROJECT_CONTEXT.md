@@ -19,7 +19,7 @@ The former `context.md`'s mandatory requirements are preserved in this file: one
 
 **User confirmed on 24 November 2026 that every published blog article must have the same layout, theme, typography, header, footers and mobile reading margins. This is a hard requirement, not a styling suggestion.**
 
-- The **single source of truth** is `/blog/article-standard.css`, currently referenced as `?v=20261126-site-grid2`. It MUST be the **last stylesheet loaded** on every published post (after any per-page CSS).
+- The **single source of truth** is `/blog/article-standard.css`, currently referenced as `?v=20261126-story-restore1`. It MUST be the **last stylesheet loaded** on every published post (after any per-page CSS).
 - Every published article uses `<body class="blog-article">` (or `class="blog-article bhangaha-article"` when specialized data components exist).
 - New posts **MUST** start from the rewritten `/blog/posts/_template.html`, NOT fresh ad-hoc HTML. Read `/blog/README.md` for the complete publishing contract/checklist.
 - Unified design: warm paper `#fbf7f0`, deep green-black typography, subtle warm brown accents, Noto Sans Devanagari / DM Sans, 1100px shared outer frame across homepage, Blog, mastheads and covers, **790px prose aligned to the outer frame's left edge**, consistent section heading rhythm; shared side gutter `clamp(17px,4vw,44px)` on every viewport.
