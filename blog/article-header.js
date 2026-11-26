@@ -12,13 +12,13 @@
   const texts = {
     ne: {
       navAbout: 'मेरो बारेमा', navFocus: 'मुख्य सोच', navJourney: 'यात्रा',
-      navBlog: 'ब्लग', navConnect: 'सम्पर्क',
+      navBlog: 'ब्लग', navData: 'तथ्याङ्क', navConnect: 'सम्पर्क',
       open: 'मेनु खोल्नुहोस्', close: 'मेनु बन्द गर्नुहोस्',
       switchLanguage: 'Switch navigation to English (article remains in Nepali)'
     },
     en: {
       navAbout: 'About', navFocus: 'Focus', navJourney: 'Journey',
-      navBlog: 'Blog', navConnect: 'Connect',
+      navBlog: 'Blog', navData: 'Data', navConnect: 'Connect',
       open: 'Open menu', close: 'Close menu',
       switchLanguage: 'नेभिगेसन नेपालीमा बदल्नुहोस् (लेख नेपालीमै रहनेछ)'
     }
