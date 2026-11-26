@@ -6,7 +6,7 @@ subject or whether the article includes data charts, photos or long-form text.
 
 ## Single source of truth for visual layout
 
-**Shared CSS:** `/blog/article-standard.css` (load LAST in the article's `<head>`). Current version query: `?v=20261126-article-nav1`; bump this in every article and template after editing the shared CSS.
+**Shared CSS:** `/blog/article-standard.css` (load LAST in the article's `<head>`). Current version query: `?v=20261126-editorial-grid1`; bump this in every article and template after editing the shared CSS.
 
 Published article `<body>` must have `class="blog-article"`. An article may
 keep a second specialized class, e.g. `class="blog-article bhangaha-article"`.
@@ -21,7 +21,7 @@ bespoke reading layout:
 
 The shared design uses a **1100px wide hero and cover**, a **790px narrative
 reading column**, restrained warm editorial colors, and consistent responsive
-gutter (`clamp(28px,7vw,62px)` desktop; `clamp(27px,7vw,36px)` mobile).
+gutter (`--editorial-gutter: clamp(27px, 5vw, 44px)` on every viewport).
 It intentionally matches the blog design exemplified by the school essay.
 
 Article-specific features (Bhangaha's Data Explorer and charts; Shreenagar's
@@ -37,6 +37,35 @@ should align with the 790px reading column. Wide photo stories may use the
 horizontal centering. Explicit `margin-inline:auto` in the common stylesheet
 is required. Bhangaha had a separate 990px figure width and a much narrower
 paragraph column; these are now aligned. Do not reintroduce either bug.
+
+## Editorial alignment between Blog listing and articles
+
+Keep two intentional, centered widths rather than stretching all content:
+
+- **Outer editorial frame: 1100px max.** The Blog listing's hero, article
+  cards, note and footer align with all article titles, metadata and cover
+  photographs. `styles.css` owns the shared tokens
+  `--editorial-wide: 1100px` and
+  `--editorial-gutter: clamp(27px, 5vw, 44px)`.
+  `blog/blog.css` applies them to the Blog listing's `.wrap`.
+  The last-loaded `blog/article-standard.css` consumes the same gutter
+  through `--blog-gutter`. These values must not diverge on tablets/mobiles.
+- **Reading measure: 790px max.** Center long Nepali paragraphs, figures,
+  captions, Bhangaha's Data Explorer/tables and the research reference list.
+  The narrower text measure is intentional and should **not** stretch to
+  1100px or 1320px just to align its edges with a cover or listing card.
+  Horizontal alignment is shared at the outer frame, while long text has
+  a consistent, centered inset.
+- The main homepage retains its **1320px** multi-column shell; changing
+  its whole layout is not part of this Blog/article alignment pass. Header,
+  theme controls and mobile navigation remain identical across pages.
+- Versioned sources: `styles.css?v=20261126-editorial-grid1` on all pages,
+  `blog/blog.css?v=20261126-editorial-grid1` on the Blog index and
+  `article-standard.css?v=20261126-editorial-grid1` on all five
+  published posts plus `posts/_template.html`.
+- Preserve responsive viewport behavior and A4 PDF styles, especially the
+  print-only zero-gutter rule; never replace Data Explorer with pictures or
+  change source data to make the layout fit.
 
 ## Standard article structure
 
