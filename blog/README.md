@@ -42,6 +42,19 @@ left-edge reflow without genuine responsive browser screenshots and tests.
 It has five story-split rows, six story figures, and seven story sections.
 Bhangaha's own 790px research column remains a separate protected layout.
 
+**Shreenagar-specific layout contract (2026-11-26):** The article's one
+inline stylesheet now includes a screen-only, `body.blog-article .story-layout`-
+scoped correction after its historical rules. It defines exactly **two**
+widths, `--shreenagar-wide:1100px` for cover, alternating photo/text rows,
+and full-width photographs, and `--shreenagar-reading:790px` for headings,
+prose, footnotes, sharing and footer navigation. It uses
+`--shreenagar-gutter` from the shared site and a consistent image gap.
+These frames are centered independently on the viewport, **never nested**.
+On widths at or below 800px, alternating rows stack image first, text second.
+Keep these scoped rules screen-only so the pre-existing PDF print layout remains
+intact. Do not add global `main > .story-content` rules to mimic this.
+
+
 ## One website-wide grid: homepage, Blog and articles
 
 Use a single outer **1100px maximum** content frame. The homepage, every
