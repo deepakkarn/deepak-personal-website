@@ -20,7 +20,7 @@ POST_NAMES = (
     "shreenagar-tin-mudha-ek-khola.html",
     "rsp-naya-netritwa.html",
 )
-VERSION = "20261126-site-grid2"
+VERSION = "20261126-story-restore1"
 EDITORIAL_VERSION = "20261126-site-grid2"
 ARTICLE_HEADER_VERSION = "20261126-nav1"
 THEME_SCRIPT_VERSION = "20261126-theme1"
@@ -156,10 +156,12 @@ def main() -> int:
     check("--blog-gutter: var(--editorial-gutter," in stylesheet and
           "--blog-wide: var(--editorial-wide, 1100px)" in stylesheet,
           "article is not inheriting the global outer grid", failures)
-    check("Canonical left-edge rhythm for long-form material" in stylesheet and
-          "margin-left: var(--blog-frame-start);" in stylesheet and
-          "main > .story-content" in stylesheet,
-          "article reading column no longer aligns to masthead's start", failures)
+    # A previous universal article reflow damaged Shreenagar's carefully
+    # arranged alternating photo/text story. NEVER force nested story-content
+    # into a second outer frame or independently left-anchor its paragraphs.
+    check("main > .story-content" not in stylesheet and
+          "--blog-frame-start" not in stylesheet,
+          "unsafe nested story-container reflow returned", failures)
     check("--section-heading-size:clamp(36px, 4.1vw, 60px);" in site_css and
           "var(--section-heading-size)" in blog_css,
           "shared section heading rhythm was lost", failures)
@@ -174,12 +176,19 @@ def main() -> int:
           "theme.js?v=" + THEME_SCRIPT_VERSION in listing,
           "Blog listing theme assets unexpectedly changed", failures)
 
-    check(".story-section > p { margin-right: auto; }" in stylesheet,
-          "Shreenagar paragraph width was lost", failures)
-    check("body.blog-article .story-content :is(" in stylesheet and
-          ".story-section > p," in stylesheet and
-          "margin-left: 0;" in stylesheet,
-          "Shreenagar prose not aligned to the site-wide start", failures)
+    check("body.blog-article .story-section > p { margin-inline: auto; }" in stylesheet,
+          "Shreenagar centered story text was lost", failures)
+    story = read("blog/posts/shreenagar-tin-mudha-ek-khola.html")
+    for label, needle, count in (
+        ("alternating photo/text rows", 'class="story-split ', 5),
+        ("photographic figures", 'class="story-figure ', 6),
+        ("story sections", 'class="story-section"', 7),
+        ("large photograph", 'class="story-figure story-wide"', 1),
+    ):
+        check(story.count(needle) == count,
+              "Shreenagar " + label + " structure changed", failures)
+    check('.story-section > p { margin-left:auto; margin-right:auto; }' in story,
+          "Shreenagar local centered prose safeguard missing", failures)
     # Bhangaha had multiple alternating 790/990/1100px columns. The
     # specific CSS contract below keeps all reading components aligned;
     # only the feature cover and the article masthead are deliberately wide.
