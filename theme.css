@@ -117,6 +117,28 @@
   html[data-theme="dark"] :is(.about-lead, .about-card p, .idea-card p, .trust-list) {
     color: #dde5dc;
   }
+  /* About detail rows define their own dark text in styles.css.
+     Override that on the dark card, without changing the light theme. */
+  html[data-theme="dark"] .about-intro-card .about-bullets li span {
+    color: #e0e8e0;
+  }
+  html[data-theme="dark"] .about-intro-card .about-bullets li strong {
+    color: var(--accent);
+  }
+  /* The three idea cards use fixed pastel backgrounds in styles.css.
+     Give them dark surfaces so their light headings and descriptions contrast. */
+  html[data-theme="dark"] .idea-card.idea-saffron {
+    background: var(--saffron);
+  }
+  html[data-theme="dark"] .idea-card.idea-blue {
+    background: var(--blue);
+  }
+  html[data-theme="dark"] .idea-card.idea-green {
+    background: var(--green);
+  }
+  html[data-theme="dark"] .idea-card :is(h3,p) {
+    color: #f1f3ed;
+  }
   html[data-theme="dark"] .card-kicker { color: #ded0b7; }
   html[data-theme="dark"] .hero-visual {
     background: linear-gradient(155deg, #2b3832, #1b2420);
