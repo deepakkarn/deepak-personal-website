@@ -385,3 +385,12 @@ User requested strict consistency of English/Nepali switching across all publish
 
 
 **Final implementation checks (2026-11-26):** Pre-theme commit `30dfad7` and final `main` Bhangaha Data Explorer source blocks match exactly (41,355 characters), and ten official/news reference links match exactly (6,020-character list). Nine tabs, nine panels and twelve figures remain. 52/52 all-page static guards passed; theme controller was also simulated with light/dark OS preference, manual override, persistence and homepage/article header insertion. Contrast of the defined colors was calculated, but **live Cloudflare browser QA is still outstanding**. The protected original story text and share/PDF integration remain unchanged. The public theme scope is homepage, Blog listing and five published Blog articles; private portal/unpublished pages are not part of this public-theme rollout.
+
+### 2026-11-26: Corrected dark-mode contrast on homepage About and Focus cards
+
+- User screenshots showed the four `about-bullets` detail rows with unreadable dark body text on dark cards and the three Focus/`idea-card` cards with near-white text on their original pastel backgrounds.
+- Root causes in `styles.css`: `.about-bullets span { color:#40504c }` continued to override the dark parent text color, while `.idea-saffron`, `.idea-blue` and `.idea-green` kept fixed light backgrounds even as the dark theme switched `.idea-card p` to pale text.
+- Fixed centrally in `theme.css` using **only** `html[data-theme="dark"]` selectors. About detail spans now use `#e0e8e0` on the existing dark surface; Focus cards use the existing dark-theme `--saffron`, `--blue`, `--green` surfaces and readable `#f1f3ed` headings/descriptions. The original light theme palette, layout, content and other sections are unchanged.
+- Bumped `theme.css` to `?v=20261126-theme2` on homepage, Blog listing, five posts and the article template; `theme.js` remains at `?v=20261126-theme1`. Extended `blog/check_article_design.py` to check these dark-mode selectors and the independent script/style asset versions.
+- Preserve dark card text contrast and these shared selectors in future changes. Actual browser screenshots on Cloudflare should be checked following deployment; source-level checks alone do not prove live visual appearance.
+
