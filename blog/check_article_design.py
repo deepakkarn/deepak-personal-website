@@ -20,8 +20,8 @@ POST_NAMES = (
     "shreenagar-tin-mudha-ek-khola.html",
     "rsp-naya-netritwa.html",
 )
-VERSION = "20261126-editorial-grid1"
-EDITORIAL_VERSION = "20261126-editorial-grid1"
+VERSION = "20261126-site-grid2"
+EDITORIAL_VERSION = "20261126-site-grid2"
 ARTICLE_HEADER_VERSION = "20261126-nav1"
 THEME_SCRIPT_VERSION = "20261126-theme1"
 THEME_CSS_VERSION = "20261126-theme3"
@@ -127,31 +127,49 @@ def main() -> int:
     stylesheet = read("blog/article-standard.css")
     check(stylesheet.count("{") == stylesheet.count("}"),
           "blog/article-standard.css has unbalanced CSS braces", failures)
-    check("--blog-reading: 790px" in stylesheet and "--blog-wide: 1100px" in stylesheet,
+    check("--blog-reading: 790px" in stylesheet and "--blog-wide: var(--editorial-wide, 1100px)" in stylesheet,
           "canonical reading/hero widths changed unexpectedly", failures)
     site_css = read("styles.css")
     blog_css = read("blog/blog.css")
     listing = read("blog/index.html")
     home = read("index.html")
-    # The Blog listing and article mastheads use the same 1100px shell and
-    # variable gutters. Long-form prose stays centered at 790px.
-    check("--wrap:1320px;" in site_css,
-          "homepage's original wide shell changed", failures)
-    check("--editorial-wide:1100px;" in site_css and
-          "--editorial-gutter:clamp(27px, 5vw, 44px);" in site_css,
-          "shared editorial width/gutter tokens changed", failures)
-    check("width: min(var(--editorial-wide, 1100px)" in blog_css and
-          "var(--editorial-gutter, 44px)" in blog_css,
-          "Blog listing no longer shares article outer grid", failures)
-    check("--blog-gutter: var(--editorial-gutter," in stylesheet,
-          "article layout not using shared editorial gutter", failures)
-    check("--blog-gutter: clamp(27px, 7vw, 36px)" not in stylesheet,
-          "old mobile-only article gutter override returned", failures)
+    # ONE 1100px outer grid governs homepage, Blog listing, mastheads,
+    # covers, headers and footers. Reading text remains 790px, left-aligned
+    # to the outer frame, without stretching paragraphs to the cover width.
+    check("--wrap:var(--editorial-wide);" in site_css and
+          "--editorial-wide:1100px;" in site_css,
+          "homepage and Blog editorial widths diverged", failures)
+    check("--editorial-gutter:clamp(17px, 4vw, 44px);" in site_css,
+          "shared mobile/desktop gutter changed", failures)
+    check(".wrap{width:min(var(--wrap), calc(100% - var(--editorial-gutter)" in site_css,
+          "shared site-wide .wrap is not the single width source", failures)
+    check(".wrap{" not in blog_css and "width: min(var(--editorial-wide" not in blog_css,
+          "Blog-specific .wrap width override was reintroduced", failures)
+    check(".site-header{height:96px;padding-inline:max(var(--editorial-gutter)" in site_css and
+          "grid-template-columns:minmax(0,1fr) auto minmax(0,1fr)" in site_css,
+          "header not aligned to content grid", failures)
+    check(".site-header .header-actions{grid-column:3;justify-self:end}" in site_css,
+          "mobile/header actions no longer anchored to right grid column", failures)
+    check(".wrap{width:calc(100% - 56px)}" not in site_css and
+          ".wrap{width:calc(100% - 34px)}" not in site_css,
+          "old tablet/mobile conflicting gutters returned", failures)
+    check("--blog-gutter: var(--editorial-gutter," in stylesheet and
+          "--blog-wide: var(--editorial-wide, 1100px)" in stylesheet,
+          "article is not inheriting the global outer grid", failures)
+    check("Canonical left-edge rhythm for long-form material" in stylesheet and
+          "margin-left: var(--blog-frame-start);" in stylesheet and
+          "main > .story-content" in stylesheet,
+          "article reading column no longer aligns to masthead's start", failures)
+    check("--section-heading-size:clamp(36px, 4.1vw, 60px);" in site_css and
+          "var(--section-heading-size)" in blog_css,
+          "shared section heading rhythm was lost", failures)
+    check("body.blog-article { --blog-gutter: 0px; }" in stylesheet,
+          "A4 print gutter contract changed", failures)
     check(("blog.css?v=" + EDITORIAL_VERSION) in listing,
-          "Blog listing still using cached pre-alignment CSS", failures)
+          "Blog listing still using stale site-grid CSS", failures)
     check(("styles.css?v=" + EDITORIAL_VERSION) in listing and
           ("styles.css?v=" + EDITORIAL_VERSION) in home,
-          "homepage/Blog shared CSS cache version is outdated", failures)
+          "homepage/Blog common stylesheet cache key is outdated", failures)
     check("theme.css?v=" + THEME_CSS_VERSION in listing and
           "theme.js?v=" + THEME_SCRIPT_VERSION in listing,
           "Blog listing theme assets unexpectedly changed", failures)
