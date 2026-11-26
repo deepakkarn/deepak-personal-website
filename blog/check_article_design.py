@@ -20,7 +20,8 @@ POST_NAMES = (
     "shreenagar-tin-mudha-ek-khola.html",
     "rsp-naya-netritwa.html",
 )
-VERSION = "20261126-article-nav1"
+VERSION = "20261126-editorial-grid1"
+EDITORIAL_VERSION = "20261126-editorial-grid1"
 ARTICLE_HEADER_VERSION = "20261126-nav1"
 THEME_SCRIPT_VERSION = "20261126-theme1"
 THEME_CSS_VERSION = "20261126-theme3"
@@ -51,6 +52,8 @@ def inspect_page(filename: str, failures: list[str]) -> None:
           note + "shared CSS must be the LAST stylesheet", failures)
     check(bool(standard and VERSION in standard[0]),
           note + "stale shared CSS query version", failures)
+    check(('styles.css?v=' + EDITORIAL_VERSION) in head,
+          note + "shared site CSS cache key is stale", failures)
     for label, pattern in (
         ("all-articles back link", r"← सबै लेखहरू"),
         ("share menu", r"data-article-share"),
@@ -126,6 +129,33 @@ def main() -> int:
           "blog/article-standard.css has unbalanced CSS braces", failures)
     check("--blog-reading: 790px" in stylesheet and "--blog-wide: 1100px" in stylesheet,
           "canonical reading/hero widths changed unexpectedly", failures)
+    site_css = read("styles.css")
+    blog_css = read("blog/blog.css")
+    listing = read("blog/index.html")
+    home = read("index.html")
+    # The Blog listing and article mastheads use the same 1100px shell and
+    # variable gutters. Long-form prose stays centered at 790px.
+    check("--wrap:1320px;" in site_css,
+          "homepage's original wide shell changed", failures)
+    check("--editorial-wide:1100px;" in site_css and
+          "--editorial-gutter:clamp(27px, 5vw, 44px);" in site_css,
+          "shared editorial width/gutter tokens changed", failures)
+    check("width: min(var(--editorial-wide, 1100px)" in blog_css and
+          "var(--editorial-gutter, 44px)" in blog_css,
+          "Blog listing no longer shares article outer grid", failures)
+    check("--blog-gutter: var(--editorial-gutter," in stylesheet,
+          "article layout not using shared editorial gutter", failures)
+    check("--blog-gutter: clamp(27px, 7vw, 36px)" not in stylesheet,
+          "old mobile-only article gutter override returned", failures)
+    check(("blog.css?v=" + EDITORIAL_VERSION) in listing,
+          "Blog listing still using cached pre-alignment CSS", failures)
+    check(("styles.css?v=" + EDITORIAL_VERSION) in listing and
+          ("styles.css?v=" + EDITORIAL_VERSION) in home,
+          "homepage/Blog shared CSS cache version is outdated", failures)
+    check("theme.css?v=" + THEME_CSS_VERSION in listing and
+          "theme.js?v=" + THEME_SCRIPT_VERSION in listing,
+          "Blog listing theme assets unexpectedly changed", failures)
+
     check(".story-section > p { margin-inline: auto; }" in stylesheet,
           "Shreenagar margin centering regression returned", failures)
     # Bhangaha had multiple alternating 790/990/1100px columns. The
