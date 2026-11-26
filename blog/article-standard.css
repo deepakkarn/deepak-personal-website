@@ -162,7 +162,7 @@ body.blog-article :is(
   margin-top: 0;
   margin-bottom: 27px;
 }
-body.blog-article .story-section > p { margin-right: auto; }
+body.blog-article .story-section > p { margin-inline: auto; }
 body.blog-article :is(.prose h2, .story-section h2, .bhangaha-article .section-head > h2) {
   font-family: 'Noto Sans Devanagari', sans-serif;
   font-size: clamp(27px, 3vw, 37px);
@@ -695,58 +695,3 @@ body.blog-article.bhangaha-article .simple-table-wrap {
   body.blog-article .theme-toggle { display:none!important; }
 }
 
-
-/* Canonical left-edge rhythm for long-form material (2026-11-26 site-grid2).
-   The site-wide 1100px frame defines the horizontal starting line across
-   home, Blog and articles. Readable 790px text stays narrow, but should not
-   independently recenter beneath the article title and cover. Wide story
-   photographs still use the full editorial frame. Screen-only: print
-   retains its existing edge-to-edge white A4 layout. */
-@media screen {
-  body.blog-article {
-    --blog-frame-start: max(var(--blog-gutter), calc((100% - var(--blog-wide)) / 2));
-  }
-  /* Direct children of <main> start on the same line as the wide masthead. */
-  body.blog-article main > :is(
-    .read-column,
-    .intro.reading-col,
-    .article-body:not(.reading-wrap),
-    .article-body.reading-wrap,
-    .reading-wrap:not(.article-mast):not(.bhangaha-post-cover),
-    .article-share.share-before-feedback,
-    .blog-engagement,
-    .after-article.read-column,
-    .story-foot
-  ) {
-    margin-left: var(--blog-frame-start);
-    margin-right: 0;
-  }
-  /* Shreenagar's prose is nested inside a wide photo-story container. */
-  body.blog-article main > .story-content {
-    box-sizing: border-box;
-    width: min(var(--blog-wide), calc(100% - var(--blog-gutter) - var(--blog-gutter)));
-    max-width: none;
-    margin-inline: auto;
-  }
-  body.blog-article .story-content :is(
-    .story-intro,
-    .story-section-heading,
-    .story-section > p,
-    .story-foot
-  ) {
-    margin-left: 0;
-    margin-right: auto;
-  }
-  /* Nested Bhangaha analysis blocks are already confined to 790px.
-     Pin them to that column's start rather than recentering each block. */
-  body.blog-article.bhangaha-article .article-body :is(
-    .section-head,
-    .section-paragraph,
-    .figure,
-    .insight,
-    .note-last
-  ) {
-    margin-left: 0;
-    margin-right: auto;
-  }
-}
