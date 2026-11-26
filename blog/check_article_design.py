@@ -20,7 +20,8 @@ POST_NAMES = (
     "shreenagar-tin-mudha-ek-khola.html",
     "rsp-naya-netritwa.html",
 )
-VERSION = "20261126-theme1"
+VERSION = "20261126-article-nav1"
+ARTICLE_HEADER_VERSION = "20261126-nav1"
 THEME_SCRIPT_VERSION = "20261126-theme1"
 THEME_CSS_VERSION = "20261126-theme3"
 PDF_VERSION = "20261124-article-pdf1"
@@ -51,7 +52,6 @@ def inspect_page(filename: str, failures: list[str]) -> None:
     check(bool(standard and VERSION in standard[0]),
           note + "stale shared CSS query version", failures)
     for label, pattern in (
-        ("blog return button", r"← BLOG"),
         ("all-articles back link", r"← सबै लेखहरू"),
         ("share menu", r"data-article-share"),
         ("shared share JS", r"share\.js"),
@@ -68,6 +68,30 @@ def inspect_page(filename: str, failures: list[str]) -> None:
         opens = len(re.findall(rf"<{tag}(?:\s|>)", html))
         closes = len(re.findall(rf"</{tag}>", html))
         check(opens == closes, note + f"unbalanced {tag} tags", failures)
+    # Article headers use the same five-link main-site navigation as Blog.
+    header = re.search(r'<header class="site-header"[^>]*>(.*?)</header>', html, flags=re.S)
+    desktop = header.group(1) if header else ""
+    mobile_match = re.search(r'<nav id="mobile-nav"[^>]*>(.*?)</nav>', html, flags=re.S)
+    mobile_text = mobile_match.group(1) if mobile_match else ""
+    check(bool(header and mobile_match), note + "shared header/mobile nav missing", failures)
+    check('class="header-actions"' in desktop, note + "missing shared header actions", failures)
+    for key, dest in (
+        ("navAbout", "/#about"), ("navFocus", "/#focus"),
+        ("navJourney", "/#journey"), ("navBlog", "/blog/"),
+        ("navConnect", "/#connect"),
+    ):
+        for section, label in ((desktop, "desktop"), (mobile_text, "mobile")):
+            check(('href="' + dest + '"') in section and ('data-i18n="' + key + '"') in section,
+                  note + "shared " + label + " nav missing " + key, failures)
+    for control in ("language-toggle", "language-label", "menu-toggle", "mobile-nav"):
+        check(html.count('id="' + control + '"') == 1,
+              note + "missing/duplicate header control " + control, failures)
+    check('aria-current="location"' in desktop,
+          note + "article Blog section does not have active-link semantics", failures)
+    check(('article-header.js?v=' + ARTICLE_HEADER_VERSION) in head,
+          note + "missing shared header controller", failures)
+    check("Home</a>" not in desktop and "Connect</a>" not in desktop,
+          note + "obsolete English-only article header", failures)
     check("article-language-switch" not in html, note + "one-off translation control", failures)
     check(('theme.js?v=' + THEME_SCRIPT_VERSION) in head,
           note + "missing early shared theme controller", failures)
@@ -117,6 +141,16 @@ def main() -> int:
               "Bhangaha unified content-column rule missing: " + selector, failures)
     check("Bhangaha content-column correction" in stylesheet,
           "Bhangaha column regression fix was removed", failures)
+
+    article_nav = read("blog/article-header.js")
+    for required in (
+        "dk-language", "data-i18n", "language-toggle", "menu-toggle",
+        "mobile-nav", "aria-expanded", "Escape", "localStorage.setItem",
+    ):
+        check(required in article_nav,
+              "shared article header script missing: " + required, failures)
+    check('body.blog-article .desktop-nav a[aria-current="location"]' in stylesheet,
+          "article Blog section highlight missing", failures)
 
     # Universal PDF handling must be shared, accessible and print all data.
     share_js = read("blog/share.js")
