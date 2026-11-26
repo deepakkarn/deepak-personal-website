@@ -99,6 +99,102 @@ body{background:var(--story-paper);color:var(--story-ink)}
   :root{--story-reading-gutter:clamp(27px,8.5vw,36px)}
 }
 .story-layout > .article-share{width:min(760px,calc(100% - var(--story-reading-gutter) - var(--story-reading-gutter)));max-width:none;margin:24px auto 44px}
+
+/* Shreenagar story layout contract, 2026-11-26.
+   One wide photographic frame and one centered reading column.
+   Scoped to this story only: never reflow other article types. */
+body.blog-article .story-layout {
+  --shreenagar-wide: var(--editorial-wide, 1100px);
+  --shreenagar-reading: 790px;
+  --shreenagar-gutter: var(--editorial-gutter, clamp(17px, 4vw, 44px));
+  --shreenagar-image-gap: clamp(24px, 4vw, 58px);
+}
+body.blog-article .story-layout :is(.story-top, .story-cover, .story-split, .story-wide) {
+  box-sizing: border-box;
+  width: min(var(--shreenagar-wide), calc(100% - 2 * var(--shreenagar-gutter)));
+  max-width: none;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 0;
+  padding-right: 0;
+}
+body.blog-article .story-layout .story-top {
+  padding-top: clamp(38px, 5vw, 60px);
+}
+body.blog-article .story-layout .story-cover {
+  margin-top: 34px;
+  margin-bottom: clamp(44px, 6vw, 70px);
+}
+body.blog-article .story-layout :is(.story-intro, .story-section-heading, .story-section > p, .story-foot) {
+  box-sizing: border-box;
+  width: min(var(--shreenagar-reading), calc(100% - 2 * var(--shreenagar-gutter)));
+  max-width: none;
+  margin-left: auto;
+  margin-right: auto;
+}
+body.blog-article .story-layout .story-intro { margin-bottom: clamp(46px, 6vw, 70px); }
+body.blog-article .story-layout .story-section-heading {
+  margin-top: clamp(42px, 5vw, 62px);
+  margin-bottom: 28px;
+}
+body.blog-article .story-layout .story-section > p {
+  margin-left: auto;
+  margin-right: auto;
+}
+body.blog-article .story-layout .story-split {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: center;
+  gap: var(--shreenagar-image-gap);
+  margin-top: clamp(34px, 4vw, 48px);
+  margin-bottom: clamp(42px, 5vw, 60px);
+}
+body.blog-article .story-layout .story-split :is(.story-figure, .story-split-copy) {
+  min-width: 0;
+  width: 100%;
+  max-width: none;
+}
+body.blog-article .story-layout .story-split-copy {
+  align-self: center;
+  margin: 0;
+}
+body.blog-article .story-layout .story-split-copy p {
+  margin-left: 0;
+  margin-right: 0;
+}
+body.blog-article .story-layout .story-wide {
+  margin-top: clamp(34px, 4vw, 48px);
+  margin-bottom: clamp(46px, 6vw, 70px);
+}
+body.blog-article .story-layout .story-wide img {
+  width: 100%;
+  height: auto;
+}
+body.blog-article .story-layout .story-foot {
+  margin-top: clamp(48px, 6vw, 72px);
+}
+@media (max-width: 800px) {
+  body.blog-article .story-layout .story-split {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 22px;
+  }
+  body.blog-article .story-layout .story-split .story-figure {
+    order: 0;
+    width: 100%;
+  }
+  body.blog-article .story-layout .story-split .story-split-copy {
+    order: 1;
+    width: 100%;
+    margin: 0;
+  }
+  body.blog-article .story-layout .story-intro,
+  body.blog-article .story-layout .story-section-heading,
+  body.blog-article .story-layout .story-section > p {
+    width: min(var(--shreenagar-reading), calc(100% - 2 * var(--shreenagar-gutter)));
+  }
+}
 </style>
 <link rel="stylesheet" href="../share.css?v=20261124-article-pdf1">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
