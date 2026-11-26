@@ -1,7 +1,7 @@
 const content = {
   ne: {
     skip: 'मुख्य सामग्रीमा जानुहोस्',
-    navAbout: 'मेरो बारेमा', navFocus: 'मुख्य सोच', navJourney: 'यात्रा', navBlog: 'ब्लग', navConnect: 'सम्पर्क',
+    navAbout: 'मेरो बारेमा', navFocus: 'मुख्य सोच', navJourney: 'यात्रा', navBlog: 'ब्लग', navData: 'तथ्याङ्क', navConnect: 'सम्पर्क',
     latestLabel: 'लेखहरू',
     latestTitle: 'हालैका<br><em>विचारहरू।</em>',
     latestIntro: 'समाज, शिक्षा, सार्वजनिक जीवन र अनुभवबारे पछिल्ला लेखहरू।',
@@ -62,7 +62,7 @@ const content = {
   },
   en: {
     skip: 'Skip to content',
-    navAbout: 'About', navFocus: 'Focus', navJourney: 'Journey', navBlog: 'Blog', navConnect: 'Connect',
+    navAbout: 'About', navFocus: 'Focus', navJourney: 'Journey', navBlog: 'Blog', navData: 'Data', navConnect: 'Connect',
     latestLabel: 'Recent writing',
     latestTitle: 'Ideas worth<br><em>exploring.</em>',
     latestIntro: 'Recent reflections on society, education, public life and lived experience.',
