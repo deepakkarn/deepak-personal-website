@@ -1,6 +1,6 @@
 const translations = {
   ne: {
-    skip:'मुख्य सामग्रीमा जानुहोस्', navAbout:'मेरो बारेमा', navFocus:'मुख्य सोच', navJourney:'यात्रा', navBlog:'ब्लग', navConnect:'सम्पर्क',
+    skip:'मुख्य सामग्रीमा जानुहोस्', navAbout:'मेरो बारेमा', navFocus:'मुख्य सोच', navJourney:'यात्रा', navBlog:'ब्लग', navData:'तथ्याङ्क', navConnect:'सम्पर्क',
     eyebrow:'विचार · अनुभव · लेखन', title:'लेखहरू<span class="blog-accent">.</span>',
     intro:'समाज, स्थानीय जीवन, प्रविधि र अनुभवबाट उठेका प्रश्नहरूबारे मेरा लेखहरू।', viewArticles:'नयाँ लेखहरू पढ्नुहोस् <span aria-hidden="true">↓</span>',
     back:'← मुख्य पृष्ठ', sectionLabel:'लेखन', sectionTitle:'नयाँ लेखहरू', sectionHint:'समयसँगै थपिँदै जाने विचार र अनुभवहरू।',
@@ -9,7 +9,7 @@ const translations = {
     lifeofqa:'LifeOfQA हेर्नुहोस्', footerNote:'सुन्ने। बुझ्ने। काम गर्ने।', read:'पूरा पढ्नुहोस् ↗'
   },
   en: {
-    skip:'Skip to content',navAbout:'About',navFocus:'Focus',navJourney:'Journey',navBlog:'Blog',navConnect:'Connect',
+    skip:'Skip to content',navAbout:'About',navFocus:'Focus',navJourney:'Journey',navBlog:'Blog',navData:'Data',navConnect:'Connect',
     eyebrow:'IDEAS · EXPERIENCES · WRITING',title:'The blog<span class="blog-accent">.</span>',
     intro:'Essays on community, public life, technology and questions shaped by experience.', viewArticles:'Explore latest articles <span aria-hidden="true">↓</span>',
     back:'← Home',sectionLabel:'Writing',sectionTitle:'Latest articles',sectionHint:'A growing collection of reflections and experiences.',
