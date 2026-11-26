@@ -72,6 +72,23 @@ def main():
     check('href="/data/population/"' in home and
           'href="/data/elections/"' in home,
           "Landing page links to both datasets")
+    # The Data portal presents subjects with CSS/SVG icons, not a personal
+    # portrait. Bars are illustrative and must not be mistaken for real data.
+    check('bhangaha-population-story-hq.jpg' not in home,
+          "Population card must not display the author's photograph")
+    check(home.count('class="data-card-bars" aria-hidden="true"') == 2,
+          "Both dataset cards need accessible decorative bars")
+    check(home.count('class="data-card-icon"') == 2,
+          "Dataset card SVG icons missing")
+    check('data-card-art--population' in home and
+          'data-card-art--elections' in home,
+          "Population and election illustrations are not paired")
+    check("वास्तविक तथ्याङ्कको चार्ट होइन" in home and
+          "वास्तविक मत परिणामको चार्ट होइन" in home,
+          "Decorative graphics need accurate accessible descriptions")
+    check("data.css?v=20261126-data2" in home and
+          "data.css?v=20261126-data2" in population,
+          "New Data illustration styles must use the refreshed cache key")
     check("आंशिक अभिलेख" in home and "उपलब्ध · Available" in home,
           "Landing must distinguish complete-looking and partial datasets")
 
@@ -148,6 +165,11 @@ def main():
     check('html[data-theme="dark"]' in election_css and
           'html[data-theme="dark"]' in css,
           "Both data views must support dark mode")
+    check('html[data-theme="dark"] body.blog-article.data-page .data-card-art' in css,
+          "Decorative card art missing dark-mode colors")
+    check('body.blog-article.data-page .data-card-art--population .data-card-bars' in css and
+          'body.blog-article.data-page .data-card-art--elections .data-card-bars' in css,
+          "Decorative dataset bars missing themed CSS")
 
     if FAILURES:
         print("DATA PAGES FAILED:", file=sys.stderr)
