@@ -6,7 +6,7 @@ subject or whether the article includes data charts, photos or long-form text.
 
 ## Single source of truth for visual layout
 
-**Shared CSS:** `/blog/article-standard.css` (load LAST in the article's `<head>`). Current version query: `?v=20261126-theme1`; bump this in every article and template after editing the shared CSS.
+**Shared CSS:** `/blog/article-standard.css` (load LAST in the article's `<head>`). Current version query: `?v=20261126-article-nav1`; bump this in every article and template after editing the shared CSS.
 
 Published article `<body>` must have `class="blog-article"`. An article may
 keep a second specialized class, e.g. `class="blog-article bhangaha-article"`.
@@ -43,7 +43,7 @@ paragraph column; these are now aligned. Do not reintroduce either bug.
 Use `posts/_template.html` (it was updated on 2026-11-24).
 Keep, in this order:
 
-1. Standard global `site-header` with DK identity and `← BLOG` button.
+1. Standard global `site-header`, identical to the Blog listing: DK logo, all five shared site links, language button, theme toggle and responsive mobile menu. The Blog section link is active; use `aria-current="location"` on article pages.
 2. `← सबै लेखहरू`, subdued category, title, optional deck, author/date/type.
 3. Optional user-provided featured cover (natural photo, no unrelated stock).
 4. `<article>` with readable body sections and optional meaningful figures.
@@ -52,12 +52,35 @@ Keep, in this order:
 7. `← अरू लेखहरू` and `मुख्य पृष्ठ` navigation.
 8. Standard footer (brand, Blog, copyright).
 
-Never introduce an individual page's second language switch unless the
-site-wide article translation system and full translations for *every*
-published post are implemented. Homepage language preferences and Blog
-listing bilingual metadata are separate features; current published article
-bodies remain in Nepali.
+The shared article header language control changes only the five navigation
+labels (Nepali/English), using the same `dk-language` browser preference as
+the homepage and Blog listing. **It does not translate article bodies.**
+Keep `<html lang="ne">` and all existing Nepali article text, citations,
+titles, source links and metadata unchanged. Do not introduce a separate
+article-body translation widget unless all published articles are actually
+translated.
 
+
+## Consistent header and navigation across all articles
+
+Use the **same visible header structure as `blog/index.html`**. Published
+articles and the starter template must contain all five links:
+`/#about`, `/#focus`, `/#journey`, `/blog/`, `/#connect`.
+The DK logo links to `/`. Their mobile navigation uses the same labels,
+links and a `menu-toggle` button with working `aria-expanded` behavior.
+
+The header's language button is a genuine button, not a `← BLOG` link,
+and is wired through the shared `/blog/article-header.js?v=20261126-nav1`.
+Its `dk-language` preference affects shared navigation labels only, since
+article bodies are Nepali. The existing `← सबै लेखहरू` link stays at the
+top of each article body, and the shared end-of-article Blog navigation
+remains. `theme.js` inserts the same Sun/Moon control in `.header-actions`.
+Keep `header-actions` and `mobile-nav` in the article template.
+
+The canonical `article-standard.css` highlights Blog links with
+`aria-current="location"` on article pages; `blog/index.html` uses
+`aria-current="page"` for its listing itself. Do not reintroduce separate
+`HOME / BLOG / CONNECT` article headers or a second top-right back button.
 
 ## Shared light / dark theme (mandatory)
 
@@ -189,6 +212,7 @@ This checks consistent article classes/styles/links and a few critical data coun
 - `/blog/article-standard.css`: the canonical article layout and dark reading design.
 - `/theme.js`, `/theme.css`: shared site-wide light/dark mode control and palette.
 - `/blog/posts/_template.html`: the starter for every new published post.
+- `/blog/article-header.js`: consistent responsive navigation and language control across all articles.
 - `/blog/share.css`, `/blog/share.js`: sharing and article PDF action.
 - `/blog/engagement.css`, `/blog/engagement.js`: reader reactions.
 - `/blog/posts.js`: list and card metadata.
