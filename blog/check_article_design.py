@@ -174,8 +174,12 @@ def main() -> int:
           "theme.js?v=" + THEME_SCRIPT_VERSION in listing,
           "Blog listing theme assets unexpectedly changed", failures)
 
-    check(".story-section > p { margin-inline: auto; }" in stylesheet,
-          "Shreenagar margin centering regression returned", failures)
+    check(".story-section > p { margin-right: auto; }" in stylesheet,
+          "Shreenagar paragraph width was lost", failures)
+    check("body.blog-article .story-content :is(" in stylesheet and
+          ".story-section > p," in stylesheet and
+          "margin-left: 0;" in stylesheet,
+          "Shreenagar prose not aligned to the site-wide start", failures)
     # Bhangaha had multiple alternating 790/990/1100px columns. The
     # specific CSS contract below keeps all reading components aligned;
     # only the feature cover and the article masthead are deliberately wide.
