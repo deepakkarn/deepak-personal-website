@@ -63,7 +63,7 @@ bodies remain in Nepali.
 
 The entire site (homepage, Blog listing, all five published posts, and
 `posts/_template.html`) uses **`/theme.js?v=20261126-theme1`**
-and **`/theme.css?v=20261126-theme1`**.
+and **`/theme.css?v=20261126-theme2`**.
 
 - Load `theme.js` synchronously in `<head>`, before page CSS, to apply
   `html[data-theme="light"|"dark"]` without a flash. It follows the
@@ -72,7 +72,7 @@ and **`/theme.css?v=20261126-theme1`**.
   the current page. The theme toggle is automatically inserted in the shared
   header. Its accessible labels follow the current page language.
 - The shared theme CSS handles header, mobile menu, homepage, Blog cards,
-  comments, sharing controls and Bhangaha Data Explorer presentation. It uses
+  comments, sharing controls and Bhangaha Data Explorer presentation. The homepage's About detail rows must remain legible on dark surfaces and its three Focus cards must switch from pastel backgrounds to dark palette surfaces. It uses
   Amber for prominent figures, Muted Teal for comparisons and Slate Blue
   for supporting graphics. Color alone must **never** encode chart meaning.
 - On articles, load `theme.css` **immediately before the LAST stylesheet**
