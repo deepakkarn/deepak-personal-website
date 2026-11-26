@@ -162,7 +162,7 @@ body.blog-article :is(
   margin-top: 0;
   margin-bottom: 27px;
 }
-body.blog-article .story-section > p { margin-inline: auto; }
+body.blog-article .story-section > p { margin-right: auto; }
 body.blog-article :is(.prose h2, .story-section h2, .bhangaha-article .section-head > h2) {
   font-family: 'Noto Sans Devanagari', sans-serif;
   font-size: clamp(27px, 3vw, 37px);
