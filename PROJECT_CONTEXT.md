@@ -394,3 +394,12 @@ User requested strict consistency of English/Nepali switching across all publish
 - Bumped `theme.css` to `?v=20261126-theme2` on homepage, Blog listing, five posts and the article template; `theme.js` remains at `?v=20261126-theme1`. Extended `blog/check_article_design.py` to check these dark-mode selectors and the independent script/style asset versions.
 - Preserve dark card text contrast and these shared selectors in future changes. Actual browser screenshots on Cloudflare should be checked following deployment; source-level checks alone do not prove live visual appearance.
 
+
+### 2026-11-26: Fixed dark contrast in Journey perspective panel
+
+- User screenshot showed the homepage “बनेको देखिनु र काम लाग्नु फरक हो।” Journey section with pale headings and accents rendered on a fixed cream/white gradient in Dark Mode, making the main text difficult to read.
+- Root cause: `styles.css` defines a fixed light background for `.journey-perspective`; the dark theme changes inherited text to light while leaving that background untouched. The component also contains fixed dark paragraph and pill colors.
+- Added scoped dark-only rules in shared `theme.css` for a deep green/charcoal panel gradient, legible off-white headline, soft-white body text, warm accent and clearly contrasted pill backgrounds and links. Decorative circle accents were adjusted to the dark surface. No layout, content, light-mode CSS, script, data explorer or print rules changed.
+- Bumped `theme.css` from `20261126-theme2` to `20261126-theme3` in homepage, Blog listing, all five posts and the starter template. `theme.js` remains `20261126-theme1`. Updated `blog/check_article_design.py` to guard dark Journey contrast selectors.
+- Scope: code-level verification; live Cloudflare/browser screenshot checks remain outstanding. Contrast checks should compare on the darkest and lightest gradient stops; screenshots alone are not a complete accessibility audit.
+
