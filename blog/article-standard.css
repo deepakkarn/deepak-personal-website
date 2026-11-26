@@ -7,7 +7,7 @@
 body.blog-article {
   --blog-reading: 790px;
   --blog-wide: 1100px;
-  --blog-gutter: clamp(28px, 7vw, 62px);
+  --blog-gutter: var(--editorial-gutter, clamp(27px, 5vw, 44px));
   --blog-ink: #25312f;
   --blog-muted: #5c6762;
   --blog-accent: #9b6747;
@@ -299,7 +299,7 @@ body.blog-article .blog-interaction-divider {
   body.blog-article .story-split .story-split-copy { width: 100%; margin-inline: 0; }
 }
 @media (max-width: 700px) {
-  body.blog-article { --blog-gutter: clamp(27px, 7vw, 36px); }
+  /* The editorial gutter is shared with the Blog listing at every viewport. */
   body.blog-article :is(.longform-head, .story-top, .article-header, .article-mast.reading-wrap) {
     padding-top: 34px;
   }
