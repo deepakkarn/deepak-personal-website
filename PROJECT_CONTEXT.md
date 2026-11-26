@@ -2,7 +2,7 @@
 
 > Living project handoff for deepakkarn.com. Read this file and inspect the current repository before making changes.
 >
-> Last reviewed: 2026-11-25  
+> Last reviewed: 2026-11-26  
 > Repository: https://github.com/deepakkarn/deepak-personal-website  
 > Default branch: `main`  
 > Latest revision: follow the current `main` branch (do not rely on a stale pinned SHA)
@@ -372,3 +372,14 @@ User requested strict consistency of English/Nepali switching across all publish
 - Updated the image URL with `?v=20261125-hq2` in the article featured cover, Open Graph/Twitter image metadata, and Article JSON-LD; updated image MIME to `image/jpeg` and dimensions to `1672×941`. Updated `blog/posts.js` card image and refreshed `posts.js` version references in homepage `index.html` and Blog `blog/index.html`.
 - **Do not recompress this detailed cover to ~10KB or shrink it to a 1000px image again.** Preserve legible Nepali text and facial detail when optimizing. A high-quality WebP alternative may be used for the page in future, but retain a JPEG/PNG for Open Graph.
 - Unrelated story content, the nine-tab Data Explorer, all charts/data tables and all ten original source links are unchanged. GitHub source and image-blob checks should be run after the commits. Live Cloudflare deployment and device/social preview rendering remain independently unverified.
+
+### 2026-11-26: Site-wide light/dark theme and chart palette
+
+- User approved the proposed warm editorial **light/dark system** based on a screenshot showing Amber, Muted Teal and Slate Blue chart roles. Implemented a single `theme.js` and `theme.css` shared across the homepage, Blog listing, all five published articles and `blog/posts/_template.html`.
+- `theme.js` is loaded synchronously in the HTML head (before CSS) and sets `html[data-theme]` immediately to respect the saved `dk-theme` preference or `prefers-color-scheme: dark`. Creates an accessible header toggle on every page with Nepali/English labels and `aria-pressed`; persists manual choice in localStorage; follows OS changes only while no manual override exists. Updates `meta[name=theme-color]`. A storage failure falls back safely. The existing mobile menu, homepage language switch and article return navigation remain in place.
+- New `theme.css` provides dark design tokens, restrained charcoal/green surfaces, off-white typography and appropriately contrasting amber/teal/slate graphics. Dark styling is screen-only so the existing white A4 PDF design survives. The original light appearance remains the default light design. Original images are never inverted.
+- The Bhangaha Data Explorer uses dark surfaces, readable table headers, tabs/active chips, chart legend text, keyboard controls, numbers and labels. Three categorical age-mosaic colors and scenario chart accent use the proposed palette. **Only CSS presentation changed**: original HTML data, all nine tabs/panels, computed values, filtering logic, tables, story, citations and ten reference links were not modified.
+- Extended the **LAST** shared article design stylesheet `blog/article-standard.css` to handle all five dark article reading surfaces/typography and preserve print. Updated all six article/template imports to `?v=20261126-theme1`, with `theme.css` immediately before canonical article CSS. Homepage and Blog listing each import theme CSS last. Updated `blog/check_article_design.py` and `blog/README.md` to require the shared controls.
+- Static checks after initial commits: 52/52 source invariants passed across eight HTML pages and assets; JS syntax passed; mock DOM confirmed toggling, persistent selection, default system behavior and article header action grouping; CSS braces balanced. Sample computed contrast ratios against dark article/chart surfaces: regular text 14.8:1, muted text 10.2:1, amber 4.8:1, teal 5.1:1 and slate 5.8:1. These are design-token calculations, **not** a full rendered WCAG audit.
+- **Not yet independently verified:** actual Cloudflare deployment, browser screenshots, print rendering on a real device, and mobile visual QA at the required widths. Do not confuse source-level checks with browser regression passes. Future work must keep the single theme controller, canonical article-width contract, PDF behavior, numerical data and references intact.
+
