@@ -269,6 +269,24 @@
   html[data-theme="dark"] .bhangaha-article :is(.dx-metric,.kpi,.figure,.recent-card) {box-shadow:none;}
 }
 
+
+/* Three consistent series colors for the age mosaic and scenario visualization. */
+@media screen {
+  html[data-theme="dark"] .bhangaha-article .age-pixel.age-child {background:var(--chart-primary);}
+  html[data-theme="dark"] .bhangaha-article .age-pixel.age-adult {background:var(--chart-secondary);}
+  html[data-theme="dark"] .bhangaha-article .age-pixel.age-senior {background:var(--chart-tertiary);}
+  html[data-theme="dark"] .bhangaha-article .age-mosaic-legend > div {color:var(--chart-muted);}
+  html[data-theme="dark"] .bhangaha-article .age-mosaic-legend strong {color:var(--chart-secondary);}
+  html[data-theme="dark"] .bhangaha-article .age-mosaic-legend > div:first-child strong {color:var(--chart-primary);}
+  html[data-theme="dark"] .bhangaha-article .age-mosaic-legend > div:last-child strong {color:var(--chart-tertiary);}
+  html[data-theme="dark"] .bhangaha-article .age-mosaic-legend strong span {color:var(--chart-muted);}
+  html[data-theme="dark"] .bhangaha-article .scenario-fill {background:var(--chart-primary);}
+  html[data-theme="dark"] .bhangaha-article .scenario-row.emphasis .scenario-rail {box-shadow:0 0 0 3px rgba(128,163,154,.28);}
+  html[data-theme="dark"] .bhangaha-article .baseline-marker {border-color:var(--chart-tertiary);}
+  html[data-theme="dark"] .bhangaha-article .poverty-large {color:#e4a09a;}
+  html[data-theme="dark"] .bhangaha-article .dx-source-muted {color:var(--chart-muted);}
+}
+
 @media print {
   html[data-theme="dark"] {color-scheme:light!important;}
   html[data-theme="dark"] body {background:#fff!important; color:#1f2828!important;}
