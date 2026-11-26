@@ -1,4 +1,11 @@
 /* Blog-specific layout. Shared design tokens and navigation live in ../styles.css. */
+/* Use the same outer editorial grid as every article title and cover.
+   The homepage intentionally retains its wider, multi-column layout. */
+.wrap {
+  width: min(var(--editorial-wide, 1100px),
+             calc(100% - var(--editorial-gutter, 44px) - var(--editorial-gutter, 44px)));
+}
+
 .desktop-nav a[aria-current="page"],.mobile-nav a[aria-current="page"]{color:var(--accent)}
 .blog-hero{min-height:540px;padding-block:88px 94px;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(300px,.85fr);align-items:center;gap:60px}
 .blog-hero-copy{position:relative;z-index:1}
