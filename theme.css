@@ -155,6 +155,41 @@
   html[data-theme="dark"] .latest-writing { background: linear-gradient(115deg,#202824,#1b211e); }
   html[data-theme="dark"] .latest-post:hover { background: rgba(224,233,226,.07); }
   html[data-theme="dark"] .about-thumbnail { background: var(--theme-surface); }
+  /* Journey editorial panel was retaining a fixed cream/white gradient
+     while inheriting pale dark-mode headings and links. Keep the entire
+     panel dark, including its chips, without affecting its light version. */
+  html[data-theme="dark"] .journey-perspective {
+    background: linear-gradient(115deg, #2d3831 0%, #252f2a 57%, #20302d 100%);
+    border-color: #526458;
+    color: #f3f0e9;
+    box-shadow: 0 14px 40px rgba(0, 0, 0, .16);
+  }
+  html[data-theme="dark"] .journey-perspective::before {
+    border-color: rgba(169, 194, 177, .2);
+    box-shadow: 0 0 0 32px rgba(169, 194, 177, .035),
+                0 0 0 75px rgba(169, 194, 177, .02);
+  }
+  html[data-theme="dark"] .journey-perspective h3 {
+    color: #f3f0e9;
+  }
+  html[data-theme="dark"] .journey-perspective :is(.perspective-kicker, h3 em, .perspective-connector, .perspective-link) {
+    color: var(--accent);
+  }
+  html[data-theme="dark"] .journey-perspective .perspective-body p {
+    color: #d2ddd3;
+  }
+  html[data-theme="dark"] .journey-perspective .perspective-path > span:not(.perspective-connector) {
+    background: #34443a;
+    border-color: #627c6b;
+    color: #edf4ec;
+  }
+  html[data-theme="dark"] .journey-perspective .perspective-link {
+    border-bottom-color: var(--accent);
+  }
+  html[data-theme="dark"] .journey-perspective .perspective-link:hover {
+    color: #fff;
+    border-bottom-color: #fff;
+  }
   html[data-theme="dark"] .blog-hero-visual {
     background: radial-gradient(circle at 70% 20%,rgba(104,142,142,.23),transparent 50%),
                 linear-gradient(135deg,#29332d,#222925);
