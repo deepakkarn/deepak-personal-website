@@ -20,7 +20,8 @@ POST_NAMES = (
     "shreenagar-tin-mudha-ek-khola.html",
     "rsp-naya-netritwa.html",
 )
-VERSION = "20261124-design-system4"
+VERSION = "20261126-theme1"
+THEME_VERSION = "20261126-theme1"
 PDF_VERSION = "20261124-article-pdf1"
 FLOATING_VERSION = "20261124-floating-nav2"
 
@@ -67,6 +68,15 @@ def inspect_page(filename: str, failures: list[str]) -> None:
         closes = len(re.findall(rf"</{tag}>", html))
         check(opens == closes, note + f"unbalanced {tag} tags", failures)
     check("article-language-switch" not in html, note + "one-off translation control", failures)
+    check(('theme.js?v=' + THEME_VERSION) in head,
+          note + "missing early shared theme controller", failures)
+    check(('theme.css?v=' + THEME_VERSION) in head,
+          note + "missing shared theme stylesheet", failures)
+    check(bool(stylesheets and len(stylesheets) >= 2
+               and "theme.css" in stylesheets[-2]),
+          note + "theme CSS must precede LAST canonical article stylesheet", failures)
+    check(head.find('theme.js?v=') < head.find('article-standard.css?v='),
+          note + "theme controller must load before page styles", failures)
     check(("share.css?v=" + PDF_VERSION) in html, note + "stale PDF/share CSS version", failures)
     check(("share.js?v=" + PDF_VERSION) in html, note + "stale PDF/share JS version", failures)
     check(("engagement.css?v=" + FLOATING_VERSION) in html,
@@ -154,6 +164,40 @@ def main() -> int:
     ):
         check(token in engagement_css,
               "shared floating button CSS missing: " + token, failures)
+
+    # One theme controller and color system covers homepage, listing, posts and
+    # future articles. Existing page layout, data and PDF contracts stay intact.
+    theme_js = read("theme.js")
+    theme_css = read("theme.css")
+    check(theme_css.count("{") == theme_css.count("}"),
+          "theme.css has unbalanced braces", failures)
+    for needle in (
+        "dk-theme", "prefers-color-scheme: dark", "data-theme",
+        "aria-pressed", "MutationObserver", "localStorage.setItem",
+        "theme-article-actions", "change",
+    ):
+        check(needle in theme_js,
+              "shared theme JS requirement missing: " + needle, failures)
+    for needle in (
+        '--chart-primary', '--chart-secondary', '--chart-tertiary',
+        '.dx-shell', '.dx-table', '.dx-tab', '.blog-engagement',
+        '.site-header', '@media print', '@media screen',
+    ):
+        check(needle in theme_css,
+              "shared dark style requirement missing: " + needle, failures)
+    check("Theme v20261126-theme1" in stylesheet,
+          "last article stylesheet missing dark typography", failures)
+    check("body.blog-article .theme-toggle { display:none!important; }" in stylesheet,
+          "theme toggle must not appear in PDFs", failures)
+    for path in ("index.html", "blog/index.html"):
+        page = read(path)
+        head = page.split("</head>", 1)[0]
+        check("theme.js?v=" + THEME_VERSION in head,
+              path + " does not load shared theme JS", failures)
+        check("theme.css?v=" + THEME_VERSION in head,
+              path + " does not load shared theme CSS", failures)
+        check(head.find("theme.js?v=") < head.find("theme.css?v="),
+              path + " theme JS must be before CSS", failures)
 
     for filename in POST_NAMES:
         inspect_page(filename, failures)
