@@ -1,5 +1,22 @@
 /* Deepak Karn shared theme design. Light mode = the existing website.
    Screen-only dark overrides preserve white-paper article PDF export. */
+
+/* Light-mode age-chart palette from the approved chart design.
+   Series meanings and numerical proportions are unchanged. */
+:root {
+  --chart-primary: #bf8c57;
+  --chart-secondary: #789d94;
+  --chart-tertiary: #8da2b3;
+}
+@media screen {
+  html[data-theme="light"] .bhangaha-article .age-pixel.age-child {background:var(--chart-primary);}
+  html[data-theme="light"] .bhangaha-article .age-pixel.age-adult {background:var(--chart-secondary);}
+  html[data-theme="light"] .bhangaha-article .age-pixel.age-senior {background:var(--chart-tertiary);}
+  html[data-theme="light"] .bhangaha-article .age-mosaic-legend strong {color:#467f73;}
+  html[data-theme="light"] .bhangaha-article .age-mosaic-legend > div:first-child strong {color:#966337;}
+  html[data-theme="light"] .bhangaha-article .age-mosaic-legend > div:last-child strong {color:#57768c;}
+}
+
 .theme-toggle {
   display: inline-flex;
   align-items: center;
