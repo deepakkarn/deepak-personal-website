@@ -118,13 +118,13 @@ translated.
 ## Consistent header and navigation across all articles
 
 Use the **same visible header structure as `blog/index.html`**. Published
-articles and the starter template must contain all five links:
-`/#about`, `/#focus`, `/#journey`, `/blog/`, `/#connect`.
+articles and the starter template must contain all six links:
+`/#about`, `/#focus`, `/#journey`, `/blog/`, `/data/`, `/#connect`.
 The DK logo links to `/`. Their mobile navigation uses the same labels,
 links and a `menu-toggle` button with working `aria-expanded` behavior.
 
 The header's language button is a genuine button, not a `← BLOG` link,
-and is wired through the shared `/blog/article-header.js?v=20261126-nav1`.
+and is wired through the shared `/blog/article-header.js?v=20261126-data-nav1`.
 Its `dk-language` preference affects shared navigation labels only, since
 article bodies are Nepali. The existing `← सबै लेखहरू` link stays at the
 top of each article body, and the shared end-of-article Blog navigation
@@ -274,3 +274,12 @@ This checks consistent article classes/styles/links and a few critical data coun
 Avoid ad-hoc CSS patches to individual posts for site-wide issues. Correct
 the shared design system once, regression-test all posts, and document the
 decision in `PROJECT_CONTEXT.md`.
+
+## Civic Data Explorer integration (2026-11-26)
+
+The public Data Explorer at `/data/` is a separate interface from the Blog.
+All six shared navigation links (including `तथ्याङ्क` / Data) must be
+present in home, Blog listing and both desktop/mobile article menus.
+Do not modify article-specific numbers or share/PDF behavior just to
+update the navigation. See canonical `PROJECT_CONTEXT.md` and execute
+`python3 data/check_data_pages.py` when modifying data pages.
