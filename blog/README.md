@@ -6,7 +6,7 @@ subject or whether the article includes data charts, photos or long-form text.
 
 ## Single source of truth for visual layout
 
-**Shared CSS:** `/blog/article-standard.css` (load LAST in the article's `<head>`). Current version query: `?v=20261124-design-system4`; bump this in every article and template after editing the shared CSS.
+**Shared CSS:** `/blog/article-standard.css` (load LAST in the article's `<head>`). Current version query: `?v=20261126-theme1`; bump this in every article and template after editing the shared CSS.
 
 Published article `<body>` must have `class="blog-article"`. An article may
 keep a second specialized class, e.g. `class="blog-article bhangaha-article"`.
@@ -58,6 +58,36 @@ published post are implemented. Homepage language preferences and Blog
 listing bilingual metadata are separate features; current published article
 bodies remain in Nepali.
 
+
+## Shared light / dark theme (mandatory)
+
+The entire site (homepage, Blog listing, all five published posts, and
+`posts/_template.html`) uses **`/theme.js?v=20261126-theme1`**
+and **`/theme.css?v=20261126-theme1`**.
+
+- Load `theme.js` synchronously in `<head>`, before page CSS, to apply
+  `html[data-theme="light"|"dark"]` without a flash. It follows the
+  operating-system setting on first use and stores explicit selection in
+  `localStorage` under `dk-theme`. If storage fails, it still works during
+  the current page. The theme toggle is automatically inserted in the shared
+  header. Its accessible labels follow the current page language.
+- The shared theme CSS handles header, mobile menu, homepage, Blog cards,
+  comments, sharing controls and Bhangaha Data Explorer presentation. It uses
+  Amber for prominent figures, Muted Teal for comparisons and Slate Blue
+  for supporting graphics. Color alone must **never** encode chart meaning.
+- On articles, load `theme.css` **immediately before the LAST stylesheet**
+  `article-standard.css`. The canonical stylesheet owns shared dark reading
+  typography, article widths and print. Do not add bespoke theme toggles or
+  separate per-post dark styles.
+- Dark mode must NEVER change the nine Bhangaha Data Explorer tabs, values,
+  calculations, filters, source links or charts' data. Avoid screenshot
+  substitutes for graphs. Test 320px through desktop, overflow, labels, active
+  tab/chip states, color contrast, Like/Comment, Share and PDF.
+- The shared A4 Print / Save as PDF layout stays light/white paper
+  regardless of screen mode; dark overrides apply to `@media screen` only.
+- When adjusting the theme, update shared assets and all page query versions
+  together, then run `python3 blog/check_article_design.py` and browser QA.
+  Static source checks do not establish a successful deployment.
 
 ## PDF / Print on every article (mandatory)
 
@@ -156,7 +186,8 @@ This checks consistent article classes/styles/links and a few critical data coun
 ## Related files
 
 - `/PROJECT_CONTEXT.md`: long-term project handoff, decisions and history.
-- `/blog/article-standard.css`: the canonical design system.
+- `/blog/article-standard.css`: the canonical article layout and dark reading design.
+- `/theme.js`, `/theme.css`: shared site-wide light/dark mode control and palette.
 - `/blog/posts/_template.html`: the starter for every new published post.
 - `/blog/share.css`, `/blog/share.js`: sharing and article PDF action.
 - `/blog/engagement.css`, `/blog/engagement.js`: reader reactions.
