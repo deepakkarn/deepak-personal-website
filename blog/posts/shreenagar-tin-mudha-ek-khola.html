@@ -100,6 +100,7 @@ body{background:var(--story-paper);color:var(--story-ink)}
 }
 .story-layout > .article-share{width:min(760px,calc(100% - var(--story-reading-gutter) - var(--story-reading-gutter)));max-width:none;margin:24px auto 44px}
 
+@media screen {
 /* Shreenagar story layout contract, 2026-11-26.
    One wide photographic frame and one centered reading column.
    Scoped to this story only: never reflow other article types. */
@@ -173,7 +174,8 @@ body.blog-article .story-layout .story-wide img {
 body.blog-article .story-layout .story-foot {
   margin-top: clamp(48px, 6vw, 72px);
 }
-@media (max-width: 800px) {
+}
+@media screen and (max-width: 800px) {
   body.blog-article .story-layout .story-split {
     display: flex;
     flex-direction: column;
