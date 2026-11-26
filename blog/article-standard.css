@@ -580,3 +580,110 @@ body.blog-article.bhangaha-article .simple-table-wrap {
   body.blog-article.bhangaha-article .dx-ward-controls { display: none!important; }
   body.blog-article.bhangaha-article .dx-panel :is(h3, h4) { break-after: avoid-page; }
 }
+
+/* Theme v20261126-theme1: canonical dark reading system for every article.
+   Runs only on screens; the existing A4 printing design stays white paper. */
+@media screen {
+  html[data-theme="dark"] body.blog-article {
+    --blog-ink: #f3f0e9;
+    --blog-muted: #c4ccc6;
+    --blog-accent: #ddb18a;
+    --blog-paper: #191e1c;
+    color: var(--blog-ink);
+    background: var(--blog-paper);
+  }
+  html[data-theme="dark"] body.blog-article :is(
+    .longform-head h1, .story-top h1, .article-header h1, .article-mast h1,
+    .prose h2, .prose h3, .story-section h2, .article-body h2,
+    .article-body h3, .section-head h2, .article-body strong,
+    .story-emphasis strong, .tldr strong
+  ) { color: var(--blog-ink); }
+  html[data-theme="dark"] body.blog-article :is(
+    .longform-deck, .story-subtitle, .article-deck, .longform-meta,
+    .story-meta, .article-meta, .article-mast .article-meta,
+    .prose p, .story-intro p, .story-section > p, .story-split-copy p,
+    .article-body > p, .article-body .section-paragraph > p,
+    .intro.reading-col > p, .prose li, .article-body li, figcaption,
+    .article-body .source-note, .article-body .key-context,
+    .story-figure figcaption, .note-last
+  ) { color: var(--blog-muted); }
+  html[data-theme="dark"] body.blog-article :is(
+    .article-header, .article-mast, .story-top, .longform-head
+  ) { color: var(--blog-ink); }
+  html[data-theme="dark"] body.blog-article :is(
+    .article-footer, .story-footer
+  ) { background: var(--blog-paper); border-color: var(--line); }
+  html[data-theme="dark"] body.blog-article :is(
+    .story-section-heading, .section-head,
+    .after-article.read-column, .story-foot,
+    .contents, .blog-interaction-divider,
+    .article-share
+  ) { border-color: var(--line); }
+  html[data-theme="dark"] body.blog-article :is(
+    .tldr, .author-note, .prose .author-note,
+    .source-line, .prose .source-line, .last-message,
+    .prose .last-message, .story-emphasis,
+    .tldr .key-message,
+    .article-body p:has(> strong:only-child)
+  ) {
+    background: #303830;
+    border-color: #ae8760;
+    color: var(--blog-ink);
+  }
+  html[data-theme="dark"] body.blog-article :is(
+    .reference-entry, .source-line, .prose .reference-entry,
+    .reference-list li, .note-last, .tldr
+  ) { border-color: var(--line); }
+  html[data-theme="dark"] body.blog-article :is(
+    .return-link, .story-back, .article-back, .draft-back,
+    .article-kicker, .story-label, .article-tag,
+    .contents summary, .prose .reference-entry a, .prose .source-line a,
+    .prose .reference-entry .ref-no, .prose h3.references-subheading,
+    .article-bottom a, .story-foot a, .after-article a,
+    .reference-list a
+  ) { color: var(--blog-accent); }
+  html[data-theme="dark"] body.blog-article :is(
+    .article-body, .prose, .story-content, .story-section, .story-intro
+  ) { color: var(--blog-ink); }
+  html[data-theme="dark"] body.blog-article :is(
+    .article-body .section-paragraph > p, .intro.reading-col > p
+  ) { color: var(--blog-muted); }
+  html[data-theme="dark"] body.blog-article .article-body strong { color: var(--blog-ink); }
+  html[data-theme="dark"] body.blog-article :is(
+    .story-figure img, .longform-cover img, .article-cover img,
+    .story-cover img, .bhangaha-post-cover img
+  ) { background: #2a302c; }
+  /* Bhangaha's charts inherit the shared surfaces but keep their
+     explicit values and category colors. All explorer tabs/rows stay intact. */
+  html[data-theme="dark"] body.blog-article.bhangaha-article :is(
+    .article-body .figure, .kpi, .dx-shell, .dx-panels
+  ) { background: var(--chart-surface); border-color: var(--chart-border); }
+  html[data-theme="dark"] body.blog-article.bhangaha-article :is(
+    .article-body .section-head, .article-body .section-paragraph
+  ) { color: var(--blog-ink); border-color: var(--line); }
+  html[data-theme="dark"] body.blog-article.bhangaha-article :is(
+    .article-body h2, .article-body h3, .dx-heading h2,
+    .dx-panel h3, .figure h3, .bar-value, .legend-item b
+  ) { color: var(--blog-ink); }
+  html[data-theme="dark"] body.blog-article.bhangaha-article :is(
+    .article-body .section-paragraph > p, .intro.reading-col > p,
+    .article-body .figure figcaption, .article-body .insight p,
+    .bar-label, .legend-item, .key-context,
+    .dx-panel-note, .dx-heading p, .dx-table
+  ) { color: var(--blog-muted)!important; }
+  html[data-theme="dark"] body.blog-article.bhangaha-article :is(
+    .section-number, .dx-eyebrow, .insight-label, .contents summary,
+    .dx-src-id, .ref-no
+  ) { color: var(--chart-primary); }
+}
+
+/* Preserve native light/white PDFs regardless of the reader's screen mode. */
+@media print {
+  html[data-theme="dark"] body.blog-article { color:#1f2828!important; background:#fff!important; }
+  html[data-theme="dark"] body.blog-article :is(
+    .longform-head h1,.article-header h1,.story-top h1,.article-mast h1,
+    .prose,.article-body,.story-content,.story-section,
+    .intro,.section-paragraph,.figure,.kpi
+  ) { color:#1f2828!important; }
+  body.blog-article .theme-toggle { display:none!important; }
+}
