@@ -189,6 +189,30 @@ def main() -> int:
               "Shreenagar " + label + " structure changed", failures)
     check('.story-section > p { margin-left:auto; margin-right:auto; }' in story,
           "Shreenagar local centered prose safeguard missing", failures)
+    # A user screenshot showed inconsistent 760/790px text columns and
+    # 990/1100/1150px photo rows. Keep one SCOPED story grid, not a
+    # universal wrapper that also affects research and essay articles.
+    required_story_rules = (
+        "Shreenagar story layout contract, 2026-11-26",
+        "--shreenagar-wide: var(--editorial-wide, 1100px)",
+        "--shreenagar-reading: 790px",
+        "--shreenagar-gutter: var(--editorial-gutter",
+        "--shreenagar-image-gap: clamp(24px, 4vw, 58px)",
+        "body.blog-article .story-layout .story-split {",
+        "grid-template-columns: repeat(2, minmax(0, 1fr))",
+        "body.blog-article .story-layout .story-split .story-figure {",
+        "body.blog-article .story-layout .story-split .story-split-copy {",
+        "body.blog-article .story-layout .story-section > p {",
+        "body.blog-article .story-layout .story-wide img {",
+    )
+    for required in required_story_rules:
+        check(required in story,
+              "Shreenagar scoped grid contract missing: " + required, failures)
+    check(story.count("Shreenagar story layout contract") == 1,
+          "Shreenagar duplicate story grid blocks", failures)
+    check(story.count("<style") == 1 and story.count("</style>") == 1,
+          "Shreenagar stylesheet structure changed unexpectedly", failures)
+
     # Bhangaha had multiple alternating 790/990/1100px columns. The
     # specific CSS contract below keeps all reading components aligned;
     # only the feature cover and the article masthead are deliberately wide.
