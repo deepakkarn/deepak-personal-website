@@ -22,7 +22,7 @@ POST_NAMES = (
 )
 VERSION = "20261126-theme1"
 THEME_SCRIPT_VERSION = "20261126-theme1"
-THEME_CSS_VERSION = "20261126-theme2"
+THEME_CSS_VERSION = "20261126-theme3"
 PDF_VERSION = "20261124-article-pdf1"
 FLOATING_VERSION = "20261124-floating-nav2"
 
@@ -194,6 +194,11 @@ def main() -> int:
         'html[data-theme="dark"] .idea-card.idea-blue',
         'html[data-theme="dark"] .idea-card.idea-green',
         'html[data-theme="dark"] .idea-card :is(h3,p)',
+        'html[data-theme="dark"] .journey-perspective {',
+        'html[data-theme="dark"] .journey-perspective h3 {',
+        'html[data-theme="dark"] .journey-perspective .perspective-body p {',
+        'html[data-theme="dark"] .journey-perspective .perspective-path > span:not(.perspective-connector) {',
+        'html[data-theme="dark"] .journey-perspective .perspective-link {',
     ):
         check(needle in theme_css,
               "homepage dark card contrast regression: " + needle, failures)
