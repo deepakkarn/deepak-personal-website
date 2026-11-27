@@ -83,8 +83,7 @@ masthead and cover must have the same horizontal start and outer margins.
   `--blog-frame-start` to reflow Shreenagar's story sequence. Changes to
   photo-story layout require desktop/tablet/mobile rendered tests.
 
-- Current CSS query keys: `20261126-site-grid2` for `styles.css`
-  (every page) and `blog/blog.css` (listing);
+- Current CSS query keys: take `styles.css` and `blog/blog.css` versions from the current page references and regression guard;
   `20261126-story-restore1` for `blog/article-standard.css`
   (all articles and starter template).
 - Validate 320, 375, 390, 430, 768, 1024, 1440px widths for equal outer
@@ -97,7 +96,7 @@ masthead and cover must have the same horizontal start and outer margins.
 Use `posts/_template.html` (it was updated on 2026-11-24).
 Keep, in this order:
 
-1. Standard global `site-header`, identical to the Blog listing: DK logo, all five shared site links, language button, theme toggle and responsive mobile menu. The Blog section link is active; use `aria-current="location"` on article pages.
+1. Standard global `site-header`, identical to the Blog listing: DK logo, all six shared site links, language button, theme toggle and responsive mobile menu. The Blog section link is active; use `aria-current="location"` on article pages.
 2. `← सबै लेखहरू`, subdued category, title, optional deck, author/date/type.
 3. Optional user-provided featured cover (natural photo, no unrelated stock).
 4. `<article>` with readable body sections and optional meaningful figures.
@@ -106,7 +105,7 @@ Keep, in this order:
 7. `← अरू लेखहरू` and `मुख्य पृष्ठ` navigation.
 8. Standard footer (brand, Blog, copyright).
 
-The shared article header language control changes only the five navigation
+The shared article header language control changes only the six navigation
 labels (Nepali/English), using the same `dk-language` browser preference as
 the homepage and Blog listing. **It does not translate article bodies.**
 Keep `<html lang="ne">` and all existing Nepali article text, citations,
