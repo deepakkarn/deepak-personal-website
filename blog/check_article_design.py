@@ -117,6 +117,16 @@ def inspect_page(filename: str, failures: list[str]) -> None:
           note + "obsolete article-only Up button would duplicate shared control", failures)
     check(".site-header{position:relative}" not in html,
           note + "article-only mobile header must not override shared sticky navigation", failures)
+    if filename in ("vidyalaya-chha-tara-sikne-batawaran-kasto-chha.html", "eutai-palika-dui-nirwachan-kshetra.html", "shreenagar-tin-mudha-ek-khola.html", "rsp-naya-netritwa.html"):
+        check("editorial-components.css?v=20261127-consistency1" in head, note + "missing common editorial components", failures)
+        check('id="full-article"' in html, note + "missing common article anchor", failures)
+    if filename == "vidyalaya-chha-tara-sikne-batawaran-kasto-chha.html":
+        check(html.count('class="editorial-section-index"') == 13, note + "education section numbering missing", failures)
+        check(html.count('class="reference-entry editorial-reference"') == 9, note + "education reference rows missing", failures)
+    if filename == "eutai-palika-dui-nirwachan-kshetra.html":
+        check(html.count('class="editorial-section-index"') == 13, note + "governance section numbering missing", failures)
+    if filename == "shreenagar-tin-mudha-ek-khola.html":
+        check('class="contents read-column editorial-story-toc"' in html, note + "photo-story contents missing", failures)
     if filename == "balbibah-maile-dekheko-wastawikata.html":
         check('class="article-body reading-wrap"' in html, note + "research article layout missing", failures)
         check(len(re.findall(r'<li id="cm5-source-\d+">', html)) == 14, note + "expected 14 references", failures)

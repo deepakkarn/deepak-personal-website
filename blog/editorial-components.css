@@ -1,0 +1,23 @@
+/* Shared article components for narrative, analysis and opinion posts.
+   Canonical outer geometry remains in article-standard.css. */
+body.blog-article.editorial-consistent .editorial-section-index{display:block;margin:0 0 10px;color:var(--blog-accent);font:800 11px/1.5 'DM Sans','Noto Sans Devanagari',sans-serif;letter-spacing:.14em}
+body.blog-article.editorial-consistent .contents{box-sizing:border-box;padding:15px 0;margin-top:27px;margin-bottom:29px;border-block:1px solid var(--line)}
+body.blog-article.editorial-consistent .contents summary{font:800 14px/1.8 'Noto Sans Devanagari',sans-serif;color:var(--blog-accent);cursor:pointer}
+body.blog-article.editorial-consistent .contents ol{padding:12px 0 0 22px;margin:0;columns:2;column-gap:30px;list-style:none}
+body.blog-article.editorial-consistent .contents li{font-size:13px;line-height:1.9;break-inside:avoid;padding:0 0 7px}
+body.blog-article.editorial-consistent .contents a{color:var(--blog-ink);text-decoration:none}
+body.blog-article.editorial-consistent .contents a:hover{text-decoration:underline;text-underline-offset:3px}
+body.blog-article.editorial-consistent .editorial-reference{display:grid;grid-template-columns:40px minmax(0,1fr);gap:11px;padding:14px 0;border-bottom:1px solid var(--line);font-size:13px;line-height:1.8;color:var(--blog-muted);scroll-margin-top:125px}
+body.blog-article.editorial-consistent .editorial-reference .ref-no{color:var(--blog-accent);font:800 11px/1.7 'DM Sans',sans-serif}
+body.blog-article.editorial-consistent .editorial-reference-copy{min-width:0;overflow-wrap:anywhere}
+body.blog-article.editorial-consistent .editorial-reference a,body.blog-article.editorial-consistent .editorial-source-note a{color:var(--blog-accent);font-weight:700;text-decoration:underline;text-underline-offset:3px;overflow-wrap:anywhere}
+body.blog-article.editorial-consistent .editorial-source-note{display:flex;gap:10px;align-items:flex-start;flex-wrap:wrap;border:1px solid var(--line);border-left:3px solid #b28b6b;border-radius:0 12px 12px 0;padding:14px 16px;margin:22px 0 30px;background:#f3eae0;color:#53625a;font-size:13px;line-height:1.8}
+body.blog-article.editorial-consistent .editorial-source-note>span:not(.editorial-citations){flex:1;min-width:0}
+body.blog-article.editorial-consistent .editorial-citations{font:750 11px/1.8 'DM Sans',sans-serif;white-space:nowrap}
+body.blog-article.editorial-consistent .editorial-reference:target{outline:2px solid #b28b6b;outline-offset:3px;border-radius:4px}
+body.blog-article.editorial-consistent .story-figure figcaption{font:400 13px/1.75 'Noto Sans Devanagari',sans-serif;color:var(--blog-muted)}
+body.blog-article.editorial-consistent .editorial-story-toc{margin-bottom:42px}
+html[data-theme="dark"] body.blog-article.editorial-consistent .editorial-source-note{background:#29372f;color:#e0e9e3;border-color:#45584b;border-left-color:#b28b6b}
+html[data-theme="dark"] body.blog-article.editorial-consistent :is(.editorial-reference a,.editorial-source-note a,.editorial-section-index,.ref-no,.contents summary){color:#e0b189}
+@media(max-width:550px){body.blog-article.editorial-consistent .contents ol{columns:1}body.blog-article.editorial-consistent .editorial-reference{grid-template-columns:26px minmax(0,1fr)}}
+@media print{body.blog-article.editorial-consistent .editorial-reference,body.blog-article.editorial-consistent .editorial-source-note{break-inside:avoid;background:#fff;color:#222}body.blog-article.editorial-consistent .editorial-story-toc{display:none}}
