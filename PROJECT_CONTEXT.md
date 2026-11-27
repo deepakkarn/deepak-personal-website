@@ -188,3 +188,5 @@ When returning to the project:
 - 2026-11-25: population evidence-led article and sharper thumbnail.
 - 2026-11-26: site-wide theme and six-link navigation, shared outer grid, Shreenagar scoped restoration after universal reflow regression, standalone Data library and explorers, decorative dataset cards. Latest scoped Shreenagar rules supersede older global left-edge instructions.
 - 2026-11-27: consolidated active project rules and historical notes. Full prior history remains in Git at [pre-consolidation revision](https://github.com/deepakkarn/deepak-personal-website/blob/88c0fa184bb602bac3876b0050dadd6528a28cf7/PROJECT_CONTEXT.md). No production behavior or dataset changed by this documentation edit. Local checkout was blocked by DNS resolution; verification remains open.
+
+- 2026-11-27: Added Data landing social preview PNG (1200×630), Open Graph image metadata and Twitter large-card metadata. Descriptions explicitly refer to available election records. No page body or research data changed. Live Facebook scrape not verified.
