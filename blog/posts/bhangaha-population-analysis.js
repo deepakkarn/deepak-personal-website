@@ -43,7 +43,7 @@
       }
     }
     if (updateHash) {
-      const hash = '#data-' + topic;
+      const hash = topic === 'overview' ? '#overview' : '#data-' + topic;
       if (window.location.hash !== hash) {
         window.history.pushState(null, '', hash);
       }
@@ -69,9 +69,15 @@
     });
   }
 
-  function updateFromHash() {
+  function topicFromHash() {
+    if (window.location.hash === '#overview') return 'overview';
     const match = /^#data-([a-z]+)$/.exec(window.location.hash);
-    if (match && panelByTopic.has(match[1])) activateTopic(match[1], false);
+    return match && panelByTopic.has(match[1]) ? match[1] : null;
+  }
+
+  function updateFromHash() {
+    const topic = topicFromHash();
+    if (topic) activateTopic(topic, false);
   }
   window.addEventListener('hashchange', updateFromHash);
   window.addEventListener('popstate', updateFromHash);
@@ -121,8 +127,8 @@
 
   if (explorer && dataTabs.length === 9 && dataPanels.length === 9) {
     document.body.classList.add('dx-enhanced');
-    const hash = /^#data-([a-z]+)$/.exec(window.location.hash);
-    activateTopic(hash && panelByTopic.has(hash[1]) ? hash[1] : 'overview');
+    const topic = topicFromHash();
+    activateTopic(topic || 'overview', !topic && !window.location.hash);
     displayWard();
   }
 })();
