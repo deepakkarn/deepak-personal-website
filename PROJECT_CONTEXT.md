@@ -192,3 +192,5 @@ When returning to the project:
 - 2026-11-27: Added Data landing social preview PNG (1200×630), Open Graph image metadata and Twitter large-card metadata. Descriptions explicitly refer to available election records. No page body or research data changed. Live Facebook scrape not verified.
 
 - 2026-11-27: Replaced permanent Blog/Data emphasis with shared active navigation via aria-current. Blog/Data landing and nested pages retain static current-section markup; homepage tracks current scroll section and marks DK at the top. Shared stylesheet and navigation controller versioned across all public pages and template. No article body or data changed. Live browser verification remains outstanding.
+
+- 2026-11-27: Added text-only editorial emphasis to inactive Blog navigation (stronger weight and warm accent, theme-aware, desktop/mobile, both languages). Active navigation retains its distinct background/underline; Data and other links are unchanged. Updated shared CSS cache key across all public pages and template. No live visual verification yet.
