@@ -183,11 +183,7 @@ formatting, legible Nepali typography, original headline, author/date, cover,
 text, source links and supporting images. Hide navigation, sharing UI, reaction
 controls and comments in the PDF. Preserve actual article content and citations.
 
-For **Bhangaha population analysis**, PDF output must include all nine Data
-Explorer panels, not just the active on-screen tab. Print all ward rows,
-open detailed data tables temporarily, and restore the visitor's selected ward
-and closed details when printing ends. Never turn 2026 scenarios into official
-figures or drop source limitations. Keep data tables inside the A4 page.
+For **Bhangaha population analysis**, print the full narrative, figures, sources and the standalone Population Explorer URL. The nine interactive panels now live only at `/data/population/`; do not duplicate them in the article or its PDF. Preserve all research caveats.
 
 When updating the print/share functionality, change the shared files, bump
 their query versions in all five posts plus the template, then run the
@@ -282,3 +278,5 @@ present in home, Blog listing and both desktop/mobile article menus.
 Do not modify article-specific numbers or share/PDF behavior just to
 update the navigation. See canonical `PROJECT_CONTEXT.md` and execute
 `python3 data/check_data_pages.py` when modifying data pages.
+
+The Bhangaha population article links to `/data/population/#overview` in a new tab (`target="_blank" rel="noopener noreferrer"`). Its own figures, KPI summary and references stay intact. The standalone explorer is the canonical interactive dataset; no duplicated tab shell in the article.

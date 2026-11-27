@@ -569,3 +569,14 @@ body.bhangaha-article{margin:0;background:#fbf7f0;color:#25332f;font-family:'Not
   .bhangaha-article .article-share.share-before-feedback,
   .bhangaha-article .after-article.read-column { display: none!important; }
 }
+
+/* Article-only link to the canonical Population Explorer. */
+.bhangaha-article .population-explorer-link{margin:24px 0 36px;padding:clamp(20px,4vw,32px);border:1px solid var(--line);border-left:4px solid #6a8f82;border-radius:16px;background:var(--paper-2);color:var(--ink);scroll-margin-top:112px}
+.bhangaha-article .population-explorer-kicker{font:700 11px/1.5 'DM Sans',sans-serif;letter-spacing:.12em;color:var(--muted)}
+.bhangaha-article .population-explorer-link h2{font:800 clamp(21px,3vw,28px)/1.5 'Noto Sans Devanagari',sans-serif;margin:10px 0;color:var(--ink)}
+.bhangaha-article .population-explorer-link p{color:var(--muted);margin:0 0 18px;line-height:1.8}
+.bhangaha-article .population-explorer-link .population-explorer-cta{display:inline-block;max-width:100%;padding:10px 16px;border-radius:10px;background:#28695e;color:#fff;font-weight:700;text-decoration:none;overflow-wrap:anywhere}
+.bhangaha-article .population-explorer-link .population-explorer-cta:hover{text-decoration:underline}
+.bhangaha-article .population-explorer-cta:focus-visible{outline:3px solid var(--accent);outline-offset:4px}
+.bhangaha-article .population-explorer-newtab{font-size:.78em;font-weight:500}
+@media print{.bhangaha-article .population-explorer-link{background:white;color:black;border:1px solid #888;break-inside:avoid}.bhangaha-article .population-explorer-link h2,.bhangaha-article .population-explorer-link p,.bhangaha-article .population-explorer-link .population-explorer-cta{background:white;color:black}.bhangaha-article .population-explorer-cta::after{content:" (https://deepakkarn.com/data/population/)";font-size:10pt;overflow-wrap:anywhere}.bhangaha-article .population-explorer-newtab{display:none}}

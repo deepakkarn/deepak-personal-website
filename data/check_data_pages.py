@@ -99,11 +99,11 @@ def main():
     check("आंशिक अभिलेख" in home and "उपलब्ध · Available" in home,
           "Landing must distinguish complete-looking and partial datasets")
 
-    # Crucial: copied population KPI values, nine-tab data payload, and
-    # ten original source links must match the published research article.
-    a = fragment(original, '<div class="dx-shell">', '<div class="dx-bottom">')
-    b = fragment(population, '<div class="dx-shell">', '<div class="dx-bottom">')
-    check(bool(a and b and a == b), "Population nine-tab data shell drifted from article")
+    # The standalone explorer owns the only nine-tab data shell.
+    check('class="dx-shell"' not in original, "Duplicate Population Explorer in article")
+    check('href="/data/population/#overview" target="_blank" rel="noopener noreferrer"' in original,
+          "Article must open standalone explorer in a new tab")
+    check(bool(fragment(population, '<div class="dx-shell">', '<div class="dx-bottom">')), "Standalone explorer shell missing")
     a = fragment(original, '<ol class="reference-list">', '</ol>', True)
     b = fragment(population, '<ol class="reference-list">', '</ol>', True)
     check(bool(a and b and a == b), "Population original ten source links drifted")

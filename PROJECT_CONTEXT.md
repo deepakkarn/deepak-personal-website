@@ -29,7 +29,7 @@ The former `context.md`'s mandatory requirements are preserved in this file: one
 - All five public articles have been attached to the same design sheet: `bhangaha-population-analysis.html`, `vidyalaya-chha-tara-sikne-batawaran-kasto-chha.html`, `eutai-palika-dui-nirwachan-kshetra.html`, `shreenagar-tin-mudha-ek-khola.html`, `rsp-naya-netritwa.html`. The obsolete `_template.html` was replaced; do not revert it.
 - **Any future design change:** fix the shared CSS once, update its cache version in ALL affected articles and the template, then regression-check **every post**, not just the one requested.
 - Do not add a unique per-post English/Nepali toggle; published body text is Nepali-only until an actual site-wide full translation system is designed. Homepage/Blog listing language switch is separate.
-- Every published article must provide the shared **PDF / प्रिन्ट** action using `/blog/share.js` and `/blog/share.css`; A4 print styles live in the last-loaded `/blog/article-standard.css`. PDFs must include complete article text, sources and all nine Bhangaha Data Explorer panels, even those hidden on screen. Do not create separate page-level print handlers or a homepage-only PDF button.
+- Every published article must provide the shared **PDF / प्रिन्ट** action using `/blog/share.js` and `/blog/share.css`; A4 print styles live in the last-loaded `/blog/article-standard.css`. PDFs must include complete article text, figures and sources. Population article PDF links to the standalone nine-tab explorer instead of embedding its tables. Do not create separate page-level print handlers or a homepage-only PDF button.
 - Automated static regression guard: run `python3 blog/check_article_design.py` from the repository root whenever changing any published post or its stylesheet. This command is documented in `blog/README.md`; it is a source validation aid, not a substitute for real responsive/browser screenshots.
 - QA viewport matrix: **320, 375, 390, 430, 768, 1024, 1440px**, check full-page horizontal overflow, equal horizontal gutters, centered content, legible headings and chart labels, image cropping, share/comments, links, table scrolling, contrast and keyboard navigation. Preserve content and references.
 - GitHub source/static tests were run on 24 November 2026: five posts + template each import shared style last; duplicate IDs 0, broken internal anchors 0, structural tag imbalance 0, sharing/comments/navigation present. Shared CSS braces matched; Bhangaha nine tabs and ten references intact. **Live Cloudflare page and real-device screenshot verification could not be completed from the available tools. Never claim it has been completed.**
@@ -171,7 +171,7 @@ When returning to the project:
 ## 11. Current data architecture and integrity
 
 - /data/ is the public dataset library; /data/population/ and /data/elections/ are separate explorers. Blog remains the narrative area. Data cards use neutral decorative SVG artwork, not quantitative graphs or the author's portrait.
-- Population: nine tabs, ten source references, existing interaction script and print behavior. The article and standalone explorer currently duplicate markup; preserve byte-for-byte parity until a build-time single-source refactor is validated. Do not switch to asynchronous fragments without protecting PDF, accessibility and indexing.
+- Population: the standalone /data/population/ page owns all nine interactive tabs and ten source references. The article retains its narrative, figures, KPI summary and references, with a compact new-tab link instead of duplicated explorer markup.
 - Elections: 148 published candidate records, 15 reported polling places in 2074, 28 matched repeated-candidate records, eight tabs. Master audit reportedly has 161 rows; the difference is unresolved until the actual master records are compared. Preserve original JSON hash, noindex, and partial archive notice. Never infer missing turnout or convert unknowns to zero.
 
 ## 12. Verification and unresolved work
@@ -179,7 +179,7 @@ When returning to the project:
 - Run both `python3 blog/check_article_design.py` and `python3 data/check_data_pages.py` on a checkout. Static source parity and isolated Chromium checks were previously reported; neither proves production rendering.
 - Verify live Cloudflare routes in both themes at 320, 375, 390, 430, 768, 1024 and 1440px; check navigation, layout, tabs, filtering, CSV, PDF and interactions. No completed live browser pass is recorded.
 - Reconcile election records with the master audit and original sources before changing counts or indexing policy.
-- Consolidate Population markup only with regression coverage for both rendered outputs.
+- Verify the standalone Population Explorer and article link in a real browser; do not reintroduce duplicated explorer markup.
 
 ## 13. Maintenance summary
 
@@ -194,3 +194,5 @@ When returning to the project:
 - 2026-11-27: Replaced permanent Blog/Data emphasis with shared active navigation via aria-current. Blog/Data landing and nested pages retain static current-section markup; homepage tracks current scroll section and marks DK at the top. Shared stylesheet and navigation controller versioned across all public pages and template. No article body or data changed. Live browser verification remains outstanding.
 
 - 2026-11-27: Added text-only editorial emphasis to inactive Blog navigation (stronger weight and warm accent, theme-aware, desktop/mobile, both languages). Active navigation retains its distinct background/underline; Data and other links are unchanged. Updated shared CSS cache key across all public pages and template. No live visual verification yet.
+
+- 2026-11-27: At user request removed the embedded Population Explorer from the blog and added a compact new-tab link to /data/population/#overview. Legacy explorer hashes reveal the link card; article #people and other narrative anchors remain. Standalone data shell preserved exactly, article prose/figures/references preserved apart from the introductory link wording. Article PDF now contains narrative, figures and references plus explorer URL, not nine duplicated tables. Updated regression guards and shared publishing contract. Live browser/PDF verification remains outstanding.

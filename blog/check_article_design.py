@@ -117,8 +117,9 @@ def inspect_page(filename: str, failures: list[str]) -> None:
     check(".site-header{position:relative}" not in html,
           note + "article-only mobile header must not override shared sticky navigation", failures)
     if filename == "bhangaha-population-analysis.html":
-        check(len(re.findall(r'data-dx-tab=', html)) == 9, note + "expected 9 data tabs", failures)
-        check(len(re.findall(r'data-dx-panel=', html)) == 9, note + "expected 9 data panels", failures)
+        check("data-dx-tab=" not in html, note + "duplicate explorer tabs", failures)
+        check("data-dx-panel=" not in html, note + "duplicate explorer panels", failures)
+        check('href="/data/population/#overview" target="_blank" rel="noopener noreferrer"' in html, note + "missing safe standalone explorer link", failures)
         check(len(re.findall(r'<li id="source-S\d+"', html)) == 10,
               note + "expected 10 numbered source items", failures)
 
