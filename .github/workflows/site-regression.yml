@@ -1,0 +1,17 @@
+name: Site regression
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  static:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Blog design regression
+        run: python3 blog/check_article_design.py
+      - name: Data integrity regression
+        if: always()
+        run: python3 data/check_data_pages.py
