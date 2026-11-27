@@ -21,7 +21,8 @@ POST_NAMES = (
     "rsp-naya-netritwa.html",
 )
 VERSION = "20261126-story-restore1"
-EDITORIAL_VERSION = "20261126-site-grid2"
+BLOG_LISTING_VERSION = "20261126-site-grid2"
+EDITORIAL_VERSION = "20261127-nav-highlight1"
 ARTICLE_HEADER_VERSION = "20261126-data-nav1"
 THEME_SCRIPT_VERSION = "20261126-theme1"
 THEME_CSS_VERSION = "20261126-theme3"
@@ -167,7 +168,7 @@ def main() -> int:
           "shared section heading rhythm was lost", failures)
     check("body.blog-article { --blog-gutter: 0px; }" in stylesheet,
           "A4 print gutter contract changed", failures)
-    check(("blog.css?v=" + EDITORIAL_VERSION) in listing,
+    check(("blog.css?v=" + BLOG_LISTING_VERSION) in listing,
           "Blog listing still using stale site-grid CSS", failures)
     check(("styles.css?v=" + EDITORIAL_VERSION) in listing and
           ("styles.css?v=" + EDITORIAL_VERSION) in home,
