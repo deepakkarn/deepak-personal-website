@@ -1,0 +1,11 @@
+/* Child marriage: reuse the Population research components; only scoped refinements. */
+.child-marriage-article .cm-intro{max-width:790px;margin:0 auto}
+.child-marriage-article .cm-citation{display:inline-block;font:750 11px/1.6 'DM Sans',sans-serif;color:#956344;text-decoration:underline;text-underline-offset:3px;vertical-align:baseline;white-space:nowrap}
+.child-marriage-article .cm-action-table .simple-table th,.child-marriage-article .cm-action-table .simple-table td{white-space:normal;text-align:left;vertical-align:top;font-size:14px;overflow-wrap:break-word}
+.child-marriage-article .cm-action-table .simple-table th:first-child{width:38%}
+.child-marriage-article .reference-list li{scroll-margin-top:125px;min-width:0}.child-marriage-article .reference-list li>span:last-child{min-width:0;overflow-wrap:anywhere}.child-marriage-article .reference-list li:target{outline:2px solid #b28b6b;outline-offset:4px;border-radius:4px}
+.child-marriage-article .note-last ul{padding-inline-start:20px;margin:0}.child-marriage-article .note-last li{margin-bottom:10px}.child-marriage-article .note-last li:last-child{margin-bottom:0}
+.child-marriage-article .kpi-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.child-marriage-article .population-explorer-link{scroll-margin-top:120px}.child-marriage-article .figure .bar-row{grid-template-columns:minmax(100px,1fr) minmax(0,2fr) auto}
+html[data-theme="dark"] .child-marriage-article .cm-citation{color:#e0b189}html[data-theme="dark"] .child-marriage-article .cm-action-table .simple-table th{background:#303c34;color:#e8f1ed}html[data-theme="dark"] .child-marriage-article .cm-action-table .simple-table td{color:#e8f1ed;border-color:#495b50}
+@media(max-width:550px){.child-marriage-article .figure .bar-row{grid-template-columns:minmax(85px,1fr) minmax(0,1.4fr) auto}.child-marriage-article .cm-action-table .simple-table th,.child-marriage-article .cm-action-table .simple-table td{font-size:12px;padding:9px}.child-marriage-article .reference-list li{grid-template-columns:26px minmax(0,1fr)}}
+@media print{.child-marriage-article .cm-citation{color:#333}.child-marriage-article .reference-list li{break-inside:avoid}.child-marriage-article .cm-action-table{overflow:visible}.child-marriage-article .kpi-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}

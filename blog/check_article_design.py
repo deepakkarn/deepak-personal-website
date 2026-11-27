@@ -117,6 +117,13 @@ def inspect_page(filename: str, failures: list[str]) -> None:
           note + "obsolete article-only Up button would duplicate shared control", failures)
     check(".site-header{position:relative}" not in html,
           note + "article-only mobile header must not override shared sticky navigation", failures)
+    if filename == "balbibah-maile-dekheko-wastawikata.html":
+        check('class="article-body reading-wrap"' in html, note + "research article layout missing", failures)
+        check(len(re.findall(r'<li id="cm5-source-\d+">', html)) == 14, note + "expected 14 references", failures)
+        check(html.count('class="ref-no"') == 14, note + "reference row layout missing", failures)
+        check(html.count('<figure class="figure">') == 3, note + "research figures missing", failures)
+        check('class="simple-table-wrap cm-action-table"' in html, note + "responsive action table missing", failures)
+        check('href="/data/child-marriage/#overview" target="_blank" rel="noopener noreferrer"' in html, note + "standalone explorer link missing", failures)
     if filename == "bhangaha-population-analysis.html":
         check("data-dx-tab=" not in html, note + "duplicate explorer tabs", failures)
         check("data-dx-panel=" not in html, note + "duplicate explorer panels", failures)
