@@ -55,6 +55,13 @@ def main():
 
     for path in PUBLIC:
         html = read(path)
+        check("nav-current.js?v=20261127-nav-current1" in html,
+              path + ": missing shared active navigation script")
+        if path != "index.html":
+            key = "navData" if path.startswith("data/") else "navBlog"
+            kind = "page" if path in ("data/index.html", "blog/index.html") else "location"
+            check(html.count(f'aria-current="{kind}" data-i18n="{key}"') == 2,
+                  path + ": incorrect desktop/mobile current section")
         check(html.count('data-i18n="navData"') == 2,
               path + ": Data link must appear once in desktop and mobile nav")
         check('href="/data/"' in html, path + ": Data landing link missing")

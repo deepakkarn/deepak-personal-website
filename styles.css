@@ -33,12 +33,6 @@ a{color:inherit;text-decoration:none}button{font:inherit}img{max-width:100%;disp
 .site-header .header-actions{grid-column:3;justify-self:end}
 .wordmark{font:600 32px/1 'Playfair Display',serif;letter-spacing:-2px}.dot{color:var(--accent)}
 .desktop-nav{display:flex;gap:32px;align-items:center}.desktop-nav a{font-size:16px;font-weight:700;letter-spacing:.015em;line-height:1.5;text-transform:uppercase}.language-toggle{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase}.desktop-nav a:hover,.language-toggle:hover{color:var(--accent)}
-.desktop-nav a[data-i18n="navBlog"]{display:inline-flex;align-items:center;justify-content:center;padding:8px 14px;border:1px solid var(--accent);border-radius:999px;background:var(--accent-soft);color:var(--ink);box-shadow:0 5px 16px rgba(34,48,44,.07);transition:background-color .2s ease,color .2s ease,transform .2s ease}
-.desktop-nav a[data-i18n="navBlog"]:hover{background:var(--accent);color:var(--paper);transform:translateY(-1px)}
-.desktop-nav a[data-i18n="navData"]{position:relative}
-.desktop-nav a[data-i18n="navData"]::after{content:"";position:absolute;left:0;right:0;bottom:-4px;height:2px;border-radius:2px;background:var(--accent);opacity:.72}
-.mobile-nav a[data-i18n="navBlog"]{margin:4px 0;padding-inline:14px;border:1px solid var(--accent);border-radius:12px;background:var(--accent-soft);color:var(--ink)}
-.mobile-nav a[data-i18n="navData"]{width:fit-content;color:var(--accent);font-weight:800;text-decoration-line:underline;text-decoration-color:var(--accent);text-decoration-thickness:2px;text-underline-offset:5px}
 .header-actions{display:flex;gap:16px;align-items:center}.language-toggle{background:#fff;border:1px solid rgba(0,0,0,.08);padding:11px 15px;border-radius:999px;cursor:pointer;box-shadow:0 8px 24px rgba(0,0,0,.04)}
 .menu-toggle{display:none}.mobile-nav{display:none}
 .hero{min-height:calc(100vh - 96px);display:grid;grid-template-columns:1.04fr .96fr;align-items:center;gap:5vw;padding-block:58px 74px;position:relative}
@@ -293,3 +287,9 @@ html[lang="en"] .name-en{font-family:'Noto Sans Devanagari',sans-serif;letter-sp
   .home-connect-jump{transition:none}
   .home-connect-jump:hover{transform:none}
 }
+
+/* Current location: one consistent marker, no permanently selected links. */
+:is(.site-header .desktop-nav, #mobile-nav.mobile-nav) a[data-i18n]{position:relative}
+:is(.site-header .desktop-nav, #mobile-nav.mobile-nav) a[data-i18n][aria-current]:not([aria-current="false"]){color:var(--ink);background:var(--accent-soft);border-radius:8px;box-shadow:0 0 0 6px var(--accent-soft);text-decoration:underline;text-decoration-color:var(--accent);text-decoration-thickness:2px;text-underline-offset:5px}
+#mobile-nav.mobile-nav a[data-i18n][aria-current]:not([aria-current="false"]){box-shadow:none;padding-inline:12px}
+.site-header .wordmark[aria-current="page"]{text-decoration:underline;text-decoration-color:var(--accent);text-decoration-thickness:2px;text-underline-offset:6px}

@@ -190,3 +190,5 @@ When returning to the project:
 - 2026-11-27: consolidated active project rules and historical notes. Full prior history remains in Git at [pre-consolidation revision](https://github.com/deepakkarn/deepak-personal-website/blob/88c0fa184bb602bac3876b0050dadd6528a28cf7/PROJECT_CONTEXT.md). No production behavior or dataset changed by this documentation edit. Local checkout was blocked by DNS resolution; verification remains open.
 
 - 2026-11-27: Added Data landing social preview PNG (1200×630), Open Graph image metadata and Twitter large-card metadata. Descriptions explicitly refer to available election records. No page body or research data changed. Live Facebook scrape not verified.
+
+- 2026-11-27: Replaced permanent Blog/Data emphasis with shared active navigation via aria-current. Blog/Data landing and nested pages retain static current-section markup; homepage tracks current scroll section and marks DK at the top. Shared stylesheet and navigation controller versioned across all public pages and template. No article body or data changed. Live browser verification remains outstanding.
