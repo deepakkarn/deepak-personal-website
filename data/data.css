@@ -322,3 +322,13 @@ body.blog-article.data-page .data-source-state a {color:var(--data-accent);text-
   body.blog-article.data-page .data-hero {margin-top:0;}
   body.blog-article.data-page .data-notice {color:#37453f;}
 }
+
+body.blog-article.data-page .data-card-art--child-marriage{--data-bar-color:#91769c}
+html[data-theme="dark"] body.blog-article.data-page .data-card-art--child-marriage{--data-bar-color:#b49ac1}
+body.blog-article.data-page .data-card-art--child-marriage .data-card-bars span:nth-child(1){height:48%}
+body.blog-article.data-page .data-card-art--child-marriage .data-card-bars span:nth-child(2){height:77%}
+body.blog-article.data-page .data-card-art--child-marriage .data-card-bars span:nth-child(3){height:57%}
+body.blog-article.data-page .data-card-art--child-marriage .data-card-bars span:nth-child(4){height:91%}
+body.blog-article.data-page .data-card-art--child-marriage .data-card-bars span:nth-child(5){height:69%}
+body.blog-article.data-page .data-card-art--child-marriage .data-card-bars span:nth-child(6){height:100%}
+body.blog-article.data-page .data-card-art--child-marriage .data-card-bars span:nth-child(7){height:83%}

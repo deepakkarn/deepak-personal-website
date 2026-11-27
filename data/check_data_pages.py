@@ -23,7 +23,7 @@ PUBLIC = (
     "blog/posts/shreenagar-tin-mudha-ek-khola.html",
     "blog/posts/rsp-naya-netritwa.html",
     "blog/posts/_template.html",
-    "data/index.html", "data/population/index.html", "data/elections/index.html",
+    "data/index.html", "data/population/index.html", "data/elections/index.html", "data/child-marriage/index.html",
 )
 ELECTION_DATA_SHA256 = "07645271cc3a017165ccba17271e5fad840ecce4711b371460d9af6e9e7702b7"
 
@@ -83,9 +83,9 @@ def main():
     # portrait. Bars are illustrative and must not be mistaken for real data.
     check('bhangaha-population-story-hq.jpg' not in home,
           "Population card must not display the author's photograph")
-    check(home.count('class="data-card-bars" aria-hidden="true"') == 2,
-          "Both dataset cards need accessible decorative bars")
-    check(home.count('class="data-card-icon"') == 2,
+    check(home.count('class="data-card-bars" aria-hidden="true"') == 3,
+          "All three dataset cards need accessible decorative bars")
+    check(home.count('class="data-card-icon"') == 3,
           "Dataset card SVG icons missing")
     check('data-card-art--population' in home and
           'data-card-art--elections' in home,
@@ -93,12 +93,17 @@ def main():
     check("वास्तविक तथ्याङ्कको चार्ट होइन" in home and
           "वास्तविक मत परिणामको चार्ट होइन" in home,
           "Decorative graphics need accurate accessible descriptions")
-    check("data.css?v=20261126-data2" in home and
-          "data.css?v=20261126-data2" in population,
+    check("data.css?v=20261127-child-marriage1" in home and
+          "data.css?v=20261127-child-marriage1" in population,
           "New Data illustration styles must use the refreshed cache key")
     check("आंशिक अभिलेख" in home and "उपलब्ध · Available" in home,
           "Landing must distinguish complete-looking and partial datasets")
 
+    child = read("data/child-marriage/index.html")
+    check('href="/data/child-marriage/"' in home, "Child marriage landing card missing")
+    check(child.count('data-cm-tab=') == 9, "Expected nine child marriage topics")
+    check(len(re.findall(r'<li id="cm-source-\d+"', child)) == 14, "Expected fourteen research references")
+    check(all(v in child for v in ("35.5%", "7.4%", "38.8%", "1,254", "1,255", "६.३%", "१२.८%")), "Key data or discrepancies missing")
     # The standalone explorer owns the only nine-tab data shell.
     check('class="dx-shell"' not in original, "Duplicate Population Explorer in article")
     check('href="/data/population/#overview" target="_blank" rel="noopener noreferrer"' in original,
