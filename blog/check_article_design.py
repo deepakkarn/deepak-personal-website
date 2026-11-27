@@ -14,6 +14,7 @@ import sys
 ROOT = Path(__file__).resolve().parent.parent
 POSTS = ROOT / "blog" / "posts"
 POST_NAMES = (
+    "balbibah-maile-dekheko-wastawikata.html",
     "bhangaha-population-analysis.html",
     "vidyalaya-chha-tara-sikne-batawaran-kasto-chha.html",
     "eutai-palika-dui-nirwachan-kshetra.html",

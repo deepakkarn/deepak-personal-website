@@ -16,6 +16,7 @@ import sys
 ROOT = Path(__file__).resolve().parent.parent
 FAILURES = []
 PUBLIC = (
+    "blog/posts/balbibah-maile-dekheko-wastawikata.html",
     "index.html", "blog/index.html",
     "blog/posts/bhangaha-population-analysis.html",
     "blog/posts/vidyalaya-chha-tara-sikne-batawaran-kasto-chha.html",
