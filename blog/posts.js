@@ -17,6 +17,7 @@ window.DK_BLOG_POSTS = [
   {
     url: 'posts/balbibah-maile-dekheko-wastawikata.html',
     date: '2026-11-27',
+    image: 'assets/child-marriage-cover.jpg',
     category: { ne: 'सामाजिक विश्लेषण · बाल अधिकार', en: 'Social analysis · Child rights' },
     title: { ne: 'छोरीको विवाहअघि, उसको भविष्यबारे कति सोच्यौँ?', en: 'Before a daughter’s marriage, how much do we think about her future?' },
     excerpt: { ne: 'भंगाहाका व्यक्तिगत अनुभव, बालविवाहसम्बन्धी प्रकाशित अनुसन्धान, शिक्षा, असमानता र सार्वजनिक जिम्मेवारीबारे सामाजिक विश्लेषण।', en: 'Personal observations from Bhangaha, published research on child marriage, education, inequality and public responsibility.' }
